@@ -1,0 +1,94 @@
+{
+  "date": "2026-11-18",
+  "dll": "Magick.Native-Q8-x64.dll",
+  "sha256": "1932542d474b9a840bc4adb43b8f44a289efc061f4d9061bf76743e13fd36109",
+  "previousSha256": "a35c4eeb4c493a4db78fe7a34388943d37a124ae6e73896752b18d296ff5198a",
+  "reason": "The previous build embedded absolute source paths under the builder's Windows user profile (from assert/__FILE__ strings). Rebuilt from the same fixed sources and profile in a neutral work directory (C:\\mfb), so no account name or developer folder is embedded.",
+  "command": "scripts/Build-Magick.ps1 -WorkDirectory C:\\mfb -VisualStudioPath C:\\BuildTools2026 -SourceCache <46 fixed archives, SHA-256 checked>",
+  "msbuildVersion": "18.12.2.51402",
+  "sourceProfile": "no-avc-hevc (unchanged; same 41 fixed source components and 2 configuration patches)",
+  "checks": {
+    "embeddedUserProfilePaths": 0,
+    "embeddedDeveloperFolderPaths": 0,
+    "delegatesUnchanged": true,
+    "featuresUnchanged": true,
+    "roundtripFormats": 10,
+    "pixelSha256MatchesPreviousBuild": true,
+    "encodedBytesMatchPreviousBuild": true
+  },
+  "imageResults": {
+    "managedVersion": "Magick.NET Q8 x64 net8.0 14.17.2",
+    "delegates": "bzlib cairo freetype gslib heic jng jp2 jpeg jxl lcms lqr lzma openexr pangocairo png ps raqm raw rsvg tiff webp xml zip zlib zstd",
+    "features": "Channel-masks(64-bit) Cipher OpenCL ",
+    "results": [
+      {
+        "format": "Png",
+        "supported": true,
+        "meanAbsoluteError": 0,
+        "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53",
+        "encodedBytes": 349
+      },
+      {
+        "format": "Bmp",
+        "supported": true,
+        "meanAbsoluteError": 0,
+        "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53",
+        "encodedBytes": 2442
+      },
+      {
+        "format": "Tiff",
+        "supported": true,
+        "meanAbsoluteError": 0,
+        "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53",
+        "encodedBytes": 2568
+      },
+      {
+        "format": "Gif",
+        "supported": true,
+        "meanAbsoluteError": 0,
+        "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53",
+        "encodedBytes": 173
+      },
+      {
+        "format": "Jpeg",
+        "supported": true,
+        "meanAbsoluteError": 0.16666666666666666,
+        "pixelSha256": "C85B5054E137121ADB3C3032754CB7E33689E44B8301988C769666D694FCDDEE",
+        "encodedBytes": 343
+      },
+      {
+        "format": "WebP",
+        "supported": true,
+        "meanAbsoluteError": 0,
+        "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53",
+        "encodedBytes": 82
+      },
+      {
+        "format": "Jp2",
+        "supported": true,
+        "meanAbsoluteError": 0,
+        "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53",
+        "encodedBytes": 1025
+      },
+      {
+        "format": "Avif",
+        "supported": true,
+        "meanAbsoluteError": 0.19444444444444445,
+        "pixelSha256": "BABFFF2EB524DB4D49B16CB36431D3527195B65B1A5EE57A8897A6EA4868036B",
+        "encodedBytes": 308
+      },
+      {
+        "format": "Jxl",
+        "supported": true,
+        "meanAbsoluteError": 0,
+        "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53",
+        "encodedBytes": 57
+      },
+      {
+        "format": "Svg",
+        "supported": true,
+        "pixelSha256": "C5E8217D6188E1E259BA837411B8ECC9D41D5BF3E9053AD78397ACBC4FDE5EAB"
+      }
+    ]
+  }
+}

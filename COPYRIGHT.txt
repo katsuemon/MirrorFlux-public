@@ -1,0 +1,13 @@
+MirrorFlux
+Copyright (C) 2026 katsuemon and MirrorFlux contributors
+
+MirrorFlux original source, configuration, documentation and original artwork
+are licensed under GNU GPL version 3 or (at your option) any later version.
+See LICENSE. This program is provided WITHOUT ANY WARRANTY.
+
+Third-party code and assets retain their original copyright and license notices.
+This statement does not replace or relicense those third-party terms.
+See THIRD_PARTY_NOTICES.md and licenses/.
+
+icon/mf_icon.png was designed by katsuemon.
+icon/mf_icon.ico is generated from that image.

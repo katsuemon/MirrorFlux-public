@@ -1,0 +1,467 @@
+{
+  "schemaVersion": 1,
+  "auditedOn": "2026-11-11",
+  "sources": [
+    {
+      "name": "Magick.NET",
+      "repository": "https://github.com/dlemstra/Magick.NET",
+      "commit": "aa58615154d7895c800fe756c695a55e4ee5d4ee",
+      "url": "https://codeload.github.com/dlemstra/Magick.NET/zip/aa58615154d7895c800fe756c695a55e4ee5d4ee",
+      "sha256": "7f075a58afc7880abc28abcc95ff3b1d55bcf151aef41a24beb9265e724478fa",
+      "bytes": 18390094,
+      "archive": "Magick.NET-aa58615154d7895c800fe756c695a55e4ee5d4ee.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "Magick.Native",
+      "repository": "https://github.com/dlemstra/Magick.Native",
+      "commit": "999720f7ebe03d5a0029536f1586a2cb82b500ae",
+      "url": "https://codeload.github.com/dlemstra/Magick.Native/zip/999720f7ebe03d5a0029536f1586a2cb82b500ae",
+      "sha256": "9833c7d5323905a2813c27c220a51d73919c5b800fbdab0b6c1c1fbe09cab56b",
+      "bytes": 169336,
+      "archive": "Magick.Native-999720f7ebe03d5a0029536f1586a2cb82b500ae.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "ImageMagick",
+      "repository": "https://github.com/ImageMagick/ImageMagick",
+      "commit": "ad98b244c995d2e3051757fa3b7855f45b550d24",
+      "url": "https://codeload.github.com/ImageMagick/ImageMagick/zip/ad98b244c995d2e3051757fa3b7855f45b550d24",
+      "sha256": "c999060eae929e4909ae90262a8f5b0c7616f973644867f5326912d5ae9811df",
+      "bytes": 16887178,
+      "archive": "ImageMagick-ad98b244c995d2e3051757fa3b7855f45b550d24.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "Dependencies",
+      "repository": "https://github.com/ImageMagick/Dependencies",
+      "commit": "1c21ff03809da9cc544427fcd04e965d1558d06f",
+      "url": "https://codeload.github.com/ImageMagick/Dependencies/zip/1c21ff03809da9cc544427fcd04e965d1558d06f",
+      "sha256": "139ac72148b80ad0d51a9f5828e1d34487f6d2eeeaa913ba4f2dae50b5914f0c",
+      "bytes": 46886,
+      "archive": "Dependencies-1c21ff03809da9cc544427fcd04e965d1558d06f.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "aom",
+      "repository": "https://github.com/ImageMagick/aom",
+      "commit": "689067b48df9548d25e37abaa618ebd4b6015c67",
+      "url": "https://codeload.github.com/ImageMagick/aom/zip/689067b48df9548d25e37abaa618ebd4b6015c67",
+      "sha256": "4bd164b979d215c580466ae2b99701de375b2c68b419b7413f72b4b01b442d50",
+      "bytes": 7737604,
+      "archive": "aom-689067b48df9548d25e37abaa618ebd4b6015c67.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "brotli",
+      "repository": "https://github.com/ImageMagick/brotli",
+      "commit": "6225e7a93b6bcc1f3e3b267e9523a8eaea49eb5e",
+      "url": "https://codeload.github.com/ImageMagick/brotli/zip/6225e7a93b6bcc1f3e3b267e9523a8eaea49eb5e",
+      "sha256": "48174a2389fb124954a227c9673051cd44d763fb2e6ae10a70632420592a8cd3",
+      "bytes": 742738,
+      "archive": "brotli-6225e7a93b6bcc1f3e3b267e9523a8eaea49eb5e.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "bzip2",
+      "repository": "https://github.com/ImageMagick/bzip2",
+      "commit": "abffe764f875f71d051efb19d4c83139375f82d7",
+      "url": "https://codeload.github.com/ImageMagick/bzip2/zip/abffe764f875f71d051efb19d4c83139375f82d7",
+      "sha256": "7edce89fdcab36e334cc4c6fc89027bf914f47fe8706cf85a96638386beb0aed",
+      "bytes": 834766,
+      "archive": "bzip2-abffe764f875f71d051efb19d4c83139375f82d7.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "exr",
+      "repository": "https://github.com/ImageMagick/exr",
+      "commit": "60ff3e20b06690fdbe938e2134872e43640cf1cb",
+      "url": "https://codeload.github.com/ImageMagick/exr/zip/60ff3e20b06690fdbe938e2134872e43640cf1cb",
+      "sha256": "7c4dbf6f4bcebfe9101a465a44d0edb3c3b45dfaaf14d40212ec1a6feba069bf",
+      "bytes": 26383890,
+      "archive": "exr-60ff3e20b06690fdbe938e2134872e43640cf1cb.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "ffi",
+      "repository": "https://github.com/ImageMagick/ffi",
+      "commit": "91982d4ac97b179dd1fb878caef2ed2847bc38b6",
+      "url": "https://codeload.github.com/ImageMagick/ffi/zip/91982d4ac97b179dd1fb878caef2ed2847bc38b6",
+      "sha256": "b87a52212715eb2389b22c8a5ed45cc261d75ff51f238779c209ce7c91b7196a",
+      "bytes": 1975747,
+      "archive": "ffi-91982d4ac97b179dd1fb878caef2ed2847bc38b6.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "freetype",
+      "repository": "https://github.com/ImageMagick/freetype",
+      "commit": "6cf8b1a08bdec1d41246f51bcd12e5a62c9845e2",
+      "url": "https://codeload.github.com/ImageMagick/freetype/zip/6cf8b1a08bdec1d41246f51bcd12e5a62c9845e2",
+      "sha256": "b8b548955e89ef38678648b388f4963565eea51b4f55a12a97f2a2a5eb4efc83",
+      "bytes": 4760936,
+      "archive": "freetype-6cf8b1a08bdec1d41246f51bcd12e5a62c9845e2.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "glib",
+      "repository": "https://github.com/ImageMagick/glib",
+      "commit": "ea0118ca0d408473d320b21262a1cdc6ce3e5f40",
+      "url": "https://codeload.github.com/ImageMagick/glib/zip/ea0118ca0d408473d320b21262a1cdc6ce3e5f40",
+      "sha256": "2a51ade72938200a0a5ea5bb69d0f96eeb57e3b7be86ddbf540d3922480fe9a2",
+      "bytes": 9594713,
+      "archive": "glib-ea0118ca0d408473d320b21262a1cdc6ce3e5f40.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "heif",
+      "repository": "https://github.com/ImageMagick/heif",
+      "commit": "b8fbb502979530d5e4baa7d24d8c353c3d13d1cd",
+      "url": "https://codeload.github.com/ImageMagick/heif/zip/b8fbb502979530d5e4baa7d24d8c353c3d13d1cd",
+      "sha256": "0272786dedc87c9dcb648185fb9a74535c0560598dc0a0a57db5b3a7bf4d3e8b",
+      "bytes": 2874002,
+      "archive": "heif-b8fbb502979530d5e4baa7d24d8c353c3d13d1cd.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "highway",
+      "repository": "https://github.com/ImageMagick/highway",
+      "commit": "e1a586af5be6358bb983ff608f9678a622209ca3",
+      "url": "https://codeload.github.com/ImageMagick/highway/zip/e1a586af5be6358bb983ff608f9678a622209ca3",
+      "sha256": "4a0dad9d520f112e9722eaebe14a0249aab1a80ec9daa3bdb63558f3bf14b8a0",
+      "bytes": 3918814,
+      "archive": "highway-e1a586af5be6358bb983ff608f9678a622209ca3.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "imath",
+      "repository": "https://github.com/ImageMagick/imath",
+      "commit": "1ec391453dd33f3432018d3a266e3d177a705235",
+      "url": "https://codeload.github.com/ImageMagick/imath/zip/1ec391453dd33f3432018d3a266e3d177a705235",
+      "sha256": "e6c3614498b844da6a65ab51a976b356827f18ceeb1d88895151ea8c653841be",
+      "bytes": 879270,
+      "archive": "imath-1ec391453dd33f3432018d3a266e3d177a705235.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "jpeg-turbo",
+      "repository": "https://github.com/ImageMagick/jpeg-turbo",
+      "commit": "b91492930ceb23c0b5282e8b9fc21de54182d92e",
+      "url": "https://codeload.github.com/ImageMagick/jpeg-turbo/zip/b91492930ceb23c0b5282e8b9fc21de54182d92e",
+      "sha256": "7959c920b966cdc3843860f097fd4dae9a0a886916e4aad16acbe4c35315a28f",
+      "bytes": 3049439,
+      "archive": "jpeg-turbo-b91492930ceb23c0b5282e8b9fc21de54182d92e.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "jpeg-xl",
+      "repository": "https://github.com/ImageMagick/jpeg-xl",
+      "commit": "8503118ff13ab8b11680296900da3361d6703dc1",
+      "url": "https://codeload.github.com/ImageMagick/jpeg-xl/zip/8503118ff13ab8b11680296900da3361d6703dc1",
+      "sha256": "c464263728ec1b996593ed4cda7ca6aec24e994fd80c2172a753bb38e2a18d88",
+      "bytes": 2194548,
+      "archive": "jpeg-xl-8503118ff13ab8b11680296900da3361d6703dc1.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "lcms",
+      "repository": "https://github.com/ImageMagick/lcms",
+      "commit": "d261ab6fda30fd7578a2ce7ace5c0b2c7d3fc0b8",
+      "url": "https://codeload.github.com/ImageMagick/lcms/zip/d261ab6fda30fd7578a2ce7ace5c0b2c7d3fc0b8",
+      "sha256": "460cdbe7a0ac7384126632471337b88947344a9bdfc29afb1a81d53740f4584f",
+      "bytes": 5967632,
+      "archive": "lcms-d261ab6fda30fd7578a2ce7ace5c0b2c7d3fc0b8.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "lqr",
+      "repository": "https://github.com/ImageMagick/lqr",
+      "commit": "a2e9e8b5b41bf0569f51482707a12d354a086f3a",
+      "url": "https://codeload.github.com/ImageMagick/lqr/zip/a2e9e8b5b41bf0569f51482707a12d354a086f3a",
+      "sha256": "dac0182d53a109b7ff015f423ee135e4ffd185f420fb1c3e72d5aa185ba98436",
+      "bytes": 687962,
+      "archive": "lqr-a2e9e8b5b41bf0569f51482707a12d354a086f3a.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "openjpeg",
+      "repository": "https://github.com/ImageMagick/openjpeg",
+      "commit": "5a52e8e0690da686ddb6e98310e7bb5190a9a7c5",
+      "url": "https://codeload.github.com/ImageMagick/openjpeg/zip/5a52e8e0690da686ddb6e98310e7bb5190a9a7c5",
+      "sha256": "92b9890d9554302d955ab50fafdab10a6811e82831d32d8a9ea4b778747e445f",
+      "bytes": 2527690,
+      "archive": "openjpeg-5a52e8e0690da686ddb6e98310e7bb5190a9a7c5.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "openjph",
+      "repository": "https://github.com/ImageMagick/openjph",
+      "commit": "c1a1ffc1e3f90eb9397407f1f545a47e01390aef",
+      "url": "https://codeload.github.com/ImageMagick/openjph/zip/c1a1ffc1e3f90eb9397407f1f545a47e01390aef",
+      "sha256": "476b46579a99a69a99383031307f51d9725d9f6a22a55cfa29413bd9927b7539",
+      "bytes": 692624,
+      "archive": "openjph-c1a1ffc1e3f90eb9397407f1f545a47e01390aef.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "png",
+      "repository": "https://github.com/ImageMagick/png",
+      "commit": "88ee938ef91b0289339be463b29003f65d486210",
+      "url": "https://codeload.github.com/ImageMagick/png/zip/88ee938ef91b0289339be463b29003f65d486210",
+      "sha256": "884733a9222e79d7838ed62d71f3cb4fe5c96b11e86fd5e0cf627daf07ff17e5",
+      "bytes": 1929518,
+      "archive": "png-88ee938ef91b0289339be463b29003f65d486210.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "raw",
+      "repository": "https://github.com/ImageMagick/raw",
+      "commit": "9f7613ef48877180225b9377c87b0f3a65a2ca8e",
+      "url": "https://codeload.github.com/ImageMagick/raw/zip/9f7613ef48877180225b9377c87b0f3a65a2ca8e",
+      "sha256": "c3d6faa5b2b6f0850556900de0447277e6a4fbf75f528c8b66706f44e9154c15",
+      "bytes": 758862,
+      "archive": "raw-9f7613ef48877180225b9377c87b0f3a65a2ca8e.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "tiff",
+      "repository": "https://github.com/ImageMagick/tiff",
+      "commit": "3021cd03440ba6954f8bdf2b7ad4557a36092cd8",
+      "url": "https://codeload.github.com/ImageMagick/tiff/zip/3021cd03440ba6954f8bdf2b7ad4557a36092cd8",
+      "sha256": "6285aa8b85df3ecfbf922dff56e532a929dcf98fb3ce5cf7637cd726a8ebf007",
+      "bytes": 3050973,
+      "archive": "tiff-3021cd03440ba6954f8bdf2b7ad4557a36092cd8.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "webp",
+      "repository": "https://github.com/ImageMagick/webp",
+      "commit": "b981ef267195cb12f2cb97e4dd23e12a1323a4ce",
+      "url": "https://codeload.github.com/ImageMagick/webp/zip/b981ef267195cb12f2cb97e4dd23e12a1323a4ce",
+      "sha256": "68cf734f51e8f28de43ef782f19cc29885ccdfc628897e46338cbfdfe08ba241",
+      "bytes": 4062854,
+      "archive": "webp-b981ef267195cb12f2cb97e4dd23e12a1323a4ce.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "xml",
+      "repository": "https://github.com/ImageMagick/xml",
+      "commit": "3ba73c8312b7ac88adc1a2e62df13d0827e93a0f",
+      "url": "https://codeload.github.com/ImageMagick/xml/zip/3ba73c8312b7ac88adc1a2e62df13d0827e93a0f",
+      "sha256": "27dc8296481fc6cc76581e8d79a9ba964f375939370f45f7e4a20124d68c262d",
+      "bytes": 4211589,
+      "archive": "xml-3ba73c8312b7ac88adc1a2e62df13d0827e93a0f.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "zlib",
+      "repository": "https://github.com/ImageMagick/zlib",
+      "commit": "e42706934e4e7564d960031ae62ff29d918ee06d",
+      "url": "https://codeload.github.com/ImageMagick/zlib/zip/e42706934e4e7564d960031ae62ff29d918ee06d",
+      "sha256": "f2529c29542276c87048dde2876d73310c16afc839f8a86e288712366696721d",
+      "bytes": 1684778,
+      "archive": "zlib-e42706934e4e7564d960031ae62ff29d918ee06d.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "zstd",
+      "repository": "https://github.com/ImageMagick/zstd",
+      "commit": "4d5752ffeca8defb48ad744274f4f76b2866d71d",
+      "url": "https://codeload.github.com/ImageMagick/zstd/zip/4d5752ffeca8defb48ad744274f4f76b2866d71d",
+      "sha256": "a747e0fb2188b2bb5e3b0dedc477f8dbe823930639388cac4033085ab5e1a2a4",
+      "bytes": 2788441,
+      "archive": "zstd-4d5752ffeca8defb48ad744274f4f76b2866d71d.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "cairo",
+      "repository": "https://github.com/ImageMagick/cairo",
+      "commit": "4334da83d8f44abe5aab1a11956e3f8e6e58eac7",
+      "url": "https://codeload.github.com/ImageMagick/cairo/zip/4334da83d8f44abe5aab1a11956e3f8e6e58eac7",
+      "sha256": "bff402249a1a2bad97a8a9b280a7fdbdec0ea0dbc7ee651d65ad9af7411d8d97",
+      "bytes": 52152503,
+      "archive": "cairo-4334da83d8f44abe5aab1a11956e3f8e6e58eac7.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "croco",
+      "repository": "https://github.com/ImageMagick/croco",
+      "commit": "178785cdc6faecad555a4e6fe4fda2b625046e8e",
+      "url": "https://codeload.github.com/ImageMagick/croco/zip/178785cdc6faecad555a4e6fe4fda2b625046e8e",
+      "sha256": "841b871c9f29f0e35059bcc7694e333d171e7b3e60304cef7e3d4fbeade44025",
+      "bytes": 357486,
+      "archive": "croco-178785cdc6faecad555a4e6fe4fda2b625046e8e.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "fribidi",
+      "repository": "https://github.com/ImageMagick/fribidi",
+      "commit": "f62e4ce7160f0c9d70a6a448c83122c920370324",
+      "url": "https://codeload.github.com/ImageMagick/fribidi/zip/f62e4ce7160f0c9d70a6a448c83122c920370324",
+      "sha256": "735660cd193233c65585e5abaf91fd9cef0a52125567a43a47d1c5c94f766915",
+      "bytes": 2829801,
+      "archive": "fribidi-f62e4ce7160f0c9d70a6a448c83122c920370324.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "gdk-pixbuf",
+      "repository": "https://github.com/ImageMagick/gdk-pixbuf",
+      "commit": "92a234886a0337480770ef93dc74ea920bf39ab3",
+      "url": "https://codeload.github.com/ImageMagick/gdk-pixbuf/zip/92a234886a0337480770ef93dc74ea920bf39ab3",
+      "sha256": "4b1c04d454011f8c77a62c9b848684d67949510b4cc0508ec026f46c531896b7",
+      "bytes": 7135776,
+      "archive": "gdk-pixbuf-92a234886a0337480770ef93dc74ea920bf39ab3.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "harfbuzz",
+      "repository": "https://github.com/ImageMagick/harfbuzz",
+      "commit": "b1dcf2b4cc1635fc6845101c4bc800e99dd9f1c2",
+      "url": "https://codeload.github.com/ImageMagick/harfbuzz/zip/b1dcf2b4cc1635fc6845101c4bc800e99dd9f1c2",
+      "sha256": "f17f1a670920fe86c95fc6b7ed94060db19cb4a2e9e784169027c40bb676f640",
+      "bytes": 43491644,
+      "archive": "harfbuzz-b1dcf2b4cc1635fc6845101c4bc800e99dd9f1c2.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "lzma",
+      "repository": "https://github.com/ImageMagick/lzma",
+      "commit": "131e9a49425f51b8dd8710c57fbaa527baed3989",
+      "url": "https://codeload.github.com/ImageMagick/lzma/zip/131e9a49425f51b8dd8710c57fbaa527baed3989",
+      "sha256": "60c85b44a56beef5aa0a889e39e3382082a29fd52ed4ba2a4f1fbede6159e03f",
+      "bytes": 3408460,
+      "archive": "lzma-131e9a49425f51b8dd8710c57fbaa527baed3989.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "pango",
+      "repository": "https://github.com/ImageMagick/pango",
+      "commit": "0b1e4536e0005f3c36b523c17ea12322490efd45",
+      "url": "https://codeload.github.com/ImageMagick/pango/zip/0b1e4536e0005f3c36b523c17ea12322490efd45",
+      "sha256": "f6efe59febef54d9088c4fb3bd9e5606adbfdc8ebe4052e96d793ef463795af2",
+      "bytes": 883752,
+      "archive": "pango-0b1e4536e0005f3c36b523c17ea12322490efd45.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "pixman",
+      "repository": "https://github.com/ImageMagick/pixman",
+      "commit": "f7b55a8d3c39380724da9fbdef72ad70be800efc",
+      "url": "https://codeload.github.com/ImageMagick/pixman/zip/f7b55a8d3c39380724da9fbdef72ad70be800efc",
+      "sha256": "319801caf0f797aa26a72a89c4c2448742838351cbaa12ac2438bb3f9ded515d",
+      "bytes": 937911,
+      "archive": "pixman-f7b55a8d3c39380724da9fbdef72ad70be800efc.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "raqm",
+      "repository": "https://github.com/ImageMagick/raqm",
+      "commit": "a699b8b7838acb4ac8d5891f42ecf3d84a00a9ad",
+      "url": "https://codeload.github.com/ImageMagick/raqm/zip/a699b8b7838acb4ac8d5891f42ecf3d84a00a9ad",
+      "sha256": "0913c2218405a52dd3c1ade08810b9fbe547221a1ce4396eb190f0aa3d2e9fa4",
+      "bytes": 359806,
+      "archive": "raqm-a699b8b7838acb4ac8d5891f42ecf3d84a00a9ad.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "rsvg",
+      "repository": "https://github.com/ImageMagick/rsvg",
+      "commit": "7415a6765db7554ba6f0f1b3dcb0877f36ff581b",
+      "url": "https://codeload.github.com/ImageMagick/rsvg/zip/7415a6765db7554ba6f0f1b3dcb0877f36ff581b",
+      "sha256": "dd971a2ed14e7fd4b22c9d50afe594ec8cb9902bf74118e8a56a8074b6cfc139",
+      "bytes": 2408605,
+      "archive": "rsvg-7415a6765db7554ba6f0f1b3dcb0877f36ff581b.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "zip",
+      "repository": "https://github.com/ImageMagick/zip",
+      "commit": "745377bdab21cf5e5fc19d0bbfcde93030d3af5e",
+      "url": "https://codeload.github.com/ImageMagick/zip/zip/745377bdab21cf5e5fc19d0bbfcde93030d3af5e",
+      "sha256": "ff03efdbefb3da98d5a83f5bc27a421c59d655b83286d5b5ada9d2463c2460a0",
+      "bytes": 2172089,
+      "archive": "zip-745377bdab21cf5e5fc19d0bbfcde93030d3af5e.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "jpeg-turbo-12",
+      "repository": "https://github.com/ImageMagick/jpeg-turbo-12",
+      "commit": "9837071e8c0e5fba6daa03f31aba4416ff5eaf7c",
+      "url": "https://codeload.github.com/ImageMagick/jpeg-turbo-12/zip/9837071e8c0e5fba6daa03f31aba4416ff5eaf7c",
+      "sha256": "70f595dc9c0888eb5e35baa0a42d9a3177d5fedabff0420097f63e39607bd585",
+      "bytes": 1737,
+      "archive": "jpeg-turbo-12-9837071e8c0e5fba6daa03f31aba4416ff5eaf7c.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "jpeg-turbo-16",
+      "repository": "https://github.com/ImageMagick/jpeg-turbo-16",
+      "commit": "d16d0839d655478b4d517ebe2aeabfecce8192d9",
+      "url": "https://codeload.github.com/ImageMagick/jpeg-turbo-16/zip/d16d0839d655478b4d517ebe2aeabfecce8192d9",
+      "sha256": "c9c7262427dd4299f83abddd80e4251bd8303bc3ec1ebeecbb9239cf523c4003",
+      "bytes": 1790,
+      "archive": "jpeg-turbo-16-d16d0839d655478b4d517ebe2aeabfecce8192d9.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "fontconfig",
+      "repository": "https://github.com/ImageMagick/fontconfig",
+      "commit": "943048d94dfa3d7d4a213f36f9ef7af988397cd4",
+      "url": "https://codeload.github.com/ImageMagick/fontconfig/zip/943048d94dfa3d7d4a213f36f9ef7af988397cd4",
+      "sha256": "35b1664bc001795eb1f7bedd8870077941dc1fdedc4278a1ce85f1765892b42d",
+      "bytes": 1204293,
+      "archive": "fontconfig-943048d94dfa3d7d4a213f36f9ef7af988397cd4.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "Configure",
+      "repository": "https://github.com/ImageMagick/Configure",
+      "commit": "08ea96dd18267b90a56204a598ba2b30db20c6b7",
+      "url": "https://codeload.github.com/ImageMagick/Configure/zip/08ea96dd18267b90a56204a598ba2b30db20c6b7",
+      "sha256": "6fa46a876a53b3cd97a578c1d1a92216129a4c17ab9cdcb2e9b5abeb3264bc72",
+      "bytes": 6809903,
+      "archive": "Configure-08ea96dd18267b90a56204a598ba2b30db20c6b7.zip",
+      "purpose": "build-tool-source"
+    },
+    {
+      "name": "AvalonEdit",
+      "repository": "https://github.com/icsharpcode/AvalonEdit",
+      "commit": "862415d51eddc9eac93f462dbc522ffbf929cd52",
+      "url": "https://codeload.github.com/icsharpcode/AvalonEdit/zip/862415d51eddc9eac93f462dbc522ffbf929cd52",
+      "sha256": "6a3c0854d288bfa6518f68773a815067085e0252c5e06fa677ff1fd38eb773ae",
+      "bytes": 1130634,
+      "archive": "AvalonEdit-862415d51eddc9eac93f462dbc522ffbf929cd52.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "hst-core",
+      "repository": "https://github.com/henrikstengaard/hst-core",
+      "commit": "78e85170d597126a223ea2534d1a5421be059343",
+      "url": "https://codeload.github.com/henrikstengaard/hst-core/zip/78e85170d597126a223ea2534d1a5421be059343",
+      "sha256": "161272bb4a578f1c6f78d8c5ea90d622567db10a5b14a1b739950f2442d7380b",
+      "bytes": 1054206,
+      "archive": "hst-core-78e85170d597126a223ea2534d1a5421be059343.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "markdig",
+      "repository": "https://github.com/xoofx/markdig",
+      "commit": "9900e46eacd9e17ba32f1b441a349bcab61777af",
+      "url": "https://codeload.github.com/xoofx/markdig/zip/9900e46eacd9e17ba32f1b441a349bcab61777af",
+      "sha256": "15f7f15051b3bf1b693efdda669212bcf3ee2dc2de50fa54aed1308981c35dfa",
+      "bytes": 1399377,
+      "archive": "markdig-9900e46eacd9e17ba32f1b441a349bcab61777af.zip",
+      "purpose": "corresponding-source"
+    },
+    {
+      "name": "NAudio",
+      "repository": "https://github.com/naudio/NAudio",
+      "commit": "4f8889e2bd34c3978a25652c6c172fa1502ccba3",
+      "url": "https://codeload.github.com/naudio/NAudio/zip/4f8889e2bd34c3978a25652c6c172fa1502ccba3",
+      "sha256": "ca43c79304cd18a5548aa6dbc8d8e7cf28b92026a53e6474198dc4299e408b7c",
+      "bytes": 3349464,
+      "archive": "NAudio-4f8889e2bd34c3978a25652c6c172fa1502ccba3.zip",
+      "purpose": "corresponding-source"
+    }
+  ],
+  "profile": "No bundled AVC/H.264 or HEVC codecs"
+}

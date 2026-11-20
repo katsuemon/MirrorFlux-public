@@ -1,0 +1,1005 @@
+{
+  "scope": "Restore-selected win-x64 runtime assets; final bundle separately checked. Excluded SQL entries have no runtime asset.",
+  "packages": [
+    {
+      "package": "AvalonEdit/6.3.1.120",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net8.0-windows7.0/ICSharpCode.AvalonEdit.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/icsharpcode/AvalonEdit.git",
+        "commit": "862415d51eddc9eac93f462dbc522ffbf929cd52"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "Hst.Compression/0.4.96",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net10.0/Hst.Compression.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/henrikstengaard/hst-core",
+        "commit": "78e85170d597126a223ea2534d1a5421be059343"
+      },
+      "noticeFiles": [
+        "license.txt"
+      ]
+    },
+    {
+      "package": "Hst.Core/0.4.96",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net10.0/Hst.Core.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/henrikstengaard/hst-core",
+        "commit": "78e85170d597126a223ea2534d1a5421be059343"
+      },
+      "noticeFiles": [
+        "license.txt"
+      ]
+    },
+    {
+      "package": "Magick.NET-Q8-x64/14.17.2",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net8.0/Magick.NET-Q8-x64.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "Apache-2.0",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dlemstra/Magick.NET",
+        "branch": "main",
+        "commit": "aa58615154d7895c800fe756c695a55e4ee5d4ee"
+      },
+      "noticeFiles": [
+        "Notice.txt"
+      ]
+    },
+    {
+      "package": "Magick.NET.Core/14.17.2",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net8.0/Magick.NET.Core.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "Apache-2.0",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dlemstra/Magick.NET",
+        "branch": "main",
+        "commit": "aa58615154d7895c800fe756c695a55e4ee5d4ee"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "Markdig/1.5.0",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net10.0/Markdig.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "BSD-2-Clause",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/xoofx/markdig",
+        "commit": "9900e46eacd9e17ba32f1b441a349bcab61777af"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "Microsoft.Extensions.ObjectPool/8.0.10",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net8.0/Microsoft.Extensions.ObjectPool.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/aspnetcore",
+        "commit": "c2a442982e736e17ae6bcadbfd8ccba278ee1be6"
+      },
+      "noticeFiles": [
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "Microsoft.NET.ILLink.Tasks/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "Microsoft.Windows.Compatibility/10.0.13",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "4099f83977f4d29604a9aeb971fb0a7bc1d5f699"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "NAudio/3.3.0",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net9.0/NAudio.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/naudio/NAudio",
+        "commit": "4f8889e2bd34c3978a25652c6c172fa1502ccba3"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "NAudio.Core/3.3.0",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net9.0/NAudio.Core.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/naudio/NAudio",
+        "commit": "4f8889e2bd34c3978a25652c6c172fa1502ccba3"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "NAudio.Midi/3.3.0",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net9.0/NAudio.Midi.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/naudio/NAudio",
+        "commit": "4f8889e2bd34c3978a25652c6c172fa1502ccba3"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "NAudio.Wasapi/3.3.0",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net9.0/NAudio.Wasapi.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/naudio/NAudio",
+        "commit": "4f8889e2bd34c3978a25652c6c172fa1502ccba3"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "NAudio.WinMM/3.3.0",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net9.0/NAudio.WinMM.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/naudio/NAudio",
+        "commit": "4f8889e2bd34c3978a25652c6c172fa1502ccba3"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.android-arm.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.android-arm64.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.android-x64.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.android-x86.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.linux-arm.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.linux-arm64.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.linux-bionic-arm64.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.linux-bionic-x64.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.linux-musl-arm.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.linux-musl-arm64.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.linux-musl-x64.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.linux-x64.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.maccatalyst-arm64.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.maccatalyst-x64.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.native.System.Data.SqlClient.sni/4.4.0",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": null,
+      "repository": {},
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.osx-arm64.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.osx-x64.runtime.native.System.IO.Ports/10.0.14",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni/4.4.0",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": null,
+      "repository": {},
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.win-x64.runtime.native.System.Data.SqlClient.sni/4.4.0",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": null,
+      "repository": {},
+      "noticeFiles": []
+    },
+    {
+      "package": "runtime.win-x86.runtime.native.System.Data.SqlClient.sni/4.4.0",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": null,
+      "repository": {},
+      "noticeFiles": []
+    },
+    {
+      "package": "System.ComponentModel.Composition/10.0.13",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net10.0/System.ComponentModel.Composition.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "4099f83977f4d29604a9aeb971fb0a7bc1d5f699"
+      },
+      "noticeFiles": [
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.ComponentModel.Composition.Registration/10.0.13",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net10.0/System.ComponentModel.Composition.Registration.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "4099f83977f4d29604a9aeb971fb0a7bc1d5f699"
+      },
+      "noticeFiles": [
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.Data.Odbc/10.0.13",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "runtimes/win/lib/net10.0/System.Data.Odbc.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "4099f83977f4d29604a9aeb971fb0a7bc1d5f699"
+      },
+      "noticeFiles": [
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.Data.OleDb/10.0.13",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "runtimes/win/lib/net10.0/System.Data.OleDb.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "4099f83977f4d29604a9aeb971fb0a7bc1d5f699"
+      },
+      "noticeFiles": [
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.Data.SqlClient/4.9.1",
+      "selectedForRuntime": false,
+      "assets": {
+        "runtime": [],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/maintenance-packages",
+        "commit": "84b081710c66cc560b77d4de38cee493c3a38e9d"
+      },
+      "noticeFiles": []
+    },
+    {
+      "package": "System.DirectoryServices.AccountManagement/10.0.13",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "runtimes/win/lib/net10.0/System.DirectoryServices.AccountManagement.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "4099f83977f4d29604a9aeb971fb0a7bc1d5f699"
+      },
+      "noticeFiles": [
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.DirectoryServices.Protocols/10.0.13",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "runtimes/win/lib/net10.0/System.DirectoryServices.Protocols.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "4099f83977f4d29604a9aeb971fb0a7bc1d5f699"
+      },
+      "noticeFiles": [
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.IO.Ports/10.0.14",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "runtimes/win/lib/net10.0/System.IO.Ports.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "0427b9abbead3fa64c6655eb4290c537397131fa"
+      },
+      "noticeFiles": [
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.Management/10.0.13",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "runtimes/win/lib/net10.0/System.Management.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "4099f83977f4d29604a9aeb971fb0a7bc1d5f699"
+      },
+      "noticeFiles": [
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.Numerics.Tensors/9.0.0",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net9.0/System.Numerics.Tensors.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/runtime",
+        "commit": "9d5a6a9aa463d6d10b0b0ba6d5982cc82f363dc3"
+      },
+      "noticeFiles": [
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.Reflection.Context/10.0.13",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net10.0/System.Reflection.Context.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "4099f83977f4d29604a9aeb971fb0a7bc1d5f699"
+      },
+      "noticeFiles": [
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.Runtime.Caching/10.0.13",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "runtimes/win/lib/net10.0/System.Runtime.Caching.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "4099f83977f4d29604a9aeb971fb0a7bc1d5f699"
+      },
+      "noticeFiles": [
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.ServiceModel.Http/8.1.2",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net8.0/System.ServiceModel.Http.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/wcf",
+        "commit": "a47960f931a813617a061adc2ba9cabe1816a551"
+      },
+      "noticeFiles": [
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.ServiceModel.NetFramingBase/8.1.2",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net8.0/System.ServiceModel.NetFramingBase.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/wcf",
+        "commit": "a47960f931a813617a061adc2ba9cabe1816a551"
+      },
+      "noticeFiles": [
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.ServiceModel.NetTcp/8.1.2",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net8.0/System.ServiceModel.NetTcp.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/wcf",
+        "commit": "a47960f931a813617a061adc2ba9cabe1816a551"
+      },
+      "noticeFiles": [
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.ServiceModel.Primitives/8.1.2",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net8.0/System.ServiceModel.Duplex.dll",
+          "lib/net8.0/System.ServiceModel.Primitives.dll",
+          "lib/net8.0/System.ServiceModel.Security.dll",
+          "lib/net8.0/System.ServiceModel.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/wcf",
+        "commit": "a47960f931a813617a061adc2ba9cabe1816a551"
+      },
+      "noticeFiles": [
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.ServiceModel.Syndication/10.0.13",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/net10.0/System.ServiceModel.Syndication.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "4099f83977f4d29604a9aeb971fb0a7bc1d5f699"
+      },
+      "noticeFiles": [
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.ServiceProcess.ServiceController/10.0.13",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "runtimes/win/lib/net10.0/System.ServiceProcess.ServiceController.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "4099f83977f4d29604a9aeb971fb0a7bc1d5f699"
+      },
+      "noticeFiles": [
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.Speech/10.0.13",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "runtimes/win/lib/net10.0/System.Speech.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "4099f83977f4d29604a9aeb971fb0a7bc1d5f699"
+      },
+      "noticeFiles": [
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    },
+    {
+      "package": "System.Web.Services.Description/8.1.2",
+      "selectedForRuntime": true,
+      "assets": {
+        "runtime": [
+          "lib/netstandard2.0/System.Web.Services.Description.dll"
+        ],
+        "native": [],
+        "runtimeTargets": []
+      },
+      "declaredLicense": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/wcf",
+        "commit": "a47960f931a813617a061adc2ba9cabe1816a551"
+      },
+      "noticeFiles": [
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT"
+      ]
+    }
+  ],
+  "sourceProjects": [
+    {
+      "name": "SharpCompress",
+      "baseVersion": "0.50.7",
+      "path": "third_party/SharpCompress",
+      "modifications": "MODIFICATIONS.json",
+      "rarImplementationRemoved": true
+    }
+  ],
+  "nativeOverrides": [
+    {
+      "package": "Magick.NET-Q8-x64/14.17.2",
+      "originalNativeAssetsExcluded": true,
+      "replacement": "Assets/Image/Magick.Native-Q8-x64.dll",
+      "profile": "no-avc-hevc"
+    }
+  ]
+}

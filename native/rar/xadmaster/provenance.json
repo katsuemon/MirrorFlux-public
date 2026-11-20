@@ -1,0 +1,10 @@
+{
+  "repository": "https://github.com/MacPaw/XADMaster",
+  "commit": "7cb9ee0abbb163f261e4cb74501e15067032319c",
+  "license": "LGPL-2.1-or-later",
+  "files": {
+    "XADRAR15Handle.m": "01d7780316acbd7e325b02c946c841636c3ffee5ab45025fe10d0c2274dfff78",
+    "XADRAR15Handle.h": "7b886cab8f527876f68ae401bf60b8f39dff1cc7a7aa63f7498a1729c3ba4272"
+  },
+  "changes": "RAR1.5 decoder translated to portable C; independent bounded bit reader, canonical prefix decoder, streaming LZSS window and CRC check. Original Objective-C sources retained."
+}

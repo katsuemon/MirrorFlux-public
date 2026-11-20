@@ -1,0 +1,267 @@
+<UserControl x:Class="MirrorFlux.Controls.MusicPlayerControl"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:local="clr-namespace:MirrorFlux.Controls"
+ Background="{DynamicResource ViewerBlack}" FontFamily="Consolas, BIZ UDGothic, MS Gothic"
+ UseLayoutRounding="True" SnapsToDevicePixels="True"
+ TextOptions.TextFormattingMode="Display">
+ <!-- サウンドビューア。鍵盤、曲情報、トランスポート、スペクトラム、レベルメーター、レジスタ表示と曲リストを並べる。 -->
+ <Grid>
+ <Grid.RowDefinitions>
+  <RowDefinition Height="522"/>
+  <RowDefinition Height="18"/>
+  <RowDefinition x:Name="TrackListRow" Height="*"/>
+ </Grid.RowDefinitions>
+ <!-- 上段の表示部。幅が足りないときは横スクロールする。 -->
+ <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Focusable="False"
+  HorizontalContentAlignment="Stretch">
+ <Grid x:Name="ViewerGrid" Margin="8,6,0,0" MinWidth="1176" Height="504" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+  <Grid.ColumnDefinitions>
+   <ColumnDefinition Width="520" />
+   <ColumnDefinition Width="16" />
+   <ColumnDefinition Width="*" />
+   <ColumnDefinition Width="8" />
+   <ColumnDefinition Width="272" />
+  </Grid.ColumnDefinitions>
+  <!-- 左列。チャンネルごとの鍵盤。 -->
+  <Border Grid.Column="0" Background="{DynamicResource ViewerBlack}" Padding="0">
+   <local:MusicKeyboardRowsDisplay x:Name="KeyboardRows" />
+  </Border>
+  <!-- スペクトラムとベロシティの目盛り。鍵盤列と隙間列にまたがって重ねる。 -->
+  <Grid x:Name="ScaleOverlay" Grid.Column="0" Grid.ColumnSpan="2" Width="32" Height="266"
+   HorizontalAlignment="Right" VerticalAlignment="Bottom" Panel.ZIndex="3" ClipToBounds="False">
+   <Grid.RowDefinitions><RowDefinition Height="14"/><RowDefinition Height="14"/><RowDefinition Height="85"/><RowDefinition Height="14"/><RowDefinition Height="14"/><RowDefinition Height="85"/><RowDefinition Height="*"/><RowDefinition Height="14"/></Grid.RowDefinitions>
+   <local:MusicVerticalScaleDisplay x:Name="SpectrumDbScale" Grid.Row="2"
+    Width="32" HorizontalAlignment="Right" Panel.ZIndex="2"
+    Labels="0dB|-10|-20|-30|-40|-50|-60" DisplayScale="1.5" BottomInsetPixels="0" />
+   <local:MusicVerticalScaleDisplay x:Name="VelocityValueScale" Grid.Row="5"
+    Width="32" HorizontalAlignment="Right" Panel.ZIndex="2"
+    Labels="127|63|0" DisplayScale="1.5" BottomInsetPixels="0" />
+  </Grid>
+  <!-- 中央列。鍵盤の右に曲名・ゲーム名・システム名・作者・形式・音源の曲情報を段に並べる。 -->
+  <Grid x:Name="Gd3TrackTitleRow" Grid.Column="2" Height="19" VerticalAlignment="Bottom" Margin="-20,0,0,471" HorizontalAlignment="Left" ClipToBounds="True">
+   <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="4" />
+    <ColumnDefinition Width="6" />
+    <ColumnDefinition Width="34" />
+    <ColumnDefinition Width="8" />
+    <ColumnDefinition Width="*" />
+   </Grid.ColumnDefinitions>
+   <Rectangle Grid.Column="0" Width="4" Height="19" Fill="{DynamicResource HighlightText}" />
+   <StackPanel Grid.Column="2" VerticalAlignment="Center">
+    <TextBlock Text="TRACK" FontSize="8.5" LineHeight="9" Foreground="{DynamicResource MutedText}" FontFamily="Consolas" />
+    <TextBlock Text="TITLE" FontSize="8.5" LineHeight="9" Foreground="{DynamicResource MutedText}" FontFamily="Consolas" />
+   </StackPanel>
+   <local:MarqueeTextBlock x:Name="Gd3TrackTitleText" Grid.Column="4" FontSize="14" Foreground="{DynamicResource HighlightText}"
+    FontFamily="Consolas, BIZ UDGothic, MS Gothic" VerticalAlignment="Center" Height="19" />
+  </Grid>
+  <Grid x:Name="Gd3GameTitleRow" Grid.Column="2" Height="19" VerticalAlignment="Bottom" Margin="-20,0,0,444" HorizontalAlignment="Left" ClipToBounds="True">
+   <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="4" />
+    <ColumnDefinition Width="6" />
+    <ColumnDefinition Width="34" />
+    <ColumnDefinition Width="8" />
+    <ColumnDefinition Width="*" />
+   </Grid.ColumnDefinitions>
+   <Rectangle Grid.Column="0" Width="4" Height="19" Fill="{DynamicResource HighlightText}" />
+   <StackPanel Grid.Column="2" VerticalAlignment="Center">
+    <TextBlock Text="GAME" FontSize="8.5" LineHeight="9" Foreground="{DynamicResource MutedText}" FontFamily="Consolas" />
+    <TextBlock Text="TITLE" FontSize="8.5" LineHeight="9" Foreground="{DynamicResource MutedText}" FontFamily="Consolas" />
+   </StackPanel>
+   <local:MarqueeTextBlock x:Name="Gd3GameTitleText" Grid.Column="4" FontSize="14" Foreground="{DynamicResource HighlightText}"
+    FontFamily="Consolas, BIZ UDGothic, MS Gothic" VerticalAlignment="Center" Height="19" />
+  </Grid>
+  <Grid x:Name="Gd3SystemNameRow" Grid.Column="2" Height="19" VerticalAlignment="Bottom" Margin="-20,0,0,417" HorizontalAlignment="Left" ClipToBounds="True">
+   <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="4" />
+    <ColumnDefinition Width="6" />
+    <ColumnDefinition Width="34" />
+    <ColumnDefinition Width="8" />
+    <ColumnDefinition Width="*" />
+   </Grid.ColumnDefinitions>
+   <Rectangle Grid.Column="0" Width="4" Height="19" Fill="{DynamicResource HighlightText}" />
+   <StackPanel Grid.Column="2" VerticalAlignment="Center">
+    <TextBlock Text="SYSTEM" FontSize="8.5" LineHeight="9" Foreground="{DynamicResource MutedText}" FontFamily="Consolas" />
+    <TextBlock Text="NAME" FontSize="8.5" LineHeight="9" Foreground="{DynamicResource MutedText}" FontFamily="Consolas" />
+   </StackPanel>
+   <local:MarqueeTextBlock x:Name="Gd3SystemNameText" Grid.Column="4" FontSize="14" Foreground="{DynamicResource HighlightText}"
+    FontFamily="Consolas, BIZ UDGothic, MS Gothic" VerticalAlignment="Center" Height="19" />
+  </Grid>
+  <Grid x:Name="Gd3AuthorRow" Grid.Column="2" Height="19" VerticalAlignment="Bottom" Margin="-20,0,0,390" HorizontalAlignment="Left" ClipToBounds="True">
+   <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="4" />
+    <ColumnDefinition Width="6" />
+    <ColumnDefinition Width="34" />
+    <ColumnDefinition Width="8" />
+    <ColumnDefinition Width="*" />
+   </Grid.ColumnDefinitions>
+   <Rectangle Grid.Column="0" Width="4" Height="19" Fill="{DynamicResource HighlightText}" />
+   <StackPanel Grid.Column="2" VerticalAlignment="Center">
+    <TextBlock Text="AUTHOR" FontSize="8.5" LineHeight="9" Foreground="{DynamicResource MutedText}" FontFamily="Consolas" />
+    <TextBlock Text="NAME" FontSize="8.5" LineHeight="9" Foreground="{DynamicResource MutedText}" FontFamily="Consolas" />
+   </StackPanel>
+   <local:MarqueeTextBlock x:Name="Gd3AuthorText" Grid.Column="4" FontSize="14" Foreground="{DynamicResource HighlightText}"
+    FontFamily="Consolas, BIZ UDGothic, MS Gothic" VerticalAlignment="Center" Height="19" />
+  </Grid>
+  <Grid x:Name="Gd3FileTypeRow" Grid.Column="2" Height="19" VerticalAlignment="Bottom" Margin="-20,0,0,363" HorizontalAlignment="Left" ClipToBounds="True">
+   <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="4" />
+    <ColumnDefinition Width="6" />
+    <ColumnDefinition Width="34" />
+    <ColumnDefinition Width="8" />
+    <ColumnDefinition Width="*" />
+   </Grid.ColumnDefinitions>
+   <Rectangle Grid.Column="0" Width="4" Height="19" Fill="{DynamicResource HighlightText}" />
+   <StackPanel Grid.Column="2" VerticalAlignment="Center">
+    <TextBlock Text="FILE" FontSize="8.5" LineHeight="9" Foreground="{DynamicResource MutedText}" FontFamily="Consolas" />
+    <TextBlock Text="TYPE" FontSize="8.5" LineHeight="9" Foreground="{DynamicResource MutedText}" FontFamily="Consolas" />
+   </StackPanel>
+   <local:MarqueeTextBlock x:Name="Gd3FileTypeText" Grid.Column="4" FontSize="14" Foreground="{DynamicResource HighlightText}"
+    FontFamily="Consolas, BIZ UDGothic, MS Gothic" VerticalAlignment="Center" Height="19" />
+  </Grid>
+  <Grid x:Name="Gd3SoundSourceRow" Grid.Column="2" Height="19" VerticalAlignment="Bottom" Margin="-20,0,0,336" HorizontalAlignment="Left" ClipToBounds="True">
+   <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="4" />
+    <ColumnDefinition Width="6" />
+    <ColumnDefinition Width="34" />
+    <ColumnDefinition Width="8" />
+    <ColumnDefinition Width="*" />
+   </Grid.ColumnDefinitions>
+   <Rectangle Grid.Column="0" Width="4" Height="19" Fill="{DynamicResource HighlightText}" />
+   <StackPanel Grid.Column="2" VerticalAlignment="Center">
+    <TextBlock Text="SOUND" FontSize="8.5" LineHeight="9" Foreground="{DynamicResource MutedText}" FontFamily="Consolas" />
+    <TextBlock Text="SOURCE" FontSize="8.5" LineHeight="9" Foreground="{DynamicResource MutedText}" FontFamily="Consolas" />
+   </StackPanel>
+   <local:MarqueeTextBlock x:Name="Gd3SoundSourceText" Grid.Column="4" FontSize="14" Foreground="{DynamicResource HighlightText}"
+    FontFamily="Consolas, BIZ UDGothic, MS Gothic" VerticalAlignment="Center" Height="19" />
+  </Grid>
+  <!-- トランスポート表示と、右寄せの時計・経過時間・総時間・ループ回数・音源コア表示。 -->
+  <TextBlock x:Name="ControllerGraphicsText" Grid.Column="2" Text="CONTROLLER" FontSize="12" Height="14" LineHeight="14"
+   Foreground="{DynamicResource AccentText}" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+   Margin="0,0,0,312" />
+  <local:MusicTransportDisplay x:Name="TransportDisplay" Grid.Column="2"
+   Height="60" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+   Margin="-20,0,0,259" />
+  <local:MusicSevenSegmentDisplay x:Name="CurrentClockSevenSegment" Grid.Column="2"
+   HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,471"
+   LabelLine1="DIGITAL" LabelLine2="CLOCK" />
+  <local:MusicSevenSegmentDisplay x:Name="ElapsedTimeDisplay" Grid.Column="2"
+   HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,444"
+   LabelLine1="ELAPSED" LabelLine2="TIME" />
+  <local:MusicSevenSegmentDisplay x:Name="TotalTimeSevenSegment" Grid.Column="2"
+   HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,417"
+   LabelLine1="TOTAL" LabelLine2="TIME" />
+  <local:MusicSevenSegmentDisplay x:Name="LoopCountSevenSegment" Grid.Column="2"
+   HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,390"
+   LabelLine1="LOOP" LabelLine2="COUNTS" />
+  <local:MusicCoreDisplay x:Name="FmCoreText" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+   Margin="0,0,0,363" Height="19" Text="—" />
+  <local:MusicCoreDisplay x:Name="ExtDeviceText" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+   Margin="0,0,0,336" Height="19" Text="—" LabelLine1="EXT" LabelLine2="DEVICE" />
+  <!-- 中央列下部。スペクトラム、周波数目盛り、ベロシティのレベルメーター、パン、ノート番号。 -->
+  <Grid Grid.Column="2" Height="266" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+   <Grid.RowDefinitions><RowDefinition Height="14"/><RowDefinition Height="14"/><RowDefinition Height="85"/><RowDefinition Height="14"/><RowDefinition Height="14"/><RowDefinition Height="85"/><RowDefinition Height="*"/><RowDefinition Height="14"/></Grid.RowDefinitions>
+   <TextBlock x:Name="SpectrumGraphicsText" Grid.Row="1" Text="SPECTRUM ANALYZER" FontSize="12" Height="14" LineHeight="14"
+    Foreground="{DynamicResource AccentText}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+   <local:MusicMeterDisplay x:Name="SpectrumDisplay" Grid.Row="2"
+    ShowPeakDockSegment="True" HiddenTopSegments="0" DisplayScale="1.5" FillPlotHeight="True" ChannelGapPixels="2"
+    OuterEdgeReferenceChannels="16" OuterEdgeReferenceGapPixels="3" />
+   <local:MusicFrequencyRulerDisplay x:Name="SpectrumFrequencyRuler" Grid.Row="3" Height="14"
+    MinimumFrequency="10" MaximumFrequency="22050" ReferenceChannels="16" ReferenceGapPixels="3" />
+   <Grid x:Name="VelocityHeader" Grid.Row="4" Height="14" ClipToBounds="True">
+    <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+    <TextBlock x:Name="VelocityCh01Text" Text="CH01" FontSize="12" Height="14" LineHeight="14"
+     Foreground="{DynamicResource MutedText}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+    <TextBlock x:Name="VelocityCh09Text" Grid.Column="1" Text="CH09" FontSize="12" Height="14" LineHeight="14"
+     Foreground="{DynamicResource MutedText}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+    <TextBlock x:Name="VelocityGraphicsText" Grid.ColumnSpan="2" Text="VELOCITY GRAPHICS" FontSize="12" Height="14" LineHeight="14"
+     Foreground="{DynamicResource AccentText}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+   </Grid>
+   <local:MusicMeterDisplay x:Name="ViewerLevelDisplay" Grid.Row="5"
+    ShowPeakDockSegment="True" HiddenTopSegments="0" DisplayScale="1.5" FillPlotHeight="True" ChannelGapPixels="3" />
+   <local:MusicPanDisplay x:Name="ViewerPanDisplay" Grid.Row="6" DisplayScale="1.5" />
+   <local:MusicNoteNumberDisplay x:Name="ViewerNoteDisplay" Grid.Row="7" Height="14" />
+  </Grid>
+  <!-- 右列上部。アルバムアートワーク。 -->
+  <Grid x:Name="AlbumArtContainer" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top"
+   Margin="0,0,0,0" Width="272">
+   <Grid.RowDefinitions>
+    <RowDefinition Height="14"/>
+    <RowDefinition Height="232"/>
+   </Grid.RowDefinitions>
+   <TextBlock Grid.Row="0" Text="ALBUM ARTWORK" FontSize="12" Height="14" LineHeight="14"
+    Foreground="{DynamicResource AccentText}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+   <Border x:Name="AlbumArtBorder" Grid.Row="1" Width="272" Height="232" Margin="0,0,0,0"
+    BorderThickness="1" BorderBrush="{DynamicResource MutedText}" Background="{DynamicResource ViewerBlack}"
+    Padding="6"
+    HorizontalAlignment="Right" SnapsToDevicePixels="True">
+    <Image x:Name="AlbumArtImage" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"
+     HorizontalAlignment="Center" VerticalAlignment="Center" />
+   </Border>
+  </Grid>
+  <!-- 右列下部。音源チップのレジスタ表示。 -->
+  <Grid Grid.Column="4" Height="266" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="272">
+   <Grid.RowDefinitions>
+    <RowDefinition Height="14"/>
+    <RowDefinition Height="14"/>
+    <RowDefinition Height="238"/>
+   </Grid.RowDefinitions>
+   <DockPanel Grid.Row="1" Height="14" LastChildFill="True">
+    <TextBlock Text="SYNTHESIZER REGISTERS" FontSize="12" Height="14" LineHeight="14"
+     Foreground="{DynamicResource AccentText}" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" />
+    <TextBlock x:Name="RegisterBankText" Foreground="{DynamicResource AccentText}" FontSize="12" Height="14" LineHeight="14"
+     HorizontalAlignment="Left" VerticalAlignment="Top" />
+   </DockPanel>
+   <local:MusicRegisterDisplay x:Name="RegisterDisplay" Grid.Row="2" Height="238" Width="272" />
+  </Grid>
+ </Grid>
+ </ScrollViewer>
+ <!-- 再生中の曲名を流す Now Playing 行。 -->
+ <Border Grid.Row="1" Background="{DynamicResource DarkPurpleBackground}" BorderBrush="{DynamicResource DarkPurpleHighlight}" BorderThickness="0,1,0,0">
+  <Border BorderBrush="{DynamicResource DarkPurpleShadow}" BorderThickness="0,0,0,1" Padding="8,0">
+   <DockPanel>
+    <TextBlock DockPanel.Dock="Left" Text="Now Playing :" Foreground="{DynamicResource AccentText}" FontWeight="Bold" FontSize="14"
+     VerticalAlignment="Center" Margin="0,0,5,0" />
+    <local:MarqueeTextBlock x:Name="TitleText" Foreground="{DynamicResource AccentText}" FontWeight="Bold" FontSize="14"
+     VerticalAlignment="Center" Height="20" />
+   </DockPanel>
+  </Border>
+ </Border>
+ <!-- 下段の曲リスト。1行18ピクセルで、選択行は背景と下線で示す。 -->
+ <Grid Grid.Row="2" x:Name="TrackListContainer" SizeChanged="OnTrackListContainerSizeChanged">
+  <ListBox x:Name="TrackListBox" Margin="8,0,0,0" Padding="0" Background="{DynamicResource ViewerBlack}" Foreground="{DynamicResource PrimaryText}"
+   BorderThickness="0" FontSize="14" VerticalAlignment="Top"
+   ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"
+   ScrollViewer.CanContentScroll="True" VirtualizingPanel.ScrollUnit="Item"
+   SelectionChanged="OnTrackSelectionChanged" MouseDoubleClick="OnTrackDoubleClick">
+   <ListBox.Template><ControlTemplate TargetType="ListBox">
+    <ScrollViewer Padding="0" Focusable="False" CanContentScroll="True"
+     HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+     <ItemsPresenter/>
+    </ScrollViewer>
+   </ControlTemplate></ListBox.Template>
+   <ListBox.ItemContainerStyle>
+    <Style TargetType="ListBoxItem">
+     <Setter Property="Height" Value="18"/><Setter Property="MinHeight" Value="18"/>
+     <Setter Property="Padding" Value="0"/><Setter Property="Margin" Value="0"/>
+     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+     <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ListBoxItem">
+      <Border x:Name="Row" Background="Transparent" BorderThickness="0" BorderBrush="{DynamicResource HighlightText}">
+       <ContentPresenter VerticalAlignment="Center"/>
+      </Border>
+      <ControlTemplate.Triggers><Trigger Property="IsSelected" Value="True">
+       <Setter TargetName="Row" Property="Background" Value="{DynamicResource InteractionSelectionBackground}"/>
+       <Setter TargetName="Row" Property="BorderThickness" Value="0,0,0,1"/>
+      </Trigger></ControlTemplate.Triggers>
+     </ControlTemplate></Setter.Value></Setter>
+    </Style>
+   </ListBox.ItemContainerStyle>
+   <!-- 番号・種類・名前の列と、MDX のタイトルの列。名前の列の幅は同じフォルダの MDX でそろえる。 -->
+   <ListBox.ItemTemplate><DataTemplate><DockPanel LastChildFill="True">
+    <TextBlock DockPanel.Dock="Left" Text="{Binding Head}" Width="{Binding HeadWidth}" TextTrimming="CharacterEllipsis"/>
+    <TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis"/>
+   </DockPanel></DataTemplate></ListBox.ItemTemplate>
+  </ListBox>
+ </Grid>
+ </Grid>
+</UserControl>

@@ -1,0 +1,56 @@
+<controls:RetroDialogWindow x:Class="MirrorFlux.ErrorDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MirrorFlux.Controls"
+        Title="エラー"
+        Width="520"
+        Foreground="{DynamicResource PaneText}"
+        PreviewKeyDown="Window_PreviewKeyDown"
+        Loaded="Window_Loaded">
+
+  <!-- エラー内容を知らせるダイアログ。外枠は2pxの強調色で囲む。 -->
+  <Border BorderBrush="{DynamicResource HighlightText}" BorderThickness="2" Background="{DynamicResource DialogBackground}" Padding="0">
+    <DockPanel LastChildFill="True">
+
+      <!-- 共通のダイアログ見出し。横幅いっぱいに置く。 -->
+      <controls:RetroDialogHeader x:Name="DialogHeader" DockPanel.Dock="Top" TitleText="エラー" />
+
+      <!-- 本文。 -->
+      <StackPanel Margin="16,12,16,14">
+        <!-- エラーの説明文。 -->
+        <TextBlock x:Name="PromptText"
+                   Text="エラーが発生しました。"
+                   Foreground="{DynamicResource PaneText}"
+                   FontSize="14"
+                   TextWrapping="Wrap"
+                   Margin="0,0,0,10" />
+
+        <!-- 詳細の表。行はコードで追加する。 -->
+        <StackPanel x:Name="DetailsPanel" Margin="12,0,12,12" />
+
+        <!-- 区切り線。 -->
+        <Border Height="1" Background="{DynamicResource DarkPurpleHighlight}" Margin="0,0,0,10" SnapsToDevicePixels="True" />
+
+        <!-- [O] 了解ボタン。押すと閉じる。 -->
+        <Border x:Name="OptionOk" Height="24" Padding="16,0"
+                BorderThickness="0,0,0,1.5" BorderBrush="{DynamicResource HighlightText}"
+                Background="{DynamicResource InteractionSelectionBackground}" Cursor="Hand"
+                HorizontalAlignment="Center"
+                MouseLeftButtonDown="OptionOk_Click"
+                SnapsToDevicePixels="True">
+          <Grid VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="28" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="O" Foreground="{DynamicResource AccentText}" FontWeight="Bold" />
+            <TextBlock Grid.Column="1" Text="了解 (閉じる)" Foreground="{DynamicResource PaneText}" />
+          </Grid>
+        </Border>
+
+        <!-- 下部のキーヘルプ。 -->
+        <controls:RetroDialogKeyHelp Text="[Enter / Esc / O] 閉じる" />
+      </StackPanel>
+    </DockPanel>
+  </Border>
+</controls:RetroDialogWindow>

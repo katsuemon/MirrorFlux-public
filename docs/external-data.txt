@@ -1,0 +1,69 @@
+MirrorFlux 外部データと画像コーデックについて
+
+ROM・録音された波形データ・楽曲データは同梱していません。
+必要なデータは、利用者が利用権限を確認したものを用意してください。
+外部データなしでもファイラー、画像・テキスト表示などを使用できます。
+
+YM2608 / OPNA リズム
+・ファイル名: YM2608_ADPCM.ROM
+・サイズ: 8192 バイト
+・配置先: mf.exe と同じフォルダー、またはその直下の roms フォルダー
+  （曲のフォルダーではありません）
+・設定: INIへの追加指定は不要です。配置後に曲を開き直してください。
+・未配置、読み取り不可、サイズ不正の場合はリズム6声だけが無音になります。
+  FM・SSG・ADPCM-Bは継続します。WAVファイルによる代用は行いません。
+
+OPL4
+・曲によっては yrw801.rom が必要です。
+・曲と同じフォルダー、mf.exe と同じフォルダー、またはその直下の roms
+  フォルダーへ配置してください。必要なROMがなければ再生開始時に通知します。
+
+MDX / PDX
+・PDXを必要とするMDXには、対応するPDXを利用者が用意してください。
+・必要に応じて mf.ini の %pdxSearchPaths に検索先フォルダーを指定します。
+
+HEIC / HEIF画像
+・表示にはWindowsに対応画像コーデックがインストールされている必要があります。
+・AVC/H.264・HEVCのデコーダーは同梱しません。
+・コーデックがない場合やファイルが非対応の場合は、画像ビューアに案内を表示します。
+
+この案内はデータの再配布許諾を与えるものではありません。
+依存ライブラリのライセンスは THIRD_PARTY_NOTICES.md と licenses/ を参照してください。
+
+----------------------------------------------------------------------
+MirrorFlux external data and image codecs (English)
+
+No ROM, recorded waveform or music data is included.
+Provide only data you have the right to use.
+The file manager, image and text viewers and other features work
+without any external data.
+
+YM2608 / OPNA rhythm
+- File name: YM2608_ADPCM.ROM
+- Size: 8192 bytes
+- Location: the folder that contains mf.exe, or the roms folder
+  directly under it (not the song's folder)
+- Settings: nothing to add to the INI. Reopen the song after placing it.
+- If the ROM is missing, unreadable or the wrong size, only the six
+  rhythm voices are silent. FM, SSG and ADPCM-B keep playing.
+  WAV files are not used as a substitute.
+
+OPL4
+- Some songs need yrw801.rom.
+- Put it in the song's folder, the folder that contains mf.exe, or the
+  roms folder directly under it. If a required ROM is missing, you are
+  told when playback starts.
+
+MDX / PDX
+- For MDX songs that need a PDX, provide the matching PDX yourself.
+- If needed, set search folders in %pdxSearchPaths in mf.ini.
+
+HEIC / HEIF images
+- Viewing them requires a matching image codec installed in Windows.
+- No AVC/H.264 or HEVC decoder is bundled.
+- If the codec is missing or the file is not supported, the image
+  viewer shows a notice.
+
+This guide does not grant permission to redistribute any data.
+For the licenses of bundled libraries, see THIRD_PARTY_NOTICES.md and
+licenses/.

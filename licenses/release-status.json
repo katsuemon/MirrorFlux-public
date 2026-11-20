@@ -1,0 +1,36 @@
+{
+  "applicationLicense": "GPL-3.0-or-later",
+  "publicReleaseApproved": false,
+  "blockers": [
+    {
+      "id": "public-snapshot",
+      "description": "Publish only the audited clean snapshot at an approved public destination. Existing private Git history contains excluded data; never change its visibility."
+    }
+  ],
+  "notYetVerified": [
+    "Public destination and publication authorization; use the audited clean snapshot without private Git history",
+    "Release-version candidate: Portable/Sources/Licenses audit, application rebuild from its source companion, native override probe, and rebuild of the five LLVM-MinGW DLLs from its Assets/*/source.zip (last done for 0.9.80; mf_ymfm and mf_chips changed since)"
+  ],
+  "resolved": [
+    "Shipped native DLLs no longer embed the builder's account name or folder layout: mf_chips and mf_ymfm build with -ffile-prefix-map, Magick.Native was rebuilt in a neutral work directory (10 roundtrip pixel hashes unchanged), and the source/artifact audits now scan .dll/.exe bytes for user-profile and build-root paths",
+    "Application GPL-3.0-or-later authorized by owner; original icon authorship confirmed",
+    "Magick corresponding versions and native unsigned image verified; license alternatives selected",
+    "GME rebuilt with fixed source and static zlib/compiler runtime",
+    "Unused SQL/SNI runtime excluded",
+    "SharpCompress restricted RAR implementation removed; replacement uses explicit BSD/LGPL permissions",
+    "Owner selected removal of bundled AVC/H.264 and HEVC: rebuilt Magick without OpenH264/libde265; HEIC uses installed Windows codecs",
+    "Owner reports that the author of the serialtestnd8 reference consulted for the ND7/ND8 NDSIF routing approved its use (2026-11-17); the reference sources themselves remain excluded from public sources because redistributing them was not part of the reported approval"
+  ],
+  "verified": [
+    "Each release candidate: the application is rebuilt from its own source companion, and the six native DLL overrides and the embedded image DLL are probed on both the rebuilt and the published EXE; the reports are kept beside the candidate, outside its ZIPs, because the ZIPs cannot contain their own results",
+    "GME and RAR standalone source.zip rebuilds",
+    "Rebuilt GME/RAR: 937 general regression checks; 22 RAR comparison/rejection cases",
+    "All six native DLL overrides loaded beside published single-file EXE (startup hook module-path audit)",
+    "Portable ZIP holds only the EXE, default INI (byte match), README.txt, EXTERNAL-DATA.txt and the license texts/notices; local INI/ROM hashes unchanged",
+    "Published bundle contains no System.Data.SqlClient, SNI, MDSound or libvgm runtime files",
+    "Full original-feature Magick rebuild with VS 2026; 10 formats match original decoded pixel SHA-256; 937 general checks and published EXE override pass",
+    "No-AVC/HEVC Magick: 41 fixed source components, 36 static libraries, 10 pixel hashes match original; native HEVC rejection and Windows 451x461 HEIC decode; 943 general checks",
+    "0.9.36 Review companions audited: 46 source archives, 39614 entries, no excluded media/history/old RAR/AVC-HEVC codec source; source companion reproduces Magick preparation; published embedded image DLL hash verified",
+    "0.9.38 candidate: same-version EXE/source/notices verified; 951 regression checks; source companion builds the application; six native overrides and embedded image hash verified; final artifact hashes recorded in FINAL-AUDIT.json"
+  ]
+}

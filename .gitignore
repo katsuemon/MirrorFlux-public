@@ -1,0 +1,29 @@
+# .NET build outputs
+**/bin/
+**/obj/
+
+# Local SDK and NuGet cache
+.dotnet/
+
+# Generated packages and per-user settings
+publish/
+
+# User-supplied sound data: never include in public sources/packages
+/YM2608_ADPCM.ROM
+/Assets/Ym2608Rhythm/*.wav
+/roms/
+
+# Local runtime artifacts
+crash.log
+*.user
+*.suo
+
+# Supplied NDSIF reference sources: licence unconfirmed, never include in public sources
+/docs/serialtestnd8/
+
+# Per-user agent tool settings
+/.opencode/
+
+# Local investigation notes and one-off image helper
+scratch/
+crop.ps1

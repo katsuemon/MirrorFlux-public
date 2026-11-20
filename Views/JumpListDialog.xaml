@@ -1,0 +1,28 @@
+<controls:RetroDialogWindow x:Class="MirrorFlux.JumpListDialog"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:controls="clr-namespace:MirrorFlux.Controls"
+ Title="ジャンプリスト" Width="520" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
+ <!-- ジャンプリストのダイアログ。INIに登録した移動先を番号付きで並べる。 -->
+ <Border BorderBrush="{DynamicResource HighlightText}" BorderThickness="2" Background="{DynamicResource DialogBackground}">
+  <DockPanel>
+   <controls:RetroDialogHeader DockPanel.Dock="Top" TitleText="jump list"/>
+   <StackPanel Margin="16,12,16,14">
+    <!-- 移動先の一覧。番号と表示名を出す。 -->
+    <ListBox x:Name="Paths" Height="260" Background="{DynamicResource DialogBackground}" BorderThickness="0" Foreground="{DynamicResource PaneText}"
+      ItemContainerStyle="{StaticResource RetroDialogListBoxItemStyle}" MouseDoubleClick="Paths_DoubleClick"
+      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+     <ListBox.ItemTemplate><DataTemplate>
+      <Grid Margin="2,3"><Grid.ColumnDefinitions><ColumnDefinition Width="34"/><ColumnDefinition/></Grid.ColumnDefinitions>
+       <TextBlock Text="{Binding Number}" Foreground="{DynamicResource AccentText}"/>
+       <TextBlock Grid.Column="1" Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis"/>
+      </Grid>
+     </DataTemplate></ListBox.ItemTemplate>
+    </ListBox>
+    <!-- エラーや登録方法の案内と、下部のキーヘルプ。 -->
+    <TextBlock x:Name="ErrorText" Foreground="{DynamicResource HighlightText}" TextWrapping="Wrap" Margin="0,6,0,4"/>
+    <controls:RetroDialogKeyHelp Text="[↑/↓] 選択   [1-9/0] 番号選択   [Enter] 移動   [Esc] 中止"/>
+   </StackPanel>
+  </DockPanel>
+ </Border>
+</controls:RetroDialogWindow>

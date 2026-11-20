@@ -1,0 +1,36 @@
+{
+  "components": [
+    {
+      "repository": "https://github.com/libarchive/libarchive",
+      "tag": "v3.8.11",
+      "commit": "03036ffa409a2aa1c5bbad35be2202641a040fda",
+      "archiveSha256": "f378eb0ab7c56f4f3b0e2d978a41f8c3ec389159a699d76aa22ac8cf01cef9af",
+      "license": "BSD-2-Clause; per-file BSD-3-Clause and public domain; BLAKE2 CC0 option"
+    },
+    {
+      "repository": "https://github.com/selmf/unarr",
+      "tag": "v1.2.0",
+      "commit": "f1412d847491e2be864f7fa337ebb67c63d72a36",
+      "archiveSha256": "136419996cf2d22f9e4ac0bc48d7fd10f50dc99ffc864876ced026fb1bd488ff",
+      "license": "LGPL-3.0; public-domain exceptions in AUTHORS"
+    },
+    {
+      "repository": "https://github.com/MacPaw/XADMaster",
+      "commit": "7cb9ee0abbb163f261e4cb74501e15067032319c",
+      "license": "LGPL-2.1-or-later",
+      "files": {
+        "XADRAR15Handle.m": "01d7780316acbd7e325b02c946c841636c3ffee5ab45025fe10d0c2274dfff78",
+        "XADRAR15Handle.h": "7b886cab8f527876f68ae401bf60b8f39dff1cc7a7aa63f7498a1729c3ba4272"
+      },
+      "changes": "RAR1.5 decoder translated to portable C; independent bounded bit reader, canonical prefix decoder, streaming LZSS window and CRC check. Original Objective-C sources retained."
+    }
+  ],
+  "changes": [
+    "Standalone static-library build and GPL-3.0-or-later C bridge",
+    "unarr RAR parser preserves empty directory and encrypted flags without resetting solid state",
+    "RAR 1.5 decoder adapted from the two fixed XADMaster files under LGPL-2.1-or-later; bounded input/output, CRC checks, no Objective-C dependency",
+    "Original upstream optional tests/media omitted; required test/CMakeLists.txt retained",
+    "No SharpCompress RAR or unRAR code included",
+    "Vendored .gitattributes disables Git newline conversion to preserve provenance hashes"
+  ]
+}

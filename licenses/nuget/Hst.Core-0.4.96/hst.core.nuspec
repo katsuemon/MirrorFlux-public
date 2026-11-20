@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Hst.Core</id>
+    <version>0.4.96</version>
+    <authors>Henrik Nørfjand Stengaard</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <readme>readme.md</readme>
+    <projectUrl>https://github.com/henrikstengaard/hst-core</projectUrl>
+    <description>Hst Core a library with common classes and extensions.</description>
+    <copyright>Copyright © 2026</copyright>
+    <tags>Hst Core</tags>
+    <repository type="git" url="https://github.com/henrikstengaard/hst-core" commit="78e85170d597126a223ea2534d1a5421be059343" />
+    <dependencies>
+      <group targetFramework="net10.0">
+        <dependency id="Microsoft.Windows.Compatibility" version="10.0.13" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net8.0">
+        <dependency id="Microsoft.Windows.Compatibility" version="10.0.13" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net9.0">
+        <dependency id="Microsoft.Windows.Compatibility" version="10.0.13" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="Microsoft.Windows.Compatibility" version="10.0.13" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

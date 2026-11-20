@@ -1,0 +1,14 @@
+# Preserve exact upstream bytes and notices used by the provenance manifests.
+* whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+Assets/** -text -whitespace
+licenses/** -text -whitespace
+native/gme/upstream/** -text -whitespace
+native/gme/zlib/** -text -whitespace
+native/rar/libarchive/** -text -whitespace
+native/rar/unarr/** -text -whitespace
+native/rar/xadmaster/** -text -whitespace
+native/rar/LICENSES/** -text -whitespace
+native/gme/LICENSES/** -text -whitespace
+third_party/SharpCompress/** -text -whitespace
+native/gme/** -text
+native/rar/** -text

@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Avoid shadowing the Windows Media Foundation MF.dll in the extraction directory. -->
+    <AssemblyName>MirrorFlux.App</AssemblyName>
+    <ApplicationIcon>icon/mf_icon.ico</ApplicationIcon>
+    <RootNamespace>MirrorFlux</RootNamespace>
+
+    <!-- exeとiniの2ファイル構成向け 単一ファイル・自己完結設定 -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>none</DebugType>
+    <SatelliteResourceLanguages>none</SatelliteResourceLanguages>
+    <CopyOutputSymbolsToPublishDirectory>false</CopyOutputSymbolsToPublishDirectory>
+  </PropertyGroup>
+  <Import Project="Version.props" />
+  <ItemGroup>
+    <Resource Include="icon/mf_icon.ico" />
+    <EmbeddedResource Include="Assets/Gme/*" />
+    <EmbeddedResource Include="Assets/Rar/*" />
+    <EmbeddedResource Include="Assets/Image/*" />
+    <EmbeddedResource Include="Assets/Lha/*" />
+    <EmbeddedResource Include="Assets/Ymfm/*" />
+    <EmbeddedResource Include="Assets/Chips/*" />
+    <EmbeddedResource Include="Assets/Syntax/*.xshd" />
+    <EmbeddedResource Include="Assets/AvalonEdit/*" />
+    <EmbeddedResource Include="Assets/MultiPCM/LICENSE.txt" />
+    <Compile Remove="tests/**/*.cs;native/**/*.cs;third_party/**/*.cs" />
+    <None Remove="tests/**" />
+    <PackageReference Include="Hst.Compression" Version="0.4.96" />
+    <!-- Hst's Windows compatibility dependency brings unused SQL client binaries.
+         Exclude both the managed caller and proprietary native SNI from distribution. -->
+    <PackageReference Include="System.Data.SqlClient" Version="4.9.1" ExcludeAssets="all" PrivateAssets="all" />
+    <PackageReference Include="runtime.win-x64.runtime.native.System.Data.SqlClient.sni" Version="4.4.0" ExcludeAssets="all" PrivateAssets="all" />
+    <!-- Use the managed wrapper; ship the reviewed no-AVC/HEVC native build instead. -->
+    <PackageReference Include="Magick.NET-Q8-x64" Version="14.17.2" ExcludeAssets="native" />
+    <PackageReference Include="AvalonEdit" Version="6.3.1.120" />
+    <PackageReference Include="Markdig" Version="1.5.0" />
+    <PackageReference Include="NAudio" Version="3.3.0" />
+    <ProjectReference Include="third_party/SharpCompress/SharpCompress.csproj" />
+    <PackageReference Include="System.IO.Ports" Version="10.0.14" />
+  </ItemGroup>
+</Project>

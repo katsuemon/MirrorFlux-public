@@ -1,0 +1,314 @@
+{
+  "configuration": {
+    "dll": "Magick.Native-Q8-x64.dll",
+    "sha256": "a35c4eeb4c493a4db78fe7a34388943d37a124ae6e73896752b18d296ff5198a",
+    "configuration": "ReleaseQ8 x64 noHdri noOpenMP static delegates and compiler runtime; no AVC/H.264 or HEVC codecs",
+    "msbuildVersion": "18.12.2.51402",
+    "sourceProfile": {
+      "profile": "no-avc-hevc",
+      "components": [
+        {
+          "name": "Magick.Native",
+          "commit": "999720f7ebe03d5a0029536f1586a2cb82b500ae"
+        },
+        {
+          "name": "ImageMagick",
+          "commit": "ad98b244c995d2e3051757fa3b7855f45b550d24"
+        },
+        {
+          "name": "Dependencies",
+          "commit": "1c21ff03809da9cc544427fcd04e965d1558d06f"
+        },
+        {
+          "name": "aom",
+          "commit": "689067b48df9548d25e37abaa618ebd4b6015c67"
+        },
+        {
+          "name": "brotli",
+          "commit": "6225e7a93b6bcc1f3e3b267e9523a8eaea49eb5e"
+        },
+        {
+          "name": "bzip2",
+          "commit": "abffe764f875f71d051efb19d4c83139375f82d7"
+        },
+        {
+          "name": "exr",
+          "commit": "60ff3e20b06690fdbe938e2134872e43640cf1cb"
+        },
+        {
+          "name": "ffi",
+          "commit": "91982d4ac97b179dd1fb878caef2ed2847bc38b6"
+        },
+        {
+          "name": "freetype",
+          "commit": "6cf8b1a08bdec1d41246f51bcd12e5a62c9845e2"
+        },
+        {
+          "name": "glib",
+          "commit": "ea0118ca0d408473d320b21262a1cdc6ce3e5f40"
+        },
+        {
+          "name": "heif",
+          "commit": "b8fbb502979530d5e4baa7d24d8c353c3d13d1cd"
+        },
+        {
+          "name": "highway",
+          "commit": "e1a586af5be6358bb983ff608f9678a622209ca3"
+        },
+        {
+          "name": "imath",
+          "commit": "1ec391453dd33f3432018d3a266e3d177a705235"
+        },
+        {
+          "name": "jpeg-turbo",
+          "commit": "b91492930ceb23c0b5282e8b9fc21de54182d92e"
+        },
+        {
+          "name": "jpeg-xl",
+          "commit": "8503118ff13ab8b11680296900da3361d6703dc1"
+        },
+        {
+          "name": "lcms",
+          "commit": "d261ab6fda30fd7578a2ce7ace5c0b2c7d3fc0b8"
+        },
+        {
+          "name": "lqr",
+          "commit": "a2e9e8b5b41bf0569f51482707a12d354a086f3a"
+        },
+        {
+          "name": "openjpeg",
+          "commit": "5a52e8e0690da686ddb6e98310e7bb5190a9a7c5"
+        },
+        {
+          "name": "openjph",
+          "commit": "c1a1ffc1e3f90eb9397407f1f545a47e01390aef"
+        },
+        {
+          "name": "png",
+          "commit": "88ee938ef91b0289339be463b29003f65d486210"
+        },
+        {
+          "name": "raw",
+          "commit": "9f7613ef48877180225b9377c87b0f3a65a2ca8e"
+        },
+        {
+          "name": "tiff",
+          "commit": "3021cd03440ba6954f8bdf2b7ad4557a36092cd8"
+        },
+        {
+          "name": "webp",
+          "commit": "b981ef267195cb12f2cb97e4dd23e12a1323a4ce"
+        },
+        {
+          "name": "xml",
+          "commit": "3ba73c8312b7ac88adc1a2e62df13d0827e93a0f"
+        },
+        {
+          "name": "zlib",
+          "commit": "e42706934e4e7564d960031ae62ff29d918ee06d"
+        },
+        {
+          "name": "zstd",
+          "commit": "4d5752ffeca8defb48ad744274f4f76b2866d71d"
+        },
+        {
+          "name": "cairo",
+          "commit": "4334da83d8f44abe5aab1a11956e3f8e6e58eac7"
+        },
+        {
+          "name": "croco",
+          "commit": "178785cdc6faecad555a4e6fe4fda2b625046e8e"
+        },
+        {
+          "name": "fribidi",
+          "commit": "f62e4ce7160f0c9d70a6a448c83122c920370324"
+        },
+        {
+          "name": "gdk-pixbuf",
+          "commit": "92a234886a0337480770ef93dc74ea920bf39ab3"
+        },
+        {
+          "name": "harfbuzz",
+          "commit": "b1dcf2b4cc1635fc6845101c4bc800e99dd9f1c2"
+        },
+        {
+          "name": "lzma",
+          "commit": "131e9a49425f51b8dd8710c57fbaa527baed3989"
+        },
+        {
+          "name": "pango",
+          "commit": "0b1e4536e0005f3c36b523c17ea12322490efd45"
+        },
+        {
+          "name": "pixman",
+          "commit": "f7b55a8d3c39380724da9fbdef72ad70be800efc"
+        },
+        {
+          "name": "raqm",
+          "commit": "a699b8b7838acb4ac8d5891f42ecf3d84a00a9ad"
+        },
+        {
+          "name": "rsvg",
+          "commit": "7415a6765db7554ba6f0f1b3dcb0877f36ff581b"
+        },
+        {
+          "name": "zip",
+          "commit": "745377bdab21cf5e5fc19d0bbfcde93030d3af5e"
+        },
+        {
+          "name": "jpeg-turbo-12",
+          "commit": "9837071e8c0e5fba6daa03f31aba4416ff5eaf7c"
+        },
+        {
+          "name": "jpeg-turbo-16",
+          "commit": "d16d0839d655478b4d517ebe2aeabfecce8192d9"
+        },
+        {
+          "name": "fontconfig",
+          "commit": "943048d94dfa3d7d4a213f36f9ef7af988397cd4"
+        },
+        {
+          "name": "Configure",
+          "commit": "08ea96dd18267b90a56204a598ba2b30db20c6b7"
+        }
+      ],
+      "patches": [
+        "heif/.ImageMagick/Config.txt: disable/remove de265 and OpenH264 plugins, definitions and references",
+        "Magick.Native/Stdafx.h: remove de265 and OpenH264 static link directives"
+      ]
+    }
+  },
+  "staticLibraries": [
+    "CORE_RL_aom_.lib",
+    "CORE_RL_brotli_.lib",
+    "CORE_RL_bzip2_.lib",
+    "CORE_RL_cairo_.lib",
+    "CORE_RL_croco_.lib",
+    "CORE_RL_exr_.lib",
+    "CORE_RL_ffi_.lib",
+    "CORE_RL_freetype_.lib",
+    "CORE_RL_fribidi_.lib",
+    "CORE_RL_gdk-pixbuf_.lib",
+    "CORE_RL_glib_.lib",
+    "CORE_RL_harfbuzz_.lib",
+    "CORE_RL_heif_.lib",
+    "CORE_RL_highway_.lib",
+    "CORE_RL_imath_.lib",
+    "CORE_RL_jpeg-turbo-12_.lib",
+    "CORE_RL_jpeg-turbo-16_.lib",
+    "CORE_RL_jpeg-turbo_.lib",
+    "CORE_RL_jpeg-xl_.lib",
+    "CORE_RL_lcms_.lib",
+    "CORE_RL_lqr_.lib",
+    "CORE_RL_lzma_.lib",
+    "CORE_RL_openjpeg_.lib",
+    "CORE_RL_openjph_.lib",
+    "CORE_RL_pango_.lib",
+    "CORE_RL_pixman_.lib",
+    "CORE_RL_png_.lib",
+    "CORE_RL_raqm_.lib",
+    "CORE_RL_raw_.lib",
+    "CORE_RL_rsvg_.lib",
+    "CORE_RL_tiff_.lib",
+    "CORE_RL_webp_.lib",
+    "CORE_RL_xml_.lib",
+    "CORE_RL_zip_.lib",
+    "CORE_RL_zlib_.lib",
+    "CORE_RL_zstd_.lib"
+  ],
+  "originalNativeNugetExcluded": true,
+  "generalRegressionChecks": 943,
+  "imageResults": {
+    "managedVersion": "Magick.NET Q8 x64 net8.0 14.17.2",
+    "delegates": "bzlib cairo freetype gslib heic jng jp2 jpeg jxl lcms lqr lzma openexr pangocairo png ps raqm raw rsvg tiff webp xml zip zlib zstd",
+    "features": "Channel-masks(64-bit) Cipher OpenCL ",
+    "results": [
+      {
+        "format": "Png",
+        "supported": true,
+        "meanAbsoluteError": 0,
+        "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53",
+        "encodedBytes": 349
+      },
+      {
+        "format": "Bmp",
+        "supported": true,
+        "meanAbsoluteError": 0,
+        "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53",
+        "encodedBytes": 2442
+      },
+      {
+        "format": "Tiff",
+        "supported": true,
+        "meanAbsoluteError": 0,
+        "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53",
+        "encodedBytes": 2568
+      },
+      {
+        "format": "Gif",
+        "supported": true,
+        "meanAbsoluteError": 0,
+        "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53",
+        "encodedBytes": 173
+      },
+      {
+        "format": "Jpeg",
+        "supported": true,
+        "meanAbsoluteError": 0.16666666666666666,
+        "pixelSha256": "C85B5054E137121ADB3C3032754CB7E33689E44B8301988C769666D694FCDDEE",
+        "encodedBytes": 343
+      },
+      {
+        "format": "WebP",
+        "supported": true,
+        "meanAbsoluteError": 0,
+        "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53",
+        "encodedBytes": 82
+      },
+      {
+        "format": "Jp2",
+        "supported": true,
+        "meanAbsoluteError": 0,
+        "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53",
+        "encodedBytes": 1025
+      },
+      {
+        "format": "Avif",
+        "supported": true,
+        "meanAbsoluteError": 0.19444444444444445,
+        "pixelSha256": "BABFFF2EB524DB4D49B16CB36431D3527195B65B1A5EE57A8897A6EA4868036B",
+        "encodedBytes": 308
+      },
+      {
+        "format": "Jxl",
+        "supported": true,
+        "meanAbsoluteError": 0,
+        "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53",
+        "encodedBytes": 57
+      },
+      {
+        "format": "Svg",
+        "supported": true,
+        "pixelSha256": "C5E8217D6188E1E259BA837411B8ECC9D41D5BF3E9053AD78397ACBC4FDE5EAB"
+      }
+    ]
+  },
+  "originalPixelHashesMatch": true,
+  "heic": {
+    "nativeRejected": true,
+    "nativeError": "HEVC decoder plugin is not built in (libheif error 11.6003)",
+    "windowsSucceeded": true,
+    "windowsError": "",
+    "width": 451,
+    "height": 461,
+    "fixture": "libheif tests/data/rainbow-451x461.heic (external, not copied into project)"
+  },
+  "windowsExtensions": {
+    "Microsoft.HEIFImageExtension": "1.2.62.0",
+    "Microsoft.HEVCVideoExtension": "2.5.48.0"
+  },
+  "scope": "AVC/H.264 and HEVC implementations excluded from bundled DLL; no assertion of worldwide patent clearance for all software.",
+  "sourceCompanionPreparationMatches": true,
+  "publishedExeEmbeddedDllHashVerified": true,
+  "publishedExeReplacementVerified": true
+}

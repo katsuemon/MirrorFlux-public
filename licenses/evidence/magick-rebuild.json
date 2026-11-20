@@ -1,0 +1,82 @@
+{
+  "scope": "Historical original-feature rebuild comparison only; this DLL is not distributed. Current no-AVC/HEVC build: magick-public-build.json",
+  "configuration": "ReleaseQ8 x64 noHdri noOpenMP static delegates and compiler runtime",
+  "msbuildVersion": "18.12.2.51402",
+  "rebuiltDllSha256": "8f22ea78f48b176d850e237c162e12bd1b24c8d077c54b1e6c3ccb09b7050600",
+  "fixedSourceComponents": 43,
+  "staticDelegateLibraries": 38,
+  "delegatesMatch": true,
+  "featuresMatch": true,
+  "formats": [
+    {
+      "format": "Png",
+      "supported": true,
+      "pixelSha256Matches": true,
+      "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53"
+    },
+    {
+      "format": "Bmp",
+      "supported": true,
+      "pixelSha256Matches": true,
+      "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53"
+    },
+    {
+      "format": "Tiff",
+      "supported": true,
+      "pixelSha256Matches": true,
+      "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53"
+    },
+    {
+      "format": "Gif",
+      "supported": true,
+      "pixelSha256Matches": true,
+      "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53"
+    },
+    {
+      "format": "Jpeg",
+      "supported": true,
+      "pixelSha256Matches": true,
+      "pixelSha256": "C85B5054E137121ADB3C3032754CB7E33689E44B8301988C769666D694FCDDEE"
+    },
+    {
+      "format": "WebP",
+      "supported": true,
+      "pixelSha256Matches": true,
+      "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53"
+    },
+    {
+      "format": "Jp2",
+      "supported": true,
+      "pixelSha256Matches": true,
+      "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53"
+    },
+    {
+      "format": "Avif",
+      "supported": true,
+      "pixelSha256Matches": true,
+      "pixelSha256": "BABFFF2EB524DB4D49B16CB36431D3527195B65B1A5EE57A8897A6EA4868036B"
+    },
+    {
+      "format": "Jxl",
+      "supported": true,
+      "pixelSha256Matches": true,
+      "pixelSha256": "3AB567CECE109BF180A03B9D5B7E621FEF423A869A41AFD619DA078CC9B8BF53"
+    },
+    {
+      "format": "Svg",
+      "supported": true,
+      "pixelSha256Matches": true,
+      "pixelSha256": "C5E8217D6188E1E259BA837411B8ECC9D41D5BF3E9053AD78397ACBC4FDE5EAB"
+    }
+  ],
+  "generalRegressionChecks": 937,
+  "publishedExeOverrideVerified": true,
+  "requiredBuildTools": [
+    "MSVC v145 x64/x86",
+    "Windows SDK",
+    "MFC/ATL",
+    "MSBuild"
+  ],
+  "installerResult": 3010,
+  "restartPerformed": false
+}

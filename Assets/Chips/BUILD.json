@@ -1,0 +1,8 @@
+{
+  "compiler": "LLVM-MinGW 20261020 UCRT x86_64 / clang 23.1.4",
+  "architecture": "x86_64-windows",
+  "files": {
+    "mf_chips.dll": "250cb613aea8b578584a44af53337d7f4ffc87ebc57108a93e6e29c9bc7262c6",
+    "source.zip": "da74d99e82c337991c19646cc3f297a9c3a297d700cc1b11b9027fbd9e71290f"
+  }
+}

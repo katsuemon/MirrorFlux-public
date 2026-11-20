@@ -1,0 +1,26 @@
+{
+  "gme": {
+    "version": "0.6.5",
+    "repository": "https://github.com/libgme/game-music-emu",
+    "source": "Existing upstream 0.6.5 source archive; optional test.nsf/test.vgz removed",
+    "license": "LGPL-2.1-or-later",
+    "emu2413": "MIT",
+    "commit": "9e23d10f9fd2a6a2f33b10912dd8dc7153258995",
+    "sourceUrl": "https://codeload.github.com/libgme/game-music-emu/zip/9e23d10f9fd2a6a2f33b10912dd8dc7153258995",
+    "upstreamArchiveSha256": "4fe88326f27159a6d78b84666731b394b517388560d65931f5aff8b99fe19e6f",
+    "sourceDifferences": []
+  },
+  "zlib": {
+    "name": "zlib",
+    "repository": "https://github.com/ImageMagick/zlib",
+    "commit": "e42706934e4e7564d960031ae62ff29d918ee06d",
+    "url": "https://codeload.github.com/ImageMagick/zlib/zip/e42706934e4e7564d960031ae62ff29d918ee06d",
+    "sha256": "f2529c29542276c87048dde2876d73310c16afc839f8a86e288712366696721d",
+    "bytes": 1684778
+  },
+  "changes": [
+    "Standalone Build.ps1 and fixed LLVM-MinGW build",
+    "No changes to synthesis source",
+    "zlib and compiler runtimes linked statically; Windows/UCRT imports only"
+  ]
+}

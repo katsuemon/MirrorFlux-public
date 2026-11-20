@@ -1,0 +1,390 @@
+{
+  "legacySourceArchiveSha256": "453e273b450c5dbbefc55a7fc1934706aafc4c9fcc9c959ccf07cbf5a0e9b436",
+  "notice": "Individually licensed chip implementations only; no libvgm player, mixer, loader, resampler or device framework is included. Files are adapted, not verbatim upstream. Core copyright notices remain in source.",
+  "components": [
+    {
+      "file": "cores/ay8910.c",
+      "source": "libvgm/emu/cores/ay8910.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "1e8391358d517ed7829a5a88feec83d66e8b7bd20e8ef984f4042c0263148425",
+      "copyright": "// copyright-holders:Couriersud"
+    },
+    {
+      "file": "cores/bsmt2000.c",
+      "source": "libvgm/emu/cores/bsmt2000.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "85a4c7e68753483aaee34dc4f0aed8474d9d2d7d33a04922ddd05cc1b529d411",
+      "copyright": "// copyright-holders:Aaron Giles, Paul Leaman, Miguel Angel Horna, Mao, cam900"
+    },
+    {
+      "file": "cores/c140.c",
+      "source": "libvgm/emu/cores/c140.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "859e22f369ee8465e6d5dbd11eb2d2828fa85da62acc5a974301c3127ac8118e",
+      "copyright": "// copyright-holders:R. Belmont"
+    },
+    {
+      "file": "cores/c219.c",
+      "source": "libvgm/emu/cores/c219.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "19e552ce5b9d5464c72a0f6260fd0dc937345a9d3be3978060deb04e050d6bec",
+      "copyright": "// copyright-holders:R. Belmont, superctr, Valley Bell"
+    },
+    {
+      "file": "cores/c352.c",
+      "source": "libvgm/emu/cores/c352.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "8bbc5bf34e58e1ce8f3ea0bde53c0efe28b39440ce66c93879280d252389c787",
+      "copyright": "// copyright-holders:R. Belmont, superctr"
+    },
+    {
+      "file": "cores/c6280_mame.c",
+      "source": "libvgm/emu/cores/c6280_mame.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "f342dd818a7b4bf0afe15f12320e62d85ff38f5ebf78ba2cc4d49b8e6f02eb4b",
+      "copyright": "// copyright-holders:Charles MacDonald"
+    },
+    {
+      "file": "cores/es5503.c",
+      "source": "libvgm/emu/cores/es5503.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "7e412da3ce47ea3cf833d60ca8e71478f95db5855148b86e5c2803f25edcbbe1",
+      "copyright": "// copyright-holders:R. Belmont"
+    },
+    {
+      "file": "cores/gb_mame.c",
+      "source": "libvgm/emu/cores/gb_mame.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "efc16f9404a6bd83e728a9c6c1d44dc292732419b180daa5b371eb5277c95c48",
+      "copyright": "// copyright-holders:Wilbert Pol, Anthony Kruize"
+    },
+    {
+      "file": "cores/ics2115.c",
+      "source": "libvgm/emu/cores/ics2115.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "26f4f6230ce94b6f55182ec087eac87ee32fdfb3bfc96c721cee1a2f4e858009",
+      "copyright": "// copyright-holders:Alex Marshall, nimitz, austere"
+    },
+    {
+      "file": "cores/iremga20.c",
+      "source": "libvgm/emu/cores/iremga20.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "2b73a369ca493596b9cb49a26669e14ba5cf32a6b9b3cb96a7773373f63c49c3",
+      "copyright": "// copyright-holders:Acho A. Tang,R. Belmont, Valley Bell"
+    },
+    {
+      "file": "cores/k005289.c",
+      "source": "libvgm/emu/cores/k005289.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "57766cb9c9ee77ebc6f8813c99f212917e14bc6fbde546c27a97bbbb92e132f0",
+      "copyright": "// copyright-holders:Bryan McPhail"
+    },
+    {
+      "file": "cores/k007232.c",
+      "source": "libvgm/emu/cores/k007232.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "7d7cd45d17f83b5604d913ae5ec33ef2663289f29b07c63f77f4018a1871b231",
+      "copyright": "// copyright-holders:Nicola Salmoria,Hiromitsu Shioya, Mao, cam900"
+    },
+    {
+      "file": "cores/k051649.c",
+      "source": "libvgm/emu/cores/k051649.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "68dd7b951412677c3f2aa56b2eae171dc992154a2f002747b767dee9a8151c2a",
+      "copyright": "// copyright-holders:Bryan McPhail"
+    },
+    {
+      "file": "cores/k053260.c",
+      "source": "libvgm/emu/cores/k053260.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "e2e849c293620ea318ae033632a4e68cb5721c0fc625de5028074530f7b91d2a",
+      "copyright": "// copyright-holders:Ernesto Corvi, Alex W. Jackson"
+    },
+    {
+      "file": "cores/k054539.c",
+      "source": "libvgm/emu/cores/k054539.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "aed104168a5d775ca2dce44a509dbfa2e5a6464a60f499a137c0b2eea2e082ad",
+      "copyright": "// copyright-holders:Olivier Galibert"
+    },
+    {
+      "file": "cores/mikey.c",
+      "source": "libvgm/emu/cores/mikey.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "MIT",
+      "originalSha256": "718966636f115709f4755f8f31c80d7b2df637124c08b713045b015c6e3d0fc5",
+      "copyright": "// copyright-holders:laoo"
+    },
+    {
+      "file": "cores/msm5205.c",
+      "source": "libvgm/emu/cores/msm5205.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "aed7f82d1e5782963b183a453cc803f778076c58bdd0b68a021fbc30b8a6eef4",
+      "copyright": "// copyright-holders:Aaron Giles"
+    },
+    {
+      "file": "cores/msm5232.c",
+      "source": "libvgm/emu/cores/msm5232.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "GPL-2.0-or-later",
+      "originalSha256": "24a7c6e0a4052012c77d51572d9d57abfcb997aa86d8a4bf5e6de064785d1032",
+      "copyright": "// copyright-holders:Jarek Burczynski, Hiromitsu Shioya, Angelo Salese"
+    },
+    {
+      "file": "cores/multipcm.c",
+      "source": "libvgm/emu/cores/multipcm.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "39446206da013bb46e6b1e1af5735e1ac50285aca820730c61d56e117daa9cc9",
+      "copyright": "// copyright-holders:Miguel Angel Horna"
+    },
+    {
+      "file": "cores/nes_apu.c",
+      "source": "libvgm/emu/cores/nes_apu.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "GPL-2.0-or-later",
+      "originalSha256": "9d8e085fedd71132f1dd24f4329ba65a83dd4b95201818de24488dbf34e025c2",
+      "copyright": "// copyright-holders:Matthew Conte"
+    },
+    {
+      "file": "cores/nes_defs.h",
+      "source": "libvgm/emu/cores/nes_defs.h",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "GPL-2.0-or-later",
+      "originalSha256": "def5d643da203e4893134d9c7312173a73c58c6cbe97655b4d224ee3d400eea2",
+      "copyright": "// copyright-holders:Matthew Conte"
+    },
+    {
+      "file": "cores/okiadpcm.c",
+      "source": "libvgm/emu/cores/okiadpcm.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "95ad62ea67fb3f239873abf79200ce11d3d548c40022ec02da0dd4a3abaf5af1",
+      "copyright": "// copyright-holders:Andrew Gardner,Aaron Giles"
+    },
+    {
+      "file": "cores/okiadpcm.h",
+      "source": "libvgm/emu/cores/okiadpcm.h",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "f850732fe0cdb032d2cedda758d4b74eb6562f701b80ec75d7a59d41cd243864",
+      "copyright": "// copyright-holders:Andrew Gardner,Aaron Giles"
+    },
+    {
+      "file": "cores/okim6258.c",
+      "source": "libvgm/emu/cores/okim6258.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "5054709d4f263c9a1a6fb44697bc0f7e58cde58950dddcef40b2854ce1875b94",
+      "copyright": "// copyright-holders:Barry Rodewald"
+    },
+    {
+      "file": "cores/okim6295.c",
+      "source": "libvgm/emu/cores/okim6295.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "09ecabcda5c13e79fa67d9772ccd641048aef63a4eb184f2b4713f0a8fe59b1f",
+      "copyright": "// copyright-holders:Mirko Buffoni,Aaron Giles"
+    },
+    {
+      "file": "cores/pokey.c",
+      "source": "libvgm/emu/cores/pokey.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "f90898d3f8b774f7e7ffefafa47f61ffeea893599582f32bed08c83542757ef9",
+      "copyright": "// copyright-holders:Brad Oliver, Eric Smith, Juergen Buchmueller"
+    },
+    {
+      "file": "cores/pwm.c",
+      "source": "libvgm/emu/cores/pwm.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "GPL-2.0-or-later",
+      "originalSha256": "b6abbba6a9f69edbf8f66be14809e3a3630157279f47c6f113572f20589e6089",
+      "copyright": null
+    },
+    {
+      "file": "cores/rf5c68.c",
+      "source": "libvgm/emu/cores/rf5c68.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "3c2ef354031609e427e4c19d30deef06fb511b8d1c641a7264269320c9ac6636",
+      "copyright": "// copyright-holders:Olivier Galibert,Aaron Giles"
+    },
+    {
+      "file": "cores/saa1099_mame.c",
+      "source": "libvgm/emu/cores/saa1099_mame.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "ff6b5b655cee9645642ce7d0d07b7d3ce8031ef813fe961bb6e56134c5bee65e",
+      "copyright": "// copyright-holders:Juergen Buchmueller, Manuel Abadia"
+    },
+    {
+      "file": "cores/scsp.c",
+      "source": "libvgm/emu/cores/scsp.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "e0796fd4429acd94bfa91afffd4be73f0cbbf584abaacac5c51b82637a2b7aac",
+      "copyright": "// copyright-holders:ElSemi, R. Belmont"
+    },
+    {
+      "file": "cores/scspdsp.c",
+      "source": "libvgm/emu/cores/scspdsp.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "6cdfa3317ff7ffa14483a29cd637d1fe36bc4a4883c3415e68a3e2dcd343537b",
+      "copyright": "// copyright-holders:ElSemi, R. Belmont"
+    },
+    {
+      "file": "cores/scspdsp.h",
+      "source": "libvgm/emu/cores/scspdsp.h",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "c80bfb412b87b546e62bdee50fc9076c13ad457dd7e65b74054adcb9dcd12c44",
+      "copyright": null
+    },
+    {
+      "file": "cores/scsplfo.c",
+      "source": "libvgm/emu/cores/scsplfo.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "df372780f485cd1586898a11447a486258a87e30c55aff8d1db9837c4e467513",
+      "copyright": "// copyright-holders:ElSemi, R. Belmont"
+    },
+    {
+      "file": "cores/segapcm.c",
+      "source": "libvgm/emu/cores/segapcm.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "0cbbc10d4d138769572df7fa7d38ba988c3c9319e2675ec0424d5371348a4a84",
+      "copyright": "// copyright-holders:Hiromitsu Shioya, Olivier Galibert"
+    },
+    {
+      "file": "cores/sn76496.c",
+      "source": "libvgm/emu/cores/sn76496.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "07f754530428c5aca771dac7231592fdf7167e1f1bfea392070fabe6f652ea5f",
+      "copyright": "// copyright-holders:Nicola Salmoria"
+    },
+    {
+      "file": "cores/upd7759.c",
+      "source": "libvgm/emu/cores/upd7759.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "d0a696ab866f8d611e1ed0e1be473b9afe1e05656c03a8d9d784e7d28e533da0",
+      "copyright": "// copyright-holders:Juergen Buchmueller, Mike Balfour, Howie Cohen, Olivier Galibert, Aaron Giles"
+    },
+    {
+      "file": "cores/vsu.c",
+      "source": "libvgm/emu/cores/vsu.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "GPL-2.0-or-later",
+      "originalSha256": "5a53ff9c92a9db432abfe784661bae0d55206fbacbcff7639b983bf11e2cdc8b",
+      "copyright": null
+    },
+    {
+      "file": "cores/x1_010.c",
+      "source": "libvgm/emu/cores/x1_010.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "1ef194bc108e8e3eda67b389cdb9d562d24968993cac11c5a38ceef1ffbd96a1",
+      "copyright": "// copyright-holders:Luca Elia"
+    },
+    {
+      "file": "cores/ymf271.c",
+      "source": "libvgm/emu/cores/ymf271.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "fb8ff565c64c2acf4b446510fe0a1692c781e92c0a4b17132d8bc8574fe60cce",
+      "copyright": "// copyright-holders:superctr"
+    },
+    {
+      "file": "cores/ymz280b.c",
+      "source": "libvgm/emu/cores/ymz280b.c",
+      "repository": "https://github.com/ValleyBell/libvgm",
+      "commit": "61b62d64455e039de2a1d01498afa9e9b5f1cb88",
+      "license": "BSD-3-Clause",
+      "originalSha256": "b65aec49c954e4ec5aa55d99eab4f08a6f9e15cde71d7548e1dfee22d013ee6b",
+      "copyright": "// copyright-holders:Aaron Giles"
+    },
+    {
+      "directory": "wonderswan",
+      "repository": "https://github.com/mamedev/mame",
+      "revision": "f008f8269b584f8bc0d1f0d1ed6401eef55573de",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "directory": "qsound",
+      "repository": "https://github.com/ValleyBell/qsound-hle",
+      "revision": "68e63be325ddce6288adc3f571a4647f634046fb",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "directory": "gme",
+      "repository": "https://github.com/libgme/game-music-emu",
+      "revision": "0.6.5",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "directory": "vgsound_emu",
+      "repository": "https://github.com/tildearrow/furnace",
+      "revision": "fa9541db8004fcdab92808ef57779cd0249e451f",
+      "license": "Zlib"
+    }
+  ]
+}

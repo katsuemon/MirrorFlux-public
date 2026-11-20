@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SyntaxDefinition name="Scenario" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+ <Color name="Voice" foreground="#EBCB68"/>
+ <Color name="Speaker" foreground="#85CDE0" fontWeight="bold"/>
+ <Color name="Comment" foreground="#808CA8"/>
+ <Color name="RubyReading" foreground="#D0B2F5"/>
+ <RuleSet>
+  <Span color="Comment" begin="^\s*//"/>
+  <Rule color="Voice">^[\t \u3000]*【[\t \u3000]*reSG[0-9]{2}_[A-Za-z0-9_]+[\t \u3000]*】[\t \u3000]*$</Rule>
+  <Rule color="Speaker">^\s*〔[^〕\r\n]+〕</Rule>
+  <Rule color="Speaker">^\s*＠[^\s＠「」][^＠「」\r\n]*(?=「)</Rule>
+  <Rule color="RubyReading">(?&lt;=｝)［[^］\r\n]+］</Rule>
+ </RuleSet>
+</SyntaxDefinition>

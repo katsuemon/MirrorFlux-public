@@ -1,0 +1,33 @@
+{
+  "cairo": {
+    "selected": "LGPL-2.1-only",
+    "evidence": "upstream/cairo/COPYING",
+    "reason": "COPYING grants LGPL 2.1 OR MPL 1.1. Select LGPL; do not rely on the MPL-only SBOM label."
+  },
+  "raw": {
+    "selected": "LGPL-2.1 (retain per-file later-version permissions)",
+    "evidence": "upstream/raw/COPYRIGHT",
+    "reason": "Select LGPL, not CDDL; retain BSD and Adobe MIT notices. RawSpeed and optional demosaic packs are not enabled in .ImageMagick/Config.txt."
+  },
+  "freetype": {
+    "selected": "FTL",
+    "evidence": "upstream/freetype/docs/FTL.TXT",
+    "reason": "Select FreeType license, preserve the required FreeType attribution and component notices."
+  },
+  "highway": {
+    "selected": "Apache-2.0",
+    "evidence": "upstream/highway/LICENSE",
+    "reason": "Apache 2 compatible with GPLv3; retain nested exceptions."
+  },
+  "zstd": {
+    "selected": "BSD-3-Clause",
+    "evidence": "upstream/zstd/LICENSE",
+    "reason": "Choose BSD alternative; preserve upstream notices."
+  },
+  "pango": {
+    "selected": "LGPL-2.0-or-later for files granting later versions; LGPL-2.0 retained otherwise",
+    "evidence": "pango source headers and COPYING",
+    "reason": "SBOM says LGPL-2.0-only; pango-layout.c explicitly permits later versions. LGPL section 3 supplies the GPL conversion option where needed; never infer blanket or-later from COPYING alone.",
+    "compatibilityReference": "https://savannah.gnu.org/maintenance/LicensingRequirements/"
+  }
+}

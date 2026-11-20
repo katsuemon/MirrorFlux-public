@@ -1,0 +1,46 @@
+{
+  "version": "0.9.36",
+  "checks": {
+    "generalRegression": 943,
+    "rarCrossComparison": 20,
+    "rarExpectedRejection": 2,
+    "nativeReplacementModules": [
+      "gme.dll",
+      "mf_rar.dll",
+      "mf_ymfm.dll",
+      "mf_chips.dll",
+      "mf_lha.dll",
+      "Magick.Native-Q8-x64.dll"
+    ],
+    "independentRebuilds": [
+      "GME",
+      "RAR",
+      "Magick no-AVC/HEVC"
+    ],
+    "portableEntries": 3,
+    "protectedLocalFilesUnchanged": 3,
+    "sourceArchiveEntries": 39614,
+    "fixedUpstreamArchives": 46,
+    "sourceArchiveIntegrity": true,
+    "excludedMediaAndHistory": true,
+    "removedSharpCompressRarAbsent": true,
+    "publishedBundleEntries": 270,
+    "sqlSniMdsoundLibvgmAbsent": true,
+    "originalMagickNativeAbsent": true,
+    "embeddedPublicImageHashVerified": true,
+    "imagePixelHashMatches": 10,
+    "windowsHeicDecode": true,
+    "bundledHevcRejected": true,
+    "magickSourceCompanionPreparationMatches": true
+  },
+  "sha256": {
+    "executable": "5f4ad56dbd77fcefd5f8804bf43b198a5911713a8f77f29e7d5a0e8676066e0a",
+    "gme": "12b8867977f10aabd25d9619fc178d19a039b767b2c975ef9fabc52b79dd80f9",
+    "rar": "d2d1600b9c960e409020d7916bb255fec0459cb9ba7fcec2036a87305a2f0d3d",
+    "image": "a35c4eeb4c493a4db78fe7a34388943d37a124ae6e73896752b18d296ff5198a"
+  },
+  "limitations": [
+    "No new hardware NDSIF or listening evaluation in this license-focused change",
+    "Existing private Git history remains non-public; publish only the reviewed clean snapshot"
+  ]
+}

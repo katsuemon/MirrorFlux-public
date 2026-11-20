@@ -1,0 +1,20 @@
+{
+  "version": "0.9.38",
+  "generalRegressionChecks": 951,
+  "defaultLogRows": 6,
+  "protectedLocalFilesUnchanged": 3,
+  "publishedExeSha256": "0d49f4fefe9a1b8702ebf068059b565f5255ebbc7e3fb2febfa5abd1d108e5fe",
+  "sourceCompanionAppRebuild": {
+    "passed": true,
+    "productVersion": "0.9.38",
+    "nativeImageSmokePassed": true,
+    "command": "dotnet publish MintWin.csproj -c Release -r win-x64 --self-contained true",
+    "sourceScope": "Application and embedded native assets from source companion; native build recipes were independently verified in 0.9.36 and those assets are unchanged."
+  },
+  "publishedNativeReplacementPassed": true,
+  "publishedEmbeddedImageHashPassed": true,
+  "wrongVersionManifestRejected": true,
+  "nativeEvidence": "release-validation.json and magick-public-build.json (0.9.36 native libraries unchanged)",
+  "artifactAudit": "publish/candidates/0.9.38/FINAL-AUDIT.json records the final three ZIP hashes outside the ZIPs to avoid self-referential hashes.",
+  "publicPublicationPerformed": false
+}

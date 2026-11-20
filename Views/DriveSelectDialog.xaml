@@ -1,0 +1,76 @@
+<controls:RetroDialogWindow x:Class="MirrorFlux.DriveSelectDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MirrorFlux.Controls"
+        Title="drive menu"
+        Width="460"
+        MaxHeight="520"
+        Foreground="{DynamicResource PaneText}"
+        PreviewKeyDown="Window_PreviewKeyDown"
+        Loaded="Window_Loaded">
+
+  <!-- ドライブ選択ダイアログ。外枠は2pxの強調色で囲む。 -->
+  <Border BorderBrush="{DynamicResource HighlightText}" BorderThickness="2" Background="{DynamicResource DialogBackground}" Padding="0">
+    <DockPanel LastChildFill="True">
+
+      <!-- 共通のダイアログ見出し。横幅いっぱいに置く。 -->
+      <controls:RetroDialogHeader DockPanel.Dock="Top" TitleText="drive menu" />
+
+      <!-- 下部のキーヘルプ。クリックするとパスの直接入力へ進む。 -->
+      <controls:RetroDialogKeyHelp DockPanel.Dock="Bottom" Margin="8,0,8,8"
+                                   Text="[\] パス直接指定 / ネットワーク共有..."
+                                   Cursor="Hand" MouseLeftButtonUp="DirectPathBadge_Click" />
+
+      <!-- ドライブの一覧。 -->
+      <Grid Margin="8,6,8,8">
+        <ListBox x:Name="DriveListBox"
+               Background="Transparent"
+               BorderThickness="0"
+               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+               ScrollViewer.VerticalScrollBarVisibility="Auto"
+               ItemContainerStyle="{StaticResource RetroDialogListBoxItemStyle}"
+               MouseLeftButtonUp="DriveListBox_MouseLeftButtonUp"
+               SelectionMode="Single">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Grid VerticalAlignment="Center">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="26" />
+                <ColumnDefinition Width="105" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+
+              <!-- ドライブ文字。強調色で出す。 -->
+              <TextBlock Grid.Column="0"
+                         Text="{Binding Letter}"
+                         Foreground="{DynamicResource AccentText}"
+                         FontWeight="Bold"
+                         VerticalAlignment="Center" />
+
+              <!-- ドライブの種類。'FIXED    0' のような固定幅表示。 -->
+              <TextBlock Grid.Column="1"
+                         Text="{Binding DeviceTypeDisplay}"
+                         Foreground="{DynamicResource PaneText}"
+                         VerticalAlignment="Center" />
+
+              <!-- 区切りの縦線。 -->
+              <TextBlock Grid.Column="2"
+                         Text="│"
+                         Foreground="{DynamicResource MutedText}"
+                         VerticalAlignment="Center" />
+
+              <!-- ボリュームラベル。準備できていないドライブはその旨を出す。 -->
+              <TextBlock Grid.Column="3"
+                         Text="{Binding VolumeDisplay}"
+                         Foreground="{DynamicResource PaneText}"
+                         VerticalAlignment="Center"
+                         TextTrimming="CharacterEllipsis" />
+            </Grid>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </Grid>
+  </DockPanel>
+</Border>
+</controls:RetroDialogWindow>

@@ -1,0 +1,5 @@
+{
+  "compiler": "clang version 23.1.4 (https://github.com/llvm/llvm-project.git 7a941dfb2877a0b8cf30323fefa85ad019e0b0f5)",
+  "cmake": "cmake version 4.4.4",
+  "sha256": "12b8867977f10aabd25d9619fc178d19a039b767b2c975ef9fabc52b79dd80f9"
+}

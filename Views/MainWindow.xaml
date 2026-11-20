@@ -1,0 +1,697 @@
+<Window x:Class="MirrorFlux.MainWindow"
+        Icon="/icon/mf_icon.ico"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:primitives="clr-namespace:System.Windows.Controls.Primitives;assembly=PresentationFramework"
+        xmlns:services="clr-namespace:MirrorFlux.Services"
+        xmlns:controls="clr-namespace:MirrorFlux.Controls"
+        Title="MirrorFlux"
+        ResizeMode="CanMinimize"
+        Width="1288" Height="832"
+        MinWidth="1288" MinHeight="640"
+        MaxWidth="1288"
+        FontFamily="Consolas, BIZ UDGothic, MS Gothic"
+        FontSize="14"
+        UseLayoutRounding="True" SnapsToDevicePixels="True"
+        Background="{DynamicResource ScreenBackground}"
+        Foreground="{DynamicResource PrimaryText}"
+        PreviewKeyDown="Window_PreviewKeyDown"
+        Loaded="Window_Loaded" Closed="Window_Closed">
+  <!-- メインウィンドウ。上部の見出し帯、左右のパネルとログ（またはビューア）、ビューアの状態表示、ファンクションキー欄を縦に並べる。 -->
+  <Window.Resources>
+    <!-- ファイル名の欄。アイコン・名前・拡張子を並べる。拡張子の幅を先に確保してから名前を省略表示する。
+         左寄せにして、短い名前と拡張子が別々の列に離れないようにする。 -->
+    <DataTemplate x:Key="FileNameCellTemplate">
+      <Grid HorizontalAlignment="Left" VerticalAlignment="Center" ClipToBounds="True">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Path Grid.Column="0" Data="{Binding IconGeometry}"
+              Stroke="{Binding IconBrush}"
+              StrokeThickness="1.1"
+              StrokeStartLineCap="Round"
+              StrokeEndLineCap="Round"
+              StrokeLineJoin="Round"
+              Fill="Transparent"
+              Width="12" Height="12" Margin="0,0,6,0"
+              Stretch="Uniform" VerticalAlignment="Center"
+              SnapsToDevicePixels="True"
+              Visibility="{Binding DataContext.Settings.ShowIcons, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BoolToVis}}" />
+        <TextBlock Grid.Column="1" Text="{Binding BaseName, Mode=OneWay}"
+                   VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+        <TextBlock Grid.Column="2" Text="{Binding ExtText, Mode=OneWay}"
+                   VerticalAlignment="Center" />
+      </Grid>
+    </DataTemplate>
+
+    <!-- ファイル一覧のListView共通スタイル。 -->
+    <Style x:Key="FileListStyle" TargetType="ListView">
+      <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource PaneText}" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+      <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+      <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
+      <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
+    </Style>
+
+    <!-- ファイル一覧の列見出しを隠すスタイル。 -->
+    <Style x:Key="CollapsedGridViewHeaderStyle" TargetType="GridViewColumnHeader">
+      <Setter Property="Visibility" Value="Collapsed" />
+      <Setter Property="Height" Value="0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <!-- 左パネルの項目スタイル。1文字分の高さ20pxで、ドライブメニューと同じ下線カーソルを使う。 -->
+    <Style x:Key="LeftItemContainerStyle" TargetType="ListViewItem">
+      <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+      <Setter Property="Height" Value="20" />
+      <Setter Property="Foreground" Value="{DynamicResource PaneText}" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Padding" Value="2,0" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="SnapsToDevicePixels" Value="True" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ListViewItem">
+            <Grid SnapsToDevicePixels="True" ClipToBounds="False">
+              <Border x:Name="Bd"
+                      Background="{TemplateBinding Background}"
+                      Padding="{TemplateBinding Padding}"
+                      SnapsToDevicePixels="True"
+                      ClipToBounds="False">
+                <GridViewRowPresenter VerticalAlignment="Center"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                      ClipToBounds="False" />
+              </Border>
+              <!-- 下線カーソル。ドライブメニューと同じ1.5pxの高さ。 -->
+              <Border x:Name="CursorLine"
+                      Height="1.5"
+                      VerticalAlignment="Bottom"
+                      HorizontalAlignment="Stretch"
+                      Background="Transparent"
+                      SnapsToDevicePixels="True" />
+            </Grid>
+            <ControlTemplate.Triggers>
+              <!-- マウスが乗った項目。 -->
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource InteractionHoverBackground}" />
+                <Setter TargetName="CursorLine" Property="Background" Value="{DynamicResource InactiveBorder}" />
+              </Trigger>
+              <!-- 非アクティブなパネルの選択項目。控えめな下線と暗い背景にする。 -->
+              <Trigger Property="IsSelected" Value="True">
+                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource InteractionHoverBackground}" />
+                <Setter TargetName="CursorLine" Property="Background" Value="{DynamicResource InactiveBorder}" />
+              </Trigger>
+              <!-- アクティブなパネルの選択項目。紺色の背景と強調色の下線カーソルにする。 -->
+              <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                  <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True" />
+                  <Condition Binding="{Binding DataContext.LeftPane.IsActive, RelativeSource={RelativeSource AncestorType=Window}}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource InteractionSelectionBackground}" />
+                <Setter TargetName="CursorLine" Property="Background" Value="{DynamicResource HighlightText}" />
+              </MultiDataTrigger>
+              <DataTrigger Binding="{Binding IsDirectory}" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource DirectoryText}" />
+              </DataTrigger>
+              <!-- マークした項目。背景と文字の色だけ変え、余白は変えずに文字位置をずらさない。 -->
+              <DataTrigger Binding="{Binding IsMarked}" Value="True">
+                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource MarkColor}" />
+                <Setter Property="Foreground" Value="{DynamicResource MarkForeground}" />
+              </DataTrigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!-- 右パネルの項目スタイル。左パネルと同じ作りで、アクティブ判定だけ右パネルを見る。 -->
+    <Style x:Key="RightItemContainerStyle" TargetType="ListViewItem">
+      <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+      <Setter Property="Height" Value="20" />
+      <Setter Property="Foreground" Value="{DynamicResource PaneText}" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Padding" Value="2,0" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="SnapsToDevicePixels" Value="True" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ListViewItem">
+            <Grid SnapsToDevicePixels="True" ClipToBounds="False">
+              <Border x:Name="Bd"
+                      Background="{TemplateBinding Background}"
+                      Padding="{TemplateBinding Padding}"
+                      SnapsToDevicePixels="True"
+                      ClipToBounds="False">
+                <GridViewRowPresenter VerticalAlignment="Center"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                      ClipToBounds="False" />
+              </Border>
+              <!-- 下線カーソル。ドライブメニューと同じ1.5pxの高さ。 -->
+              <Border x:Name="CursorLine"
+                      Height="1.5"
+                      VerticalAlignment="Bottom"
+                      HorizontalAlignment="Stretch"
+                      Background="Transparent"
+                      SnapsToDevicePixels="True" />
+            </Grid>
+            <ControlTemplate.Triggers>
+              <!-- マウスが乗った項目。 -->
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource InteractionHoverBackground}" />
+                <Setter TargetName="CursorLine" Property="Background" Value="{DynamicResource InactiveBorder}" />
+              </Trigger>
+              <!-- 非アクティブなパネルの選択項目。控えめな下線と暗い背景にする。 -->
+              <Trigger Property="IsSelected" Value="True">
+                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource InteractionHoverBackground}" />
+                <Setter TargetName="CursorLine" Property="Background" Value="{DynamicResource InactiveBorder}" />
+              </Trigger>
+              <!-- アクティブなパネルの選択項目。紺色の背景と強調色の下線カーソルにする。 -->
+              <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                  <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True" />
+                  <Condition Binding="{Binding DataContext.RightPane.IsActive, RelativeSource={RelativeSource AncestorType=Window}}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource InteractionSelectionBackground}" />
+                <Setter TargetName="CursorLine" Property="Background" Value="{DynamicResource HighlightText}" />
+              </MultiDataTrigger>
+              <DataTrigger Binding="{Binding IsDirectory}" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource DirectoryText}" />
+              </DataTrigger>
+              <!-- マークした項目。背景と文字の色だけ変え、余白は変えずに文字位置をずらさない。 -->
+              <DataTrigger Binding="{Binding IsMarked}" Value="True">
+                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource MarkColor}" />
+                <Setter Property="Foreground" Value="{DynamicResource MarkForeground}" />
+              </DataTrigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </Window.Resources>
+
+  <!-- ウィンドウ全体のレイアウト。周囲に左・上・右4px、下8pxの余白を取る。 -->
+  <Grid Margin="4,4,4,8">
+    <Grid.RowDefinitions>
+      <!-- 0行目：上部の見出し帯。1文字分の高さ20px。 -->
+      <RowDefinition Height="20" />
+      <!-- 1行目：中央の作業領域。左右のパネルまたはビューア。 -->
+      <RowDefinition Height="*" />
+      <!-- 2行目：ビューアの状態表示。ビューア表示中だけ出す。 -->
+      <RowDefinition x:Name="ViewerStatusBarRow" Height="Auto" />
+      <!-- 3行目：F1～F12のファンクションキー欄。 -->
+      <RowDefinition Height="20" />
+    </Grid.RowDefinitions>
+
+    <!-- 上部の見出し帯。暗い紫の背景に、上端1pxの明るい線と下端1pxの暗い線を引く。 -->
+    <Border Grid.Row="0" Background="{DynamicResource DarkPurpleBackground}" BorderBrush="{DynamicResource DarkPurpleHighlight}" BorderThickness="0,1,0,0">
+      <Border BorderBrush="{DynamicResource DarkPurpleShadow}" BorderThickness="0,0,0,1">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+
+          <!-- 左端：CPU使用率の表示。 -->
+          <Border Grid.Column="0" Background="Transparent" BorderThickness="0" Padding="8,0">
+            <TextBlock Text="{Binding CpuUsageText, Mode=OneWay}" Foreground="{DynamicResource AccentText}"
+                       FontWeight="Bold" FontSize="14" VerticalAlignment="Center" />
+          </Border>
+
+          <!-- 中央のバージョン表示と右端の日付・時刻。 -->
+          <Border Grid.Column="1" Background="Transparent" BorderThickness="0" Padding="8,0">
+            <DockPanel LastChildFill="True">
+              <!-- 右端：日付と時刻。1文字分左へ寄せる。 -->
+              <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="{DynamicResource AccentText}"
+                         FontWeight="Bold" FontSize="14" Margin="0,0,8,0">
+                <Run Text="{Binding ClockText, Mode=OneWay}" />
+              </TextBlock>
+              <TextBlock x:Name="AppVersionText" Text="Ver."
+                         Foreground="{DynamicResource AccentText}" FontWeight="Bold" FontSize="14"
+                         HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </DockPanel>
+          </Border>
+        </Grid>
+      </Border>
+    </Border>
+
+    <!-- 中央の作業領域。ファイル一覧の画面とビューアを切り替える。 -->
+    <Grid Grid.Row="1">
+      <!-- ファイル一覧の画面。ビューアを開いていないときに出す。 -->
+      <Grid x:Name="FilerContentGrid"
+            Visibility="{Binding IsViewerActive, Converter={StaticResource InverseBoolToVis}}">
+        <Grid.RowDefinitions>
+          <!-- 0行目：左右のパネル。 -->
+          <RowDefinition Height="*" />
+          <!-- 1行目：ファイル操作の進行欄。操作中だけ出す。 -->
+          <RowDefinition Height="Auto" />
+          <!-- 2行目：ステータス行。 -->
+          <RowDefinition Height="20" />
+          <!-- 3行目：ログ欄。高さは設定で変わる。 -->
+          <RowDefinition x:Name="LogRow" Height="120" />
+        </Grid.RowDefinitions>
+
+        <!-- 左右のパネルと中央の区切り線。 -->
+        <Grid Grid.Row="0">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+
+      <!-- 左パネル。 -->
+      <Border Grid.Column="0" Background="{DynamicResource PanelBackground}" BorderThickness="0" Padding="4,0,2,0"
+              PreviewMouseDown="LeftPanel_PreviewMouseDown">
+        <Grid>
+          <Grid.RowDefinitions>
+            <!-- 2行分の見出し：ボリューム名とマーク集計、パス。 -->
+            <RowDefinition Height="40" />
+            <!-- ファイル一覧。1行20px。 -->
+            <RowDefinition Height="*" />
+            <!-- 1行分の集計行。 -->
+            <RowDefinition Height="20" />
+          </Grid.RowDefinitions>
+
+          <!-- 左パネルの見出し。ボリューム名・マーク集計とパスの2行。 -->
+          <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="20" />
+              <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+
+            <!-- 1行目：ボリューム名と、マークしたフォルダー数・ファイル数・合計容量。数値と単位の間は1文字空ける。 -->
+            <DockPanel Grid.Row="0" LastChildFill="True">
+              <TextBlock DockPanel.Dock="Left" Text="{Binding LeftPane.VolumeLabel}"
+                         Foreground="{DynamicResource HighlightText}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" />
+              <TextBlock HorizontalAlignment="Right" FontSize="14" VerticalAlignment="Center">
+                <Run Text="{Binding LeftPane.MarkedDirsCount, Mode=OneWay}" Foreground="{DynamicResource PaneText}" /><Run Text=" " /><Run Text="Dir  " Foreground="{DynamicResource HighlightText}" /><Run Text="{Binding LeftPane.MarkedFilesCount, Mode=OneWay}" Foreground="{DynamicResource PaneText}" /><Run Text=" " /><Run Text="File  " Foreground="{DynamicResource HighlightText}" /><Run Text="{Binding LeftPane.MarkedCapacityValue, Mode=OneWay}" Foreground="{DynamicResource PaneText}" /><Run Text=" " /><Run Text="{Binding LeftPane.MarkedCapacityUnit, Mode=OneWay}" Foreground="{DynamicResource HighlightText}" /><Run Text="&#160;&#160;" />
+              </TextBlock>
+            </DockPanel>
+
+            <!-- 2行目：パス（例：C:\*）と、絞り込み・並び順の表示。並び順はクリックで変更できる。 -->
+            <DockPanel Grid.Row="1" LastChildFill="True">
+              <TextBlock DockPanel.Dock="Right"
+                         Text="{Binding LeftPane.SortBadgeText}"
+                         Foreground="{DynamicResource HighlightText}"
+                         FontWeight="Bold" FontSize="13" VerticalAlignment="Center"
+                         Margin="6,0,6,0" Cursor="Hand"
+                         MouseLeftButtonDown="LeftSortBadge_MouseLeftButtonDown" />
+              <TextBlock DockPanel.Dock="Right"
+                         Text="{Binding LeftPane.SearchBadgeText}"
+                         Visibility="{Binding LeftPane.HasSearchText, Converter={StaticResource BoolToVis}}"
+                         Foreground="{DynamicResource HighlightText}"
+                         FontWeight="Bold" FontSize="13" VerticalAlignment="Center"
+                         MaxWidth="220" TextTrimming="CharacterEllipsis"
+                         Margin="0,0,2,0" />
+              <TextBlock Text="{Binding LeftPane.DisplayPathPattern}"
+                         Foreground="{DynamicResource AccentText}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"
+                         TextTrimming="CharacterEllipsis" />
+            </DockPanel>
+          </Grid>
+
+          <!-- 左のファイル一覧。列幅は文字の桁に合わせる。 -->
+          <ListView x:Name="LeftList" Grid.Row="1" Style="{StaticResource FileListStyle}"
+                    ItemContainerStyle="{StaticResource LeftItemContainerStyle}"
+                    ItemsSource="{Binding LeftPane.VisibleEntries}"
+                    SelectedItem="{Binding LeftPane.SelectedItem, Mode=TwoWay}"
+                    InputMethod.IsInputMethodEnabled="False"
+                    GotKeyboardFocus="LeftList_GotKeyboardFocus"
+                    SelectionChanged="List_SelectionChanged"
+                    MouseDoubleClick="List_MouseDoubleClick">
+            <ListView.View>
+              <GridView ColumnHeaderContainerStyle="{StaticResource CollapsedGridViewHeaderStyle}">
+                <GridViewColumn Width="345" CellTemplate="{StaticResource FileNameCellTemplate}" />
+                <!-- サイズの列。フォルダーは < DIR > と出す。 -->
+                <GridViewColumn Width="105">
+                  <GridViewColumn.CellTemplate>
+                    <DataTemplate>
+                      <TextBlock Text="{Binding SizeDisplay}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                    </DataTemplate>
+                  </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <!-- 更新日時の列（yyyy-MM-dd  HH:mm:ss）。 -->
+                <GridViewColumn Width="180">
+                  <GridViewColumn.CellTemplate>
+                    <DataTemplate>
+                      <TextBlock Text="{Binding DateTimeDisplay}" VerticalAlignment="Center" ClipToBounds="False" />
+                    </DataTemplate>
+                  </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+              </GridView>
+            </ListView.View>
+          </ListView>
+
+          <!-- 左パネルの集計行。 -->
+          <Border Grid.Row="2" Background="{DynamicResource ScreenBackground}" BorderThickness="0" Padding="8,0">
+            <DockPanel LastChildFill="True">
+              <!-- 右端：選択中の行番号。時刻の列にそろえる。 -->
+              <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14">
+                <Run Text="[" Foreground="{DynamicResource HighlightText}" /><Run Text="{Binding LeftPane.SelectedIndexDisplay, Mode=OneWay}" Foreground="{DynamicResource PaneText}" /><Run Text="]" Foreground="{DynamicResource HighlightText}" />
+              </TextBlock>
+              <!-- 左側：ファイル数、使用容量、空き容量。数値以外は強調色で出す。 -->
+              <TextBlock VerticalAlignment="Center" FontSize="14">
+                <Run Text="{Binding LeftPane.FilesCount, Mode=OneWay}" Foreground="{DynamicResource PaneText}" /><Run Text=" Files  " Foreground="{DynamicResource HighlightText}" /><Run Text="{Binding LeftPane.UsedCapacityValue, Mode=OneWay}" Foreground="{DynamicResource PaneText}" /><Run Text=" " /><Run Text="{Binding LeftPane.UsedCapacityUnit, Mode=OneWay}" Foreground="{DynamicResource HighlightText}" /><Run Text=" use  " Foreground="{DynamicResource HighlightText}" /><Run Text="{Binding LeftPane.FreeCapacityValue, Mode=OneWay}" Foreground="{DynamicResource PaneText}" /><Run Text=" " /><Run Text="{Binding LeftPane.FreeCapacityUnit, Mode=OneWay}" Foreground="{DynamicResource HighlightText}" /><Run Text=" Free" Foreground="{DynamicResource HighlightText}" />
+              </TextBlock>
+            </DockPanel>
+          </Border>
+        </Grid>
+      </Border>
+
+      <!-- 中央の区切り線。 -->
+      <Border Grid.Column="1" Width="1" Background="{DynamicResource InactiveBorder}" HorizontalAlignment="Center" />
+
+      <!-- 右パネル。 -->
+      <Border Grid.Column="2" Background="{DynamicResource PanelBackground}" BorderThickness="0" Padding="2,0,4,0"
+              PreviewMouseDown="RightPanel_PreviewMouseDown">
+        <Grid>
+          <Grid.RowDefinitions>
+            <!-- 2行分の見出し：ボリューム名とマーク集計、パス。 -->
+            <RowDefinition Height="40" />
+            <!-- ファイル一覧。1行20px。 -->
+            <RowDefinition Height="*" />
+            <!-- 1行分の集計行。 -->
+            <RowDefinition Height="20" />
+          </Grid.RowDefinitions>
+
+          <!-- 右パネルの見出し。ボリューム名・マーク集計とパスの2行。 -->
+          <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="20" />
+              <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+
+            <!-- 1行目：ボリューム名と、マークしたフォルダー数・ファイル数・合計容量。数値と単位の間は1文字空ける。 -->
+            <DockPanel Grid.Row="0" LastChildFill="True">
+              <TextBlock DockPanel.Dock="Left" Text="{Binding RightPane.VolumeLabel}"
+                         Foreground="{DynamicResource HighlightText}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" />
+              <TextBlock HorizontalAlignment="Right" FontSize="14" VerticalAlignment="Center">
+                <Run Text="{Binding RightPane.MarkedDirsCount, Mode=OneWay}" Foreground="{DynamicResource PaneText}" /><Run Text=" " /><Run Text="Dir  " Foreground="{DynamicResource HighlightText}" /><Run Text="{Binding RightPane.MarkedFilesCount, Mode=OneWay}" Foreground="{DynamicResource PaneText}" /><Run Text=" " /><Run Text="File  " Foreground="{DynamicResource HighlightText}" /><Run Text="{Binding RightPane.MarkedCapacityValue, Mode=OneWay}" Foreground="{DynamicResource PaneText}" /><Run Text=" " /><Run Text="{Binding RightPane.MarkedCapacityUnit, Mode=OneWay}" Foreground="{DynamicResource HighlightText}" /><Run Text="&#160;&#160;" />
+              </TextBlock>
+            </DockPanel>
+
+            <!-- 2行目：パス（例：C:\*）と、絞り込み・並び順の表示。並び順はクリックで変更できる。 -->
+            <DockPanel Grid.Row="1" LastChildFill="True">
+              <TextBlock DockPanel.Dock="Right"
+                         Text="{Binding RightPane.SortBadgeText}"
+                         Foreground="{DynamicResource HighlightText}"
+                         FontWeight="Bold" FontSize="13" VerticalAlignment="Center"
+                         Margin="6,0,6,0" Cursor="Hand"
+                         MouseLeftButtonDown="RightSortBadge_MouseLeftButtonDown" />
+              <TextBlock DockPanel.Dock="Right"
+                         Text="{Binding RightPane.SearchBadgeText}"
+                         Visibility="{Binding RightPane.HasSearchText, Converter={StaticResource BoolToVis}}"
+                         Foreground="{DynamicResource HighlightText}"
+                         FontWeight="Bold" FontSize="13" VerticalAlignment="Center"
+                         MaxWidth="220" TextTrimming="CharacterEllipsis"
+                         Margin="0,0,2,0" />
+              <TextBlock Text="{Binding RightPane.DisplayPathPattern}"
+                         Foreground="{DynamicResource AccentText}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"
+                         TextTrimming="CharacterEllipsis" />
+            </DockPanel>
+          </Grid>
+
+          <!-- 右のファイル一覧。列幅は文字の桁に合わせる。 -->
+          <ListView x:Name="RightList" Grid.Row="1" Style="{StaticResource FileListStyle}"
+                    ItemContainerStyle="{StaticResource RightItemContainerStyle}"
+                    ItemsSource="{Binding RightPane.VisibleEntries}"
+                    SelectedItem="{Binding RightPane.SelectedItem, Mode=TwoWay}"
+                    InputMethod.IsInputMethodEnabled="False"
+                    GotKeyboardFocus="RightList_GotKeyboardFocus"
+                    SelectionChanged="List_SelectionChanged"
+                    MouseDoubleClick="List_MouseDoubleClick">
+            <ListView.View>
+              <GridView ColumnHeaderContainerStyle="{StaticResource CollapsedGridViewHeaderStyle}">
+                <GridViewColumn Width="345" CellTemplate="{StaticResource FileNameCellTemplate}" />
+                <!-- サイズの列。フォルダーは < DIR > と出す。 -->
+                <GridViewColumn Width="105">
+                  <GridViewColumn.CellTemplate>
+                    <DataTemplate>
+                      <TextBlock Text="{Binding SizeDisplay}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                    </DataTemplate>
+                  </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <!-- 更新日時の列（yyyy-MM-dd  HH:mm:ss）。 -->
+                <GridViewColumn Width="180">
+                  <GridViewColumn.CellTemplate>
+                    <DataTemplate>
+                      <TextBlock Text="{Binding DateTimeDisplay}" VerticalAlignment="Center" ClipToBounds="False" />
+                    </DataTemplate>
+                  </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+              </GridView>
+            </ListView.View>
+          </ListView>
+
+          <!-- 右パネルの集計行。 -->
+          <Border Grid.Row="2" Background="{DynamicResource ScreenBackground}" BorderThickness="0" Padding="8,0">
+            <DockPanel LastChildFill="True">
+              <!-- 右端：選択中の行番号。時刻の列にそろえる。 -->
+              <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14">
+                <Run Text="[" Foreground="{DynamicResource HighlightText}" /><Run Text="{Binding RightPane.SelectedIndexDisplay, Mode=OneWay}" Foreground="{DynamicResource PaneText}" /><Run Text="]" Foreground="{DynamicResource HighlightText}" />
+              </TextBlock>
+              <!-- 左側：ファイル数、使用容量、空き容量。数値以外は強調色で出す。 -->
+              <TextBlock VerticalAlignment="Center" FontSize="14">
+                <Run Text="{Binding RightPane.FilesCount, Mode=OneWay}" Foreground="{DynamicResource PaneText}" /><Run Text=" Files  " Foreground="{DynamicResource HighlightText}" /><Run Text="{Binding RightPane.UsedCapacityValue, Mode=OneWay}" Foreground="{DynamicResource PaneText}" /><Run Text=" " /><Run Text="{Binding RightPane.UsedCapacityUnit, Mode=OneWay}" Foreground="{DynamicResource HighlightText}" /><Run Text=" use  " Foreground="{DynamicResource HighlightText}" /><Run Text="{Binding RightPane.FreeCapacityValue, Mode=OneWay}" Foreground="{DynamicResource PaneText}" /><Run Text=" " /><Run Text="{Binding RightPane.FreeCapacityUnit, Mode=OneWay}" Foreground="{DynamicResource HighlightText}" /><Run Text=" Free" Foreground="{DynamicResource HighlightText}" />
+              </TextBlock>
+            </DockPanel>
+          </Border>
+        </Grid>
+      </Border>
+    </Grid>
+
+        <!-- 読み込み中の覆い。画面を暗くせずに操作を止め、0.5秒たったら案内を出す。 -->
+        <Border Grid.Row="0"
+                Background="Transparent"
+                Visibility="{Binding IsLoading, Converter={StaticResource BoolToVis}}"
+                IsHitTestVisible="True"
+                Panel.ZIndex="100">
+          <Border HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  MinWidth="340"
+                  MaxWidth="780"
+                  Padding="20,14"
+                  Visibility="{Binding IsLoadingOverlayVisible, Converter={StaticResource BoolToVis}}"
+                  Background="{DynamicResource DarkPurpleBackground}"
+                  BorderBrush="{DynamicResource HighlightText}"
+                  BorderThickness="1.5">
+            <StackPanel>
+              <TextBlock Text="{Binding LoadingTitle}"
+                         Foreground="{DynamicResource HighlightText}"
+                         FontWeight="Bold"
+                         FontSize="15"
+                         HorizontalAlignment="Center"
+                         Margin="0,0,0,6" />
+              <TextBlock Text="{Binding LoadingMessage}"
+                         Foreground="{DynamicResource PaneText}"
+                         FontSize="13"
+                         HorizontalAlignment="Center"
+                         TextTrimming="CharacterEllipsis" />
+            </StackPanel>
+          </Border>
+        </Border>
+
+        <!-- ファイル操作の進行欄。コピー・移動・削除・展開などの実行中と待ちの間だけ出す。 -->
+        <controls:FileOperationPanel Grid.Row="1"
+                                     Visibility="{Binding IsOperationPanelVisible, Converter={StaticResource BoolToVis}}" />
+
+        <!-- ステータス行。ドライブ表示・メッセージと、クリックで切り替えるログ表示レベル。 -->
+        <Border Grid.Row="2" Background="{DynamicResource DarkPurpleBackground}" BorderBrush="{DynamicResource DarkPurpleHighlight}" BorderThickness="0,1,0,0">
+          <Border BorderBrush="{DynamicResource DarkPurpleShadow}" BorderThickness="0,0,0,1" Padding="6,0">
+            <DockPanel LastChildFill="True">
+              <TextBlock DockPanel.Dock="Right"
+                         Text="{Binding LogLevelBadgeText}"
+                         Foreground="{DynamicResource HighlightText}"
+                         FontWeight="Bold" FontSize="13" VerticalAlignment="Center"
+                         Margin="8,0,2,0" Cursor="Hand"
+                         MouseLeftButtonDown="LogLevelBadge_MouseLeftButtonDown"
+                         MouseRightButtonDown="LogLevelBadge_MouseRightButtonDown" />
+              <TextBlock TextTrimming="CharacterEllipsis" Foreground="{DynamicResource AccentText}" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center">
+                <Run Text="{Binding PromptDriveText, Mode=OneWay}" FontWeight="Bold" />
+                <Run Text="{Binding StatusMessage}" />
+              </TextBlock>
+            </DockPanel>
+          </Border>
+        </Border>
+
+        <!-- ログ欄。1行20px。 -->
+        <Border Grid.Row="3" Background="{DynamicResource LogBackground}" BorderThickness="0" Padding="6,0,0,0">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- 左側：ログの一覧。 -->
+            <ListBox x:Name="LogListBox"
+                     Grid.Column="0"
+                     ItemsSource="{Binding Logs}"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     Padding="0"
+                     Margin="0"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+              <ListBox.Template>
+                <ControlTemplate TargetType="ListBox">
+                  <Border Background="{TemplateBinding Background}" BorderThickness="0" Padding="0" Margin="0">
+                    <ScrollViewer Focusable="False" Padding="0" Margin="0" BorderThickness="0">
+                      <ItemsPresenter SnapsToDevicePixels="True" />
+                    </ScrollViewer>
+                  </Border>
+                </ControlTemplate>
+              </ListBox.Template>
+              <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                  <Setter Property="Height" Value="20" />
+                  <Setter Property="Padding" Value="0" />
+                  <Setter Property="Margin" Value="0" />
+                  <Setter Property="VerticalContentAlignment" Value="Center" />
+                  <Setter Property="Foreground" Value="{DynamicResource PrimaryText}" />
+                  <Setter Property="Focusable" Value="False" />
+                  <Setter Property="Template">
+                    <Setter.Value>
+                      <ControlTemplate TargetType="ListBoxItem">
+                        <ContentPresenter VerticalAlignment="Center" Height="20" />
+                      </ControlTemplate>
+                    </Setter.Value>
+                  </Setter>
+                </Style>
+              </ListBox.ItemContainerStyle>
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <TextBlock FontSize="14" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                             services:LogInlinesBehavior.LogMessage="{Binding}" />
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+
+            <!-- 右側：再生中に常駐するサウンドバー。 -->
+            <controls:MiniPlayerControl x:Name="MiniPlayerView"
+                                       Grid.Column="1"
+                                       Visibility="Collapsed" />
+          </Grid>
+        </Border>
+      </Grid>
+
+      <!-- ビューアの表示領域。テキスト・画像・動画・PDF・サウンドビューアを切り替えて出す。 -->
+      <controls:ViewerHost x:Name="MainViewerHost"
+                           Visibility="{Binding IsViewerActive, Converter={StaticResource BoolToVis}}" />
+    </Grid>
+
+    <!-- ビューアの状態表示。ファンクションキー欄のすぐ上に置く。 -->
+    <Border Grid.Row="2"
+            x:Name="ViewerStatusBar"
+            Height="20"
+            Background="{DynamicResource DarkPurpleBackground}"
+            BorderBrush="{DynamicResource DarkPurpleHighlight}"
+            BorderThickness="0,1,0,0"
+            Visibility="{Binding IsViewerActive, Converter={StaticResource BoolToVis}}">
+      <Border BorderBrush="{DynamicResource DarkPurpleShadow}" BorderThickness="0,0,0,1" Padding="8,0">
+        <DockPanel LastChildFill="True">
+          <!-- 右側：表示位置（例：Ln 120/850  Col 1  [14%]）。サウンドビューアでは幅を狭めて右寄せにする。 -->
+          <TextBlock DockPanel.Dock="Right"
+                     Text="{Binding ViewerLocationText}"
+                     Margin="12,0,0,0"
+                     FontFamily="Consolas"
+                     TextTrimming="CharacterEllipsis"
+                     Foreground="{DynamicResource HighlightText}"
+                     FontWeight="SemiBold"
+                     FontSize="14"
+                     VerticalAlignment="Center">
+            <TextBlock.Style>
+              <Style TargetType="TextBlock">
+                <Setter Property="Width" Value="680"/>
+                <Setter Property="TextAlignment" Value="Left"/>
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding IsMusicPlayerViewer}" Value="True">
+                    <Setter Property="Width" Value="180"/>
+                    <Setter Property="TextAlignment" Value="Right"/>
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </TextBlock.Style>
+          </TextBlock>
+          <!-- 左側：ファイルの状態（例：filename.txt  [UTF-8/CRLF]  14.2 KB  [NoWrap]）。 -->
+          <TextBlock Text="{Binding ViewerStatusText}"
+                     TextTrimming="CharacterEllipsis"
+                     Foreground="{DynamicResource AccentText}"
+                     FontWeight="SemiBold"
+                     FontSize="14"
+                     VerticalAlignment="Center" />
+        </DockPanel>
+      </Border>
+    </Border>
+
+    <!-- ファンクションキー欄。4個ずつ3組に分けて並べる。 -->
+    <Border Grid.Row="3" Background="{DynamicResource FunctionBarBackground}" BorderThickness="0" Padding="2,0">
+      <Grid Height="20">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="14" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="14" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- 1組目：F1～F4。 -->
+        <primitives:UniformGrid Grid.Column="0" Columns="4">
+          <Button Style="{StaticResource RetroFunctionButtonStyle}" Command="{Binding FunctionKeyCommand}" CommandParameter="1">
+            <TextBlock Text="{Binding Fn01Label, Mode=OneWay}" />
+          </Button>
+          <Button Style="{StaticResource RetroFunctionButtonStyle}" Command="{Binding FunctionKeyCommand}" CommandParameter="2">
+            <TextBlock Text="{Binding Fn02Label, Mode=OneWay}" />
+          </Button>
+          <Button Style="{StaticResource RetroFunctionButtonStyle}" Command="{Binding FunctionKeyCommand}" CommandParameter="3">
+            <TextBlock Text="{Binding Fn03Label, Mode=OneWay}" />
+          </Button>
+          <Button Style="{StaticResource RetroFunctionButtonStyle}" Command="{Binding FunctionKeyCommand}" CommandParameter="4">
+            <TextBlock Text="{Binding Fn04Label, Mode=OneWay}" />
+          </Button>
+        </primitives:UniformGrid>
+
+        <!-- 2組目：F5～F8。 -->
+        <primitives:UniformGrid Grid.Column="2" Columns="4">
+          <Button Style="{StaticResource RetroFunctionButtonStyle}" Command="{Binding FunctionKeyCommand}" CommandParameter="5">
+            <TextBlock Text="{Binding Fn05Label, Mode=OneWay}" />
+          </Button>
+          <Button Style="{StaticResource RetroFunctionButtonStyle}" Command="{Binding FunctionKeyCommand}" CommandParameter="6">
+            <TextBlock Text="{Binding Fn06Label, Mode=OneWay}" />
+          </Button>
+          <Button Style="{StaticResource RetroFunctionButtonStyle}" Command="{Binding FunctionKeyCommand}" CommandParameter="7">
+            <TextBlock Text="{Binding Fn07Label, Mode=OneWay}" />
+          </Button>
+          <Button Style="{StaticResource RetroFunctionButtonStyle}" Command="{Binding FunctionKeyCommand}" CommandParameter="8">
+            <TextBlock Text="{Binding Fn08Label, Mode=OneWay}" />
+          </Button>
+        </primitives:UniformGrid>
+
+        <!-- 3組目：F9～F12。 -->
+        <primitives:UniformGrid Grid.Column="4" Columns="4">
+          <Button Style="{StaticResource RetroFunctionButtonStyle}" Command="{Binding FunctionKeyCommand}" CommandParameter="9">
+            <TextBlock Text="{Binding Fn09Label, Mode=OneWay}" />
+          </Button>
+          <Button Style="{StaticResource RetroFunctionButtonStyle}" Command="{Binding FunctionKeyCommand}" CommandParameter="10">
+            <TextBlock Text="{Binding Fn10Label, Mode=OneWay}" />
+          </Button>
+          <Button Style="{StaticResource RetroFunctionButtonStyle}" Command="{Binding FunctionKeyCommand}" CommandParameter="11">
+            <TextBlock Text="{Binding Fn11Label, Mode=OneWay}" />
+          </Button>
+          <Button Style="{StaticResource RetroFunctionButtonStyle}" Command="{Binding FunctionKeyCommand}" CommandParameter="12">
+            <TextBlock Text="{Binding Fn12Label, Mode=OneWay}" />
+          </Button>
+        </primitives:UniformGrid>
+      </Grid>
+    </Border>
+  </Grid>
+</Window>
+

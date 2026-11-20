@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="MirrorFlux.Controls.FileOperationPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- ファイル操作の進行欄。DataContext は MainViewModel。色は既存のテーマ色だけを使う。背景はログ欄と同じ黒で、見出しの行だけステータス行と同じ色を付ける。 -->
+  <Border Background="{DynamicResource LogBackground}">
+    <StackPanel TextElement.FontSize="14">
+      <!-- 作業の番号・操作元と操作先・中止キー。 -->
+      <Border Background="{DynamicResource DarkPurpleBackground}" BorderBrush="{DynamicResource DarkPurpleHighlight}"
+              BorderThickness="0,1,0,0" Padding="6,0">
+        <DockPanel Height="20" LastChildFill="True">
+          <TextBlock DockPanel.Dock="Right" Text="{Binding OperationKeyHint}" Foreground="{DynamicResource HighlightText}"
+                     FontWeight="Bold" VerticalAlignment="Center" Margin="8,0,2,0" />
+          <TextBlock Text="{Binding OperationHeader}" Foreground="{DynamicResource HighlightText}" FontWeight="Bold"
+                     TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+        </DockPanel>
+      </Border>
+      <StackPanel Margin="6,0,6,1">
+        <!-- 件数・量・速度・経過・残り。 -->
+        <TextBlock Height="20" Text="{Binding OperationSummary}" Foreground="{DynamicResource PaneText}"
+                   TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+        <!-- 処理中のファイルと、そのファイルの進み具合。 -->
+        <DockPanel Height="20" LastChildFill="True">
+          <TextBlock DockPanel.Dock="Right" Text="{Binding OperationCurrentPercentText}" Width="44" TextAlignment="Right"
+                     Foreground="{DynamicResource PaneText}" VerticalAlignment="Center" />
+          <Border DockPanel.Dock="Right" Width="100" Height="8" Margin="8,0,0,0" VerticalAlignment="Center"
+                  Background="{DynamicResource DarkPurpleShadow}">
+            <Border Background="{DynamicResource AccentText}" HorizontalAlignment="Left" Width="100" RenderTransformOrigin="0,0.5">
+              <Border.RenderTransform>
+                <ScaleTransform ScaleX="{Binding OperationCurrentFraction}" />
+              </Border.RenderTransform>
+            </Border>
+          </Border>
+          <TextBlock DockPanel.Dock="Right" Text="{Binding OperationCurrentSize}" Foreground="{DynamicResource PaneText}"
+                     VerticalAlignment="Center" Margin="8,0,0,0" />
+          <TextBlock DockPanel.Dock="Left" Text="▶" Width="16" Foreground="{DynamicResource AccentText}" VerticalAlignment="Center" />
+          <TextBlock Text="{Binding OperationCurrentPath}" Foreground="{DynamicResource AccentText}"
+                     TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+        </DockPanel>
+        <!-- 次に処理するファイル。 -->
+        <ItemsControl ItemsSource="{Binding OperationUpcoming}" Focusable="False">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Height="20" Text="{Binding}" Margin="16,0,0,0" Foreground="{DynamicResource MutedText}"
+                         TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <!-- 順番待ちの作業。 -->
+        <ItemsControl ItemsSource="{Binding OperationWaiting}" Focusable="False">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Height="20" Text="{Binding}" Foreground="{DynamicResource DirectoryText}"
+                         TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+    </StackPanel>
+  </Border>
+</UserControl>
