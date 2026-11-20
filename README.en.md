@@ -140,3 +140,7 @@ The tests create their files in a temporary folder and delete them afterwards.
 ## License
 
 MirrorFlux is released under **GPL-3.0-or-later**. See [LICENSE](LICENSE) and [COPYRIGHT.txt](COPYRIGHT.txt). Bundled third-party components keep their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and `licenses/`.
+
+## Acknowledgements
+
+MirrorFlux owes much to mint, mmdsp, fmdsp, hoot, vgmplay, and others, and is made with deep respect and gratitude for their creators and communities.

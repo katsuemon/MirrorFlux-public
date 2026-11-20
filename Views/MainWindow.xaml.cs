@@ -36,7 +36,7 @@ public partial class MainWindow : Window
         var version = typeof(MainWindow).Assembly.GetName().Version!;
         AppVersionText.Text = $"—— Ver.{version.Major}.{version.Minor}.{version.Build} ——";
         AddHandler(Keyboard.PreviewKeyUpEvent, new KeyEventHandler((_, _) => UpdateFunctionModifiers()), true);
-        Activated += (_, _) => UpdateFunctionModifiers();
+        Activated += (_, _) => { UpdateFunctionModifiers(); RestoreWindowHeight(); };
         Deactivated += (_, _) => _viewModel.FunctionShiftPressed = false;
         _viewModel.ViewerShiftFunctionKeyRequested += number =>
         {
@@ -102,11 +102,28 @@ public partial class MainWindow : Window
         EnableDarkMode();
         StartupWindowPlacement.Apply(this);
         // 再生したままスリープすると復帰後に応答しなくなることがあるため、スリープに入る前に再生中の曲を止める。
-        _suspendGuard = new MirrorFlux.Services.Music.SuspendPlaybackGuard(this, StopPlaybackForSuspend);
+        _suspendGuard = new MirrorFlux.Services.Music.SuspendPlaybackGuard(this, StopPlaybackForSuspend, RestoreWindowHeightAfterResume);
         Closed += (_, _) => _suspendGuard?.Dispose();
     }
 
     private MirrorFlux.Services.Music.SuspendPlaybackGuard? _suspendGuard;
+    private double _displayWindowHeight = 832;
+
+    /// <summary>復帰後、Windows の画面配置が落ち着いてから元の高さを適用する。</summary>
+    private void RestoreWindowHeightAfterResume()
+    {
+        Dispatcher.InvokeAsync(RestoreWindowHeight, DispatcherPriority.ApplicationIdle);
+        var timer = new DispatcherTimer(DispatcherPriority.Background, Dispatcher) { Interval = TimeSpan.FromMilliseconds(750) };
+        timer.Tick += (_, _) => { timer.Stop(); RestoreWindowHeight(); };
+        timer.Start();
+    }
+
+    private void RestoreWindowHeight()
+    {
+        if (!IsLoaded || WindowState == WindowState.Minimized) return;
+        if (WindowState == WindowState.Maximized) WindowState = WindowState.Normal;
+        SetWindowHeight(_displayWindowHeight);
+    }
 
     /// <summary>
     /// スリープに入る前に、再生中または一時停止中の曲を止めてログに残す。
@@ -281,7 +298,7 @@ public partial class MainWindow : Window
     {
         // 行数の指定がない、または一覧の大きさがまだ決まっていなければ何もしない。
         int rows = _viewModel.Settings.FileRows;
-        if (rows <= 0) return;
+        if (rows <= 0) { SetWindowHeight(StandardWindowHeight); return; }
         UpdateLayout();
         if (LeftList.ActualHeight <= 0) return;
         // 作業領域の高さをDPIで換算し、その範囲に収まる高さを求めて反映する。
@@ -309,6 +326,9 @@ public partial class MainWindow : Window
     /// </summary>
     private void SetWindowHeight(double height)
     {
+        _displayWindowHeight = height;
+        // Windows がスリープ復帰やディスプレイ再接続で作業領域いっぱいに広げても、この高さを上限にする。
+        MaxHeight = height;
         if (Math.Abs(ActualHeight - height) < 0.5) return;
         Height = height;
         UpdateLayout();

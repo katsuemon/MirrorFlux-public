@@ -395,6 +395,16 @@ if (args.Contains("--header-render"))
     return;
 }
 
+if (args.Contains("--window-resume"))
+{
+    int checks = 0;
+    void CheckWindow(bool ok, string name) { if (!ok) throw new Exception(name); checks++; Console.WriteLine("PASS " + name); }
+    StartupWindowPlacementRegression.Run(CheckWindow);
+    SuspendPlaybackRegression.Run(CheckWindow);
+    Console.WriteLine($"Passed {checks} window and resume checks.");
+    return;
+}
+
 var root = Path.Combine(Path.GetTempPath(), "MirrorFlux-tests-" + Guid.NewGuid().ToString("N"));
 Directory.CreateDirectory(root);
 int passed = 0;
@@ -445,6 +455,7 @@ try
     StereoPanRegression.Run(Check);
     FileOperationQueueRegression.Run(root, Check);
     StartupWindowPlacementRegression.Run(Check);
+    SuspendPlaybackRegression.Run(Check);
     CharsetDetectorRegression.Run(Check);
     await ExplorerFolderRegression.Run(root, Check);
     await ExternalProgramRegression.Run(root, Check);

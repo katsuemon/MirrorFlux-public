@@ -15,16 +15,20 @@ public sealed class SuspendPlaybackGuard : IDisposable
 {
     internal const int WmPowerBroadcast = 0x0218;
     internal const int PbtApmSuspend = 0x0004;
+    private const int PbtApmResumeSuspend = 0x0007;
+    private const int PbtApmResumeAutomatic = 0x0012;
     private readonly Action _onSuspend;
+    private readonly Action? _onResume;
     private HwndSource? _source;
     private IntPtr _registration;
     // 同じスリープで二重に止めないための印（復帰で0に戻す）。
     private int _stopped;
 
     /// <summary>ウィンドウの通知を受ける仕組みと、予備の電源イベントを登録する。</summary>
-    public SuspendPlaybackGuard(Window window, Action onSuspend)
+    public SuspendPlaybackGuard(Window window, Action onSuspend, Action? onResume = null)
     {
         _onSuspend = onSuspend;
+        _onResume = onResume;
         var hwnd = new WindowInteropHelper(window).EnsureHandle();
         _source = HwndSource.FromHwnd(hwnd);
         _source?.AddHook(Hook);
@@ -39,6 +43,10 @@ public sealed class SuspendPlaybackGuard : IDisposable
     internal static bool IsSuspendMessage(int message, IntPtr wParam) =>
         message == WmPowerBroadcast && wParam.ToInt64() == PbtApmSuspend;
 
+    internal static bool IsResumeMessage(int message, IntPtr wParam) =>
+        message == WmPowerBroadcast &&
+        wParam.ToInt64() is PbtApmResumeAutomatic or PbtApmResumeSuspend;
+
     /// <summary>
     /// ウィンドウの通知を受ける。
     /// スリープ直前なら止め、復帰などの通知なら印を戻す。
@@ -46,7 +54,7 @@ public sealed class SuspendPlaybackGuard : IDisposable
     private IntPtr Hook(IntPtr hwnd, int message, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
         if (IsSuspendMessage(message, wParam)) StopOnce();
-        else if (message == WmPowerBroadcast) Interlocked.Exchange(ref _stopped, 0);
+        else if (IsResumeMessage(message, wParam)) ResumeOnce();
         return IntPtr.Zero;
     }
 
@@ -60,7 +68,16 @@ public sealed class SuspendPlaybackGuard : IDisposable
         {
             try { _dispatcher.Invoke(StopOnce, TimeSpan.FromSeconds(5)); } catch (Exception) { }
         }
-        else if (e.Mode == PowerModes.Resume) Interlocked.Exchange(ref _stopped, 0);
+        else if (e.Mode == PowerModes.Resume)
+        {
+            try { _dispatcher.Invoke(ResumeOnce, TimeSpan.FromSeconds(5)); } catch (Exception) { }
+        }
+    }
+
+    private void ResumeOnce()
+    {
+        if (Interlocked.Exchange(ref _stopped, 0) != 1) return;
+        try { _onResume?.Invoke(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[Suspend] resume failed: {ex}"); }
     }
 
     /// <summary>一度だけ停止の処理を呼ぶ。</summary>

@@ -146,3 +146,7 @@ dotnet run --project tests/MirrorFlux.Regression.csproj
 ## ライセンス
 
 MirrorFlux は **GPL-3.0-or-later** で公開しています。[LICENSE](LICENSE) と [著作権と適用範囲](COPYRIGHT.txt) を参照してください。同梱している第三者の部品は、それぞれ元のライセンスに従います。一覧は [第三者通知](THIRD_PARTY_NOTICES.md) と `licenses/` にあります。
+
+## 謝辞
+
+MirrorFlux の制作は mint、mmdsp、fmdsp、hoot、vgmplay などから多大な影響を受けており、これらを生み育ててきた皆さまに深い敬意と感謝を表します。

@@ -86,6 +86,15 @@ MirrorFlux は、キーボードだけで素早く操作できる2画面ファ�
   ソースコード: https://github.com/katsuemon/MirrorFlux-public
 
 
+----------------------------------------------------------------------
+ 8. 謝辞
+----------------------------------------------------------------------
+
+  MirrorFlux の制作は mint、mmdsp、fmdsp、hoot、vgmplay などから
+  多大な影響を受けており、これらを生み育ててきた皆さまに
+  深い敬意と感謝を表します。
+
+
 ======================================================================
   MirrorFlux (MF) - English
   A keyboard-driven two-pane file manager for Windows
@@ -173,3 +182,11 @@ app.
     licenses\                License texts and notices of those components
 
   Source code: https://github.com/katsuemon/MirrorFlux-public
+
+----------------------------------------------------------------------
+ 8. Acknowledgements
+----------------------------------------------------------------------
+
+  MirrorFlux owes much to mint, mmdsp, fmdsp, hoot, vgmplay, and
+  others, and is made with deep respect and gratitude for their
+  creators and communities.

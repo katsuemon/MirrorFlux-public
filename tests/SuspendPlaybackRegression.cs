@@ -12,6 +12,10 @@ internal static class SuspendPlaybackRegression
               !SuspendPlaybackGuard.IsSuspendMessage(0x0218, (IntPtr)0x12) &&
               !SuspendPlaybackGuard.IsSuspendMessage(0x0010, (IntPtr)4),
             "Only WM_POWERBROADCAST/PBT_APMSUSPEND is treated as entering sleep");
+        check(SuspendPlaybackGuard.IsResumeMessage(0x0218, (IntPtr)0x12) &&
+              SuspendPlaybackGuard.IsResumeMessage(0x0218, (IntPtr)0x07) &&
+              !SuspendPlaybackGuard.IsResumeMessage(0x0218, (IntPtr)0x8013),
+            "Only resume notifications restore the window size");
 
         Exception? failure = null;
         var thread = new Thread(() =>
@@ -20,13 +24,15 @@ internal static class SuspendPlaybackRegression
             try
             {
                 window = new Window { Width = 100, Height = 100, Left = -10000, Top = -10000, ShowInTaskbar = false, WindowStyle = WindowStyle.None };
-                int stops = 0;
-                using var guard = new SuspendPlaybackGuard(window, () => stops++);
+                int stops = 0, resumes = 0;
+                using var guard = new SuspendPlaybackGuard(window, () => stops++, () => resumes++);
                 IntPtr hwnd = new WindowInteropHelper(window).Handle;
                 SendMessage(hwnd, 0x0218, (IntPtr)4, IntPtr.Zero);
                 SendMessage(hwnd, 0x0218, (IntPtr)4, IntPtr.Zero);
                 check(stops == 1, "Playback is stopped once when the PC enters sleep");
                 SendMessage(hwnd, 0x0218, (IntPtr)0x12, IntPtr.Zero); // PBT_APMRESUMEAUTOMATIC
+                SendMessage(hwnd, 0x0218, (IntPtr)0x12, IntPtr.Zero);
+                check(resumes == 1, "Window restoration is requested once after resuming");
                 SendMessage(hwnd, 0x0218, (IntPtr)4, IntPtr.Zero);
                 check(stops == 2, "After resuming, the next sleep stops playback again");
             }

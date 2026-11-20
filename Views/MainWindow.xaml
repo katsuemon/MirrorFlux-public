@@ -9,7 +9,7 @@
         ResizeMode="CanMinimize"
         Width="1288" Height="832"
         MinWidth="1288" MinHeight="640"
-        MaxWidth="1288"
+        MaxWidth="1288" MaxHeight="832"
         FontFamily="Consolas, BIZ UDGothic, MS Gothic"
         FontSize="14"
         UseLayoutRounding="True" SnapsToDevicePixels="True"
@@ -228,18 +228,16 @@
                        FontWeight="Bold" FontSize="14" VerticalAlignment="Center" />
           </Border>
 
-          <!-- 中央のバージョン表示と右端の日付・時刻。 -->
+          <!-- 版番号は見出し帯全体の中央に置き、右端の時計の幅に影響されないようにする。 -->
+          <TextBlock x:Name="AppVersionText" Grid.ColumnSpan="2" Text="Ver."
+                     Foreground="{DynamicResource AccentText}" FontWeight="Bold" FontSize="14"
+                     HorizontalAlignment="Center" VerticalAlignment="Center" />
           <Border Grid.Column="1" Background="Transparent" BorderThickness="0" Padding="8,0">
-            <DockPanel LastChildFill="True">
-              <!-- 右端：日付と時刻。1文字分左へ寄せる。 -->
-              <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="{DynamicResource AccentText}"
-                         FontWeight="Bold" FontSize="14" Margin="0,0,8,0">
-                <Run Text="{Binding ClockText, Mode=OneWay}" />
-              </TextBlock>
-              <TextBlock x:Name="AppVersionText" Text="Ver."
-                         Foreground="{DynamicResource AccentText}" FontWeight="Bold" FontSize="14"
-                         HorizontalAlignment="Center" VerticalAlignment="Center" />
-            </DockPanel>
+            <!-- 右端：日付と時刻。1文字分左へ寄せる。 -->
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right"
+                       Foreground="{DynamicResource AccentText}" FontWeight="Bold" FontSize="14" Margin="0,0,8,0">
+              <Run Text="{Binding ClockText, Mode=OneWay}" />
+            </TextBlock>
           </Border>
         </Grid>
       </Border>
