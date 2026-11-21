@@ -395,6 +395,17 @@ if (args.Contains("--header-render"))
     return;
 }
 
+if (args.Contains("--hardware-stop"))
+{
+    int count = 0;
+    void CheckHardware(bool ok, string name) { if (!ok) throw new Exception(name); count++; Console.WriteLine("PASS " + name); }
+    NdsifShutdownRegression.Run(CheckHardware);
+    KeyboardPitchRenderRegression.Run(CheckHardware);
+    MdxNd8Regression.Run(CheckHardware);
+    Console.WriteLine($"Passed {count} hardware shutdown and MDX checks.");
+    return;
+}
+
 if (args.Contains("--window-resume"))
 {
     int checks = 0;
@@ -449,6 +460,7 @@ try
     MdxRegression.Run(Check);
     PdxPcmRegression.Run(Check);
     MdxNd8Regression.Run(Check);
+    NdsifShutdownRegression.Run(Check);
     MdxCommandRegression.Run(Check);
     RhythmRomPathRegression.Run(root, Check);
     VgmDisplayTimingRegression.Run(Check);

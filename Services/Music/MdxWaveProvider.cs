@@ -309,6 +309,7 @@ public sealed class MdxWaveProvider : IPlaybackWaveProvider
                 ChipName = "YM2151",
                 Label = $"FM{i + 1:00}",
                 Kind = MusicChannelKind.Fm,
+                IsHardwareOutput = FmOnHardware,
                 NoteNumber = midi,
                 // ディチューン・ポルタメント・MXDRVのピッチLFO・ymfmのハードLFO PMを反映した連続ピッチ。光らせる鍵（ドライバーのノート+3）はOPMの実際の音程より1オクターブ低い表記のため、線もオクターブ単位で鍵に合わせる。
                 Pitch = finePitch,
@@ -347,6 +348,7 @@ public sealed class MdxWaveProvider : IPlaybackWaveProvider
                 ChipName = "PCM8",
                 Label = $"PCM{pcm + 1:00}",
                 Kind = MusicChannelKind.Pcm,
+                IsHardwareOutput = PcmOnHardware,
                 NoteNumber = active ? note : null,
                 Frequency = rate,
                 IsKeyOn = active,
@@ -406,9 +408,12 @@ public sealed class MdxWaveProvider : IPlaybackWaveProvider
         {
             if (_disposed) return;
             _disposed = true;
-            if (_ymfm != IntPtr.Zero) { YmfmNative.Close(_ymfm); _ymfm = IntPtr.Zero; }
-            for (int channel = 0; channel < 8; channel++) _pcmMixer.Stop(channel);
-            _hardware?.Dispose();
+            try
+            {
+                if (_ymfm != IntPtr.Zero) { YmfmNative.Close(_ymfm); _ymfm = IntPtr.Zero; }
+                for (int channel = 0; channel < 8; channel++) _pcmMixer.Stop(channel);
+            }
+            finally { _hardware?.Dispose(); }
         }
     }
 }

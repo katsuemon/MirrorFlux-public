@@ -189,11 +189,11 @@ internal static class MusicDisplayDrawing
         double markHeight = Math.Max(4, Math.Floor(bounds.Height * .4));
         double markTop = bounds.Y + Math.Floor((bounds.Height - markHeight) / 2);
         if (dpi is DpiScale markDpi) markTop = Math.Round(markTop * markDpi.DpiScaleY) / markDpi.DpiScaleY;
-        if (active.Any(note => note < startNote)) dc.DrawGeometry(KeyboardActiveWhiteKey, null, Triangle(bounds.X, markTop, markWidth, markHeight, pointsLeft: true));
+        if (active.Any(note => note < startNote)) dc.DrawGeometry(isNdPart || ndActive?.Any(note => note < startNote) == true ? KeyboardActiveNdWhiteKey : KeyboardActiveWhiteKey, null, Triangle(bounds.X, markTop, markWidth, markHeight, pointsLeft: true));
         if (active.Any(note => note >= endNote))
         {
             double right = Math.Min(bounds.Right, bounds.X + 63 * keyWidth);
-            dc.DrawGeometry(KeyboardActiveWhiteKey, null, Triangle(right - markWidth, markTop, markWidth, markHeight, pointsLeft: false));
+            dc.DrawGeometry(isNdPart || ndActive?.Any(note => note >= endNote) == true ? KeyboardActiveNdWhiteKey : KeyboardActiveWhiteKey, null, Triangle(right - markWidth, markTop, markWidth, markHeight, pointsLeft: false));
         }
 
         // 半音より細かい本当の音程の位置に、ハイライト色の棒を置く。いちばん近い鍵の形に合わせ、

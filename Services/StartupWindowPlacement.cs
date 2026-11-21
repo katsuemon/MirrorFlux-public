@@ -38,6 +38,34 @@ internal static class StartupWindowPlacement
     internal static bool SameWholeRows(double area, double current, double target, double rowHeight) =>
         area > 0 && Math.Floor(area / rowHeight) == Math.Floor((area + target - current) / rowHeight);
 
+    /// <summary>通常表示中の位置を画面ピクセルで記録する。最小化中の特殊座標は保存しない。</summary>
+    internal static Rect? CapturePosition(Window window)
+    {
+        if (window.WindowState != WindowState.Normal) return null;
+        IntPtr hwnd = new WindowInteropHelper(window).Handle;
+        return hwnd != IntPtr.Zero && GetWindowRect(hwnd, out var bounds) ? bounds.ToRect() : null;
+    }
+
+    internal static Rect PositionInside(Rect bounds, Rect work) => new(
+        Math.Clamp(bounds.Left, work.Left, Math.Max(work.Left, work.Right - bounds.Width)),
+        Math.Clamp(bounds.Top, work.Top, Math.Max(work.Top, work.Bottom - bounds.Height)), bounds.Width, bounds.Height);
+
+    /// <summary>保存した画面に戻す。画面が撤去された場合は最寄りの画面内へ収める。</summary>
+    internal static void RestorePosition(Window window, Rect? saved)
+    {
+        if (saved is not Rect position || window.WindowState != WindowState.Normal) return;
+        IntPtr hwnd = new WindowInteropHelper(window).Handle;
+        if (hwnd == IntPtr.Zero || !GetWindowRect(hwnd, out var current)) return;
+        var bounds = new NativeRect { Left = (int)position.Left, Top = (int)position.Top,
+            Right = (int)position.Right, Bottom = (int)position.Bottom };
+        IntPtr monitor = MonitorFromRect(ref bounds, 2);
+        var info = new MonitorInfo { Size = Marshal.SizeOf<MonitorInfo>() };
+        if (monitor == IntPtr.Zero || !GetMonitorInfo(monitor, ref info)) return;
+        Rect target = PositionInside(new Rect(position.Location, current.ToRect().Size), info.Work.ToRect());
+        SetWindowPos(hwnd, IntPtr.Zero, (int)Math.Round(target.Left), (int)Math.Round(target.Top),
+            0, 0, 0x0001 | 0x0004 | 0x0010);
+    }
+
     /// <summary>ウィンドウがあるモニターの作業領域の高さ（ピクセル）。取得できなければ0。</summary>
     internal static double WorkAreaHeight(Window window)
     {
@@ -115,6 +143,8 @@ internal static class StartupWindowPlacement
     private static extern bool GetWindowRect(IntPtr hwnd, out NativeRect bounds);
     [DllImport("user32.dll")]
     private static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint flags);
+    [DllImport("user32.dll")]
+    private static extern IntPtr MonitorFromRect(ref NativeRect rect, uint flags);
     [DllImport("user32.dll", CharSet = CharSet.Unicode)]
     [return: MarshalAs(UnmanagedType.Bool)]
     private static extern bool GetMonitorInfo(IntPtr monitor, ref MonitorInfo info);

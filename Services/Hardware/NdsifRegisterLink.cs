@@ -23,7 +23,10 @@ internal sealed partial class NdsifRegisterLink : IDisposable
     /// </summary>
     internal readonly record struct RegisterWrite(long Sample, byte WriteId, byte Instance, byte Page, byte Address, byte Value);
 
-    private readonly SerialPort _port;
+    private readonly INdsifPort _port;
+    private readonly object _ioSync = new();
+    private int _disposing;
+    private bool _shutdownRequired;
     private readonly List<Capability> _capabilities = [];
     private readonly ConcurrentQueue<RegisterWrite> _queue = new();
     private readonly AutoResetEvent _signal = new(false);
@@ -51,7 +54,8 @@ internal sealed partial class NdsifRegisterLink : IDisposable
     internal string AudioDiagnostics => _audioDiagnostics;
 
     /// <summary>開いたポートと機種名から接続を作る。</summary>
-    private NdsifRegisterLink(SerialPort port, string name) { _port = port; Name = name; _connected = true; }
+    private NdsifRegisterLink(SerialPort port, string name) : this(new SerialNdsifPort(port), name) { }
+    internal NdsifRegisterLink(INdsifPort port, string name) { _port = port; Name = name; _connected = true; }
 
     /// <summary>
     /// 指定番号の NanoDrive を探して開く。
@@ -125,8 +129,14 @@ internal sealed partial class NdsifRegisterLink : IDisposable
     /// 応答を求めるコマンドを送り、同じトランザクションIDの応答を最大1秒待つ。
     /// 拒否ならIOExceptionを投げる。
     /// </summary>
-    private byte[] Request(byte opcode, ReadOnlySpan<byte> payload)
+    private byte[] Request(byte opcode, ReadOnlySpan<byte> payload, bool shutdown = false)
     {
+        lock (_ioSync) return RequestLocked(opcode, payload, shutdown);
+    }
+
+    private byte[] RequestLocked(byte opcode, ReadOnlySpan<byte> payload, bool shutdown)
+    {
+        if (!shutdown && Volatile.Read(ref _disposing) != 0) throw new OperationCanceledException();
         // コマンドを枠に包んで送る。
         ushort id = _transaction++;
         byte[] packet = NdsifService.BuildFramedPacket(1, opcode, id, payload);
@@ -136,6 +146,7 @@ internal sealed partial class NdsifRegisterLink : IDisposable
         long until = Environment.TickCount64 + 1000;
         while (Environment.TickCount64 < until)
         {
+            if (!shutdown && Volatile.Read(ref _disposing) != 0) throw new OperationCanceledException();
             int next;
             try { next = _port.ReadByte(); } catch (TimeoutException) { continue; }
             if (next < 0) continue;
@@ -256,6 +267,7 @@ internal sealed partial class NdsifRegisterLink : IDisposable
     {
         try
         {
+            _shutdownRequired = true;
             var requested = clocks.Distinct().ToArray();
             // リセットし、対応していれば出力の消音を解除する。
             Request(0x00, []);
@@ -278,7 +290,7 @@ internal sealed partial class NdsifRegisterLink : IDisposable
     /// <summary>レジスタ書き込みを送信待ちに積み、送信スレッドを起こす。</summary>
     internal void Queue(RegisterWrite write)
     {
-        if (!_connected) return;
+        if (!_connected || Volatile.Read(ref _disposing) != 0) return;
         _queue.Enqueue(write); _signal.Set();
     }
 
@@ -288,7 +300,7 @@ internal sealed partial class NdsifRegisterLink : IDisposable
     /// </summary>
     internal void Start()
     {
-        if (!_connected || _running) return;
+        if (!_connected || _running || Volatile.Read(ref _disposing) != 0) return;
         if (_audioFactory != null && !_audioPrepared) return;
         if (_audioFactory != null) StartAudioStream();
         else _clock.Restart();
@@ -356,19 +368,47 @@ internal sealed partial class NdsifRegisterLink : IDisposable
                     payload[length++] = next.Address; payload[length++] = next.Value;
                 }
                 byte[] packet = NdsifService.BuildFramedPacket(0, write.WriteId, 0, payload.AsSpan(0, length));
-                _port.Write(packet, 0, packet.Length);
+                WritePacket(packet);
             }
         }
         catch (Exception ex) { _connected = false; Debug.WriteLine($"[NDSIF] {Name} disconnected: {ex.Message}"); }
     }
 
+    private void WritePacket(byte[] packet)
+    {
+        lock (_ioSync)
+        {
+            if (Volatile.Read(ref _disposing) != 0) throw new OperationCanceledException();
+            _port.Write(packet, 0, packet.Length);
+        }
+    }
+
     /// <summary>送信スレッドを止め、基板をリセットしてからポートを閉じる。</summary>
     public void Dispose()
     {
+        if (Interlocked.Exchange(ref _disposing, 1) != 0) return;
         _running = false; _signal.Set();
-        if (_worker != null && Thread.CurrentThread != _worker) _worker.Join(500);
-        if (_connected) { try { Request(0x00, []); } catch { } }
-        _connected = false; _port.Dispose(); _signal.Dispose();
-        _audioStopped.Dispose();
+        // Request は読み取りタイムアウトごとに中止を確認する。通常の送信とは同時にリセットしない。
+        bool joined = _worker == null || Thread.CurrentThread == _worker || _worker.Join(1500);
+        try
+        {
+            // 通信エラーで IsConnected が落ちても、演奏済みの基板には停止を試みる。
+            // 機種の探査だけで開いたポートへはリセットを送らない。
+            if (_shutdownRequired && _port.IsOpen)
+            {
+                try { Request(0x00, [], shutdown: true); }
+                catch (Exception ex) { Debug.WriteLine($"[NDSIF] reset: {ex.Message}"); }
+                if ((_controlFeatures & 1) != 0)
+                    try { Request(0x03, [1], shutdown: true); }
+                    catch (Exception ex) { Debug.WriteLine($"[NDSIF] mute: {ex.Message}"); }
+            }
+        }
+        finally
+        {
+            _connected = false;
+            _port.Dispose();
+            if (!joined && _worker != null) joined = _worker.Join(1500);
+            if (joined) { _signal.Dispose(); _audioStopped.Dispose(); }
+        }
     }
 }

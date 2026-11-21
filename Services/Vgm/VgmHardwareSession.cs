@@ -161,7 +161,9 @@ internal sealed class VgmHardwareSession : IDisposable
     /// <summary>接続を閉じ、ND6のクロックと音源チップを初期状態に戻す。</summary>
     public void Dispose()
     {
-        foreach (var link in _registerLinks) link.Dispose();
+        foreach (var link in _registerLinks)
+            try { link.Dispose(); }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[NDSIF] stop: {ex.Message}"); }
         _registerLinks.Clear(); _registerRoutes.Clear();
         if (IsNd6Active) { NdsifService.Instance.ResetClock(0); NdsifService.Instance.Reset(); IsNd6Active = false; }
     }

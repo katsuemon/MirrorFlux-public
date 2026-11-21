@@ -123,13 +123,11 @@ public abstract class WaveOutPlaybackBackend<TProvider> : IMusicPlaybackBackend
     /// <summary>出力とプロバイダーを閉じる。</summary>
     private void StopCore()
     {
-        Output?.Stop();
-        Output?.Dispose();
+        AudioOutput.Close(Output);
         Output = null;
         _gainProvider = null;
-        Provider?.Dispose();
-        Provider = null;
-        CurrentFilePath = null;
+        try { Provider?.Dispose(); }
+        finally { Provider = null; CurrentFilePath = null; }
     }
 
     /// <summary>停止して通知を出す。</summary>

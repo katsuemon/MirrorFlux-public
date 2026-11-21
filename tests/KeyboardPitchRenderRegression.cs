@@ -131,6 +131,12 @@ internal static class KeyboardPitchRenderRegression
             bool IsLamp(Color c) => Math.Abs(c.R - lamp.R) <= 2 && Math.Abs(c.G - lamp.G) <= 2 && Math.Abs(c.B - lamp.B) <= 2;
             check(IsLamp(At(4, 14 + 14)) && !IsLamp(At(4, 14.5)) && !IsLamp(At(4, 41.5)) && !IsHighlight(At(4, 14 + 14)),
                 "Below-range marker is drawn in the key lamp color at the vertical middle of the keyboard" + at);
+            low.SetChannels([new MusicChannelSnapshot { Id = "p", ChipName = "PCM8", Kind = MusicChannelKind.Pcm, IsInUse = true, IsKeyOn = true, NoteNumber = 0, Pitch = 0, IsHardwareOutput = true }]);
+            low.UpdateLayout();
+            var ndBmp = new RenderTargetBitmap(pixelWidth, pixelHeight, 96 * scale, 96 * scale, PixelFormats.Pbgra32);
+            ndBmp.Render(low); ndBmp.CopyPixels(pixels, pixelWidth * 4, 0);
+            lamp = ((SolidColorBrush)MusicDisplayDrawing.KeyboardActiveNdWhiteKey).Color;
+            check(IsLamp(At(4, 28)), "ND PCM below-range marker uses the hardware lamp color" + at);
         }
     }
 }

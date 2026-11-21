@@ -25,7 +25,7 @@ internal sealed partial class NdsifRegisterLink
     private void SendNoReply(byte opcode, ReadOnlySpan<byte> payload)
     {
         byte[] packet = NdsifService.BuildFramedPacket(0, opcode, _transaction++, payload);
-        _port.Write(packet, 0, packet.Length);
+        WritePacket(packet);
     }
 
     /// <summary>

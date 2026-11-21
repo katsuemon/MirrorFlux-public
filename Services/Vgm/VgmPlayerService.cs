@@ -167,12 +167,7 @@ namespace MirrorFlux.Services.Vgm
         {
             if (_wavePlayer != null)
             {
-                try
-                {
-                    _wavePlayer.Stop();
-                    _wavePlayer.Dispose();
-                }
-                catch { }
+                MirrorFlux.Services.Music.AudioOutput.Close(_wavePlayer);
                 _wavePlayer = null;
             }
 

@@ -45,6 +45,10 @@ internal static class StartupWindowPlacementRegression
         check(!StartupWindowPlacement.SameWholeRows(161, 829, 832, 18) && !StartupWindowPlacement.SameWholeRows(100, 689, 832, 18) &&
             !StartupWindowPlacement.SameWholeRows(0, 829, 832, 18),
             "The player returns to the standard height when a track row would be lost or the layout is not ready");
+        check(StartupWindowPlacement.PositionInside(inside, work) == inside, "Resume preserves exact visible position");
+        check(StartupWindowPlacement.PositionInside(new Rect(-1900, 100, 300, 200), work) == new Rect(0, 100, 300, 200), "Resume handles removed monitor");
+        check(StartupWindowPlacement.PositionInside(new Rect(-1500, 70, 300, 200), new Rect(-1920, 40, 1920, 1000)) == new Rect(-1500, 70, 300, 200), "Resume keeps negative monitor coordinates");
+        check(StartupWindowPlacement.PositionInside(new Rect(1800, 900, 1288, 832), work) == new Rect(632, 208, 1288, 832), "Resume clamps to a smaller work area without resizing");
         VerifyNativeStartup(check);
     }
 
@@ -65,6 +69,11 @@ internal static class StartupWindowPlacementRegression
                 check(initialized && read && Math.Abs((rect.Left + rect.Right) / 2.0 - (info.Work.Left + info.Work.Right) / 2.0) <= 1 &&
                     Math.Abs((rect.Top + rect.Bottom) / 2.0 - (info.Work.Top + info.Work.Bottom) / 2.0) <= 1,
                     "SourceInitialized centers the actual HWND before it is shown");
+                var saved = StartupWindowPlacement.CapturePosition(window);
+                SetWindowPos(hwnd, IntPtr.Zero, rect.Left + 40, rect.Top + 30, 0, 0, 0x0015);
+                StartupWindowPlacement.RestorePosition(window, saved);
+                GetWindowRect(hwnd, out var restored);
+                check(rect.Equals(restored), "Resume restores actual HWND position without resizing");
                 var before = rect;
                 StartupWindowPlacement.Apply(window);
                 GetWindowRect(hwnd, out rect);
@@ -78,6 +87,7 @@ internal static class StartupWindowPlacementRegression
     }
     [StructLayout(LayoutKind.Sequential)] private struct NativeRect { public int Left, Top, Right, Bottom; }
     [StructLayout(LayoutKind.Sequential)] private struct MonitorInfo { public int Size; public NativeRect Monitor, Work; public uint Flags; }
+    [DllImport("user32.dll")] private static extern bool SetWindowPos(IntPtr hwnd, IntPtr after, int x, int y, int width, int height, uint flags);
     [DllImport("user32.dll")] private static extern bool GetWindowRect(IntPtr hwnd, out NativeRect rect);
     [DllImport("user32.dll")] private static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint flags);
     [DllImport("user32.dll", CharSet = CharSet.Unicode)] private static extern bool GetMonitorInfo(IntPtr monitor, ref MonitorInfo info);

@@ -108,13 +108,22 @@ public partial class MainWindow : Window
 
     private MirrorFlux.Services.Music.SuspendPlaybackGuard? _suspendGuard;
     private double _displayWindowHeight = 832;
+    private Rect? _positionBeforeSuspend;
+    private int _suspendGeneration;
 
     /// <summary>復帰後、Windows の画面配置が落ち着いてから元の高さを適用する。</summary>
     private void RestoreWindowHeightAfterResume()
     {
-        Dispatcher.InvokeAsync(RestoreWindowHeight, DispatcherPriority.ApplicationIdle);
+        int generation = _suspendGeneration;
+        void Restore()
+        {
+            if (generation != _suspendGeneration) return;
+            RestoreWindowHeight();
+            StartupWindowPlacement.RestorePosition(this, _positionBeforeSuspend);
+        }
+        Dispatcher.InvokeAsync(Restore, DispatcherPriority.ApplicationIdle);
         var timer = new DispatcherTimer(DispatcherPriority.Background, Dispatcher) { Interval = TimeSpan.FromMilliseconds(750) };
-        timer.Tick += (_, _) => { timer.Stop(); RestoreWindowHeight(); };
+        timer.Tick += (_, _) => { timer.Stop(); Restore(); };
         timer.Start();
     }
 
@@ -130,9 +139,12 @@ public partial class MainWindow : Window
     /// </summary>
     private void StopPlaybackForSuspend()
     {
+        _suspendGeneration++;
+        _positionBeforeSuspend = StartupWindowPlacement.CapturePosition(this);
         var music = MirrorFlux.Services.Music.MusicPlaybackService.Instance;
-        if (!music.IsPlaying && !music.IsPaused) return;
+        bool wasPlaying = music.IsPlaying || music.IsPaused;
         music.Stop();
+        if (!wasPlaying) return;
         _viewModel.AddLog("スリープに入るため、再生中の曲を停止しました", "INFO");
     }
 
