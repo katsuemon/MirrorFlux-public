@@ -20,7 +20,7 @@ public static class IniKeyParser
     /// 「>キー名 修飾キー &amp;コマンド;」の行。
     /// </summary>
     private static readonly Regex LineRegex = new(
-        @"^>(KEY_[A-Za-z0-9_\-\\]+)\s+([sSacCtT\-_]{1,8})\s+&([A-Za-z0-9_\-]+);?",
+        @"^>(KEY_[A-Za-z0-9_\-\\]+)\s+([sSacCtT\-_]{1,8})\s+(.+)$",
         RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
     /// <summary>
@@ -72,9 +72,19 @@ public static class IniKeyParser
 
         ModifierKeys modifiers = ParseModifiers(rawFlags);
 
-        if (!TryParseCommand(rawCmd, out AppCommand command)) return false;
-
-        item = new KeyBindingItem(key, modifiers, command, rawCmd.ToLowerInvariant());
+        // Validate the whole sequence before accepting any command.
+        string sequence = rawCmd.TrimEnd();
+        if (sequence.EndsWith(';')) sequence = sequence[..^1];
+        var parts = sequence.Split(';');
+        var commands = new List<KeyBindingItem>();
+        foreach (var part in parts)
+        {
+            string token = part.Trim();
+            if (!Regex.IsMatch(token, @"^&[A-Za-z0-9_\-]+$") ||
+                !TryParseCommand(token, out var command)) return false;
+            commands.Add(new KeyBindingItem(key, modifiers, command, token[1..].ToLowerInvariant()));
+        }
+        item = commands[0] with { FollowingCommands = commands.Count > 1 ? commands.Skip(1).ToArray() : null };
         return true;
     }
 
@@ -231,6 +241,12 @@ public static class IniKeyParser
         // 名前と別名からコマンドを決める。incrimentalsearch はINIで使われている綴りなのでそのまま受け付ける。
         switch (normalized)
         {
+            case "switchpane": command = AppCommand.SwitchPane; return true;
+            case "paneleft": command = AppCommand.ActivateLeftPane; return true;
+            case "paneright": command = AppCommand.ActivateRightPane; return true;
+            case "parent": command = AppCommand.GoParent; return true;
+            case "parentleft": command = AppCommand.ParentLeft; return true;
+            case "parentright": command = AppCommand.ParentRight; return true;
             case "none": command = AppCommand.None; return true;
             case "help": command = AppCommand.Help; return true;
             case "mark": command = AppCommand.ToggleMark; return true;
@@ -461,7 +477,14 @@ public static class IniKeyParser
             };
         }
 
-        return $">{keyName,-10}\t{flags}\t&{cmdName};";
+        string result = $">{keyName,-10}\t{flags}\t&{cmdName};";
+        if (item.FollowingCommands is { } following)
+            foreach (var command in following)
+            {
+                string formatted = FormatLine(command);
+                result += formatted[(formatted.LastIndexOf('\t') + 1)..];
+            }
+        return result;
     }
 
     /// <summary>

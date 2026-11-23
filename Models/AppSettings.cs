@@ -305,6 +305,13 @@ public sealed class AppSettings
     public List<KeyBindingItem> KeyBindings { get; set; } =
     [
         .. MirrorFlux.Input.FunctionKeyBindings.CreateDefaults(),
+        new KeyBindingItem(System.Windows.Input.Key.Tab, System.Windows.Input.ModifierKeys.None, MirrorFlux.Input.AppCommand.SwitchPane, "switchpane"),
+        new KeyBindingItem(System.Windows.Input.Key.Tab, System.Windows.Input.ModifierKeys.Shift, MirrorFlux.Input.AppCommand.SwitchPane, "switchpane"),
+        new KeyBindingItem(System.Windows.Input.Key.Back, System.Windows.Input.ModifierKeys.None, MirrorFlux.Input.AppCommand.GoParent, "parent"),
+        new KeyBindingItem(System.Windows.Input.Key.Left, System.Windows.Input.ModifierKeys.None, MirrorFlux.Input.AppCommand.ParentLeft, "parentleft",
+            FollowingCommands: [new(System.Windows.Input.Key.Left, System.Windows.Input.ModifierKeys.None, MirrorFlux.Input.AppCommand.ActivateLeftPane, "paneleft")]),
+        new KeyBindingItem(System.Windows.Input.Key.Right, System.Windows.Input.ModifierKeys.None, MirrorFlux.Input.AppCommand.ParentRight, "parentright",
+            FollowingCommands: [new(System.Windows.Input.Key.Right, System.Windows.Input.ModifierKeys.None, MirrorFlux.Input.AppCommand.ActivateRightPane, "paneright")]),
         new KeyBindingItem(System.Windows.Input.Key.Return, System.Windows.Input.ModifierKeys.None, MirrorFlux.Input.AppCommand.ExtExec, "extexec"),
         new KeyBindingItem(System.Windows.Input.Key.Return, System.Windows.Input.ModifierKeys.Shift, MirrorFlux.Input.AppCommand.ExtExecWindows, "extexecwin"),
         new KeyBindingItem(System.Windows.Input.Key.V, System.Windows.Input.ModifierKeys.None, MirrorFlux.Input.AppCommand.TextViewer, "textviewer"),

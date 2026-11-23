@@ -50,11 +50,13 @@ public enum AppCommand
     MarkClear,
     ExternalProgram,
     VideoViewer,
-    OperationCancel
+    OperationCancel,
+    ParentLeft,
+    ParentRight
 }
 
 /// <summary>
 /// キー入力から決まった実行内容。コマンド、引数、押されていた修飾キー、外部プログラムのコマンド行を持つ。
 /// </summary>
 public readonly record struct ResolvedCommand(AppCommand Command, int Argument = 0,
-    System.Windows.Input.ModifierKeys Modifiers = System.Windows.Input.ModifierKeys.None, string? ExternalCommand = null);
+    System.Windows.Input.ModifierKeys Modifiers = System.Windows.Input.ModifierKeys.None, string? ExternalCommand = null, ResolvedCommand[]? FollowingCommands = null);

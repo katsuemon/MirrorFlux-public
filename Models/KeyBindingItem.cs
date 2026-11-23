@@ -11,5 +11,6 @@ public sealed record KeyBindingItem(
     ModifierKeys Modifiers,
     AppCommand Command,
     string RawCommandName,
-    string? ExternalCommand = null
+    string? ExternalCommand = null,
+    KeyBindingItem[]? FollowingCommands = null
 );

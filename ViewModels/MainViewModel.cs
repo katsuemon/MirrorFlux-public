@@ -845,7 +845,13 @@ public sealed partial class MainViewModel : ObservableObject
     /// </summary>
     public async Task ExecuteAsync(ResolvedCommand resolved)
     {
-        try { await ExecuteCoreAsync(resolved); }
+        try
+        {
+            await ExecuteCoreAsync(resolved);
+            if (resolved.FollowingCommands is { } following)
+                foreach (var next in following)
+                    await ExecuteCoreAsync(next with { Modifiers = resolved.Modifiers });
+        }
         catch (OperationCanceledException) { }
         catch (Exception ex)
         {
@@ -868,7 +874,7 @@ public sealed partial class MainViewModel : ObservableObject
                 await ExecuteExternalProgramAsync(resolved.ExternalCommand);
                 break;
             case AppCommand.Help:
-                AddLog($"[ヘルプ] [↑↓]選択 [←→/Tab]左右切替 [Enter]開く [BS]親へ [Space]マーク [Ctrl+R/F11]更新 [F1-F12]機能", "HELP");
+                AddLog($"[ヘルプ] [↑↓]選択 [←→]外向きは親へ/内向きは切替 [Tab]左右切替 [Enter]開く [BS]親へ [Space]マーク [Ctrl+R/F11]更新 [F1-F12]機能", "HELP");
                 if (MirrorFlux.Services.Music.MusicPlaybackService.Instance.IsPlaying)
                     AddLog("[サウンドバー] Ctrl+P 一時停止/再開  Ctrl+S 停止  Ctrl+←/→ 5秒シーク  Ctrl+↑/↓ 曲番号  Ctrl+M サウンドビューア", "HELP");
                 StatusMessage = string.Join(" ", Enumerable.Range(1, 12).Select(number => $"F{number}:{FunctionLabel(number)}"));
@@ -904,6 +910,12 @@ public sealed partial class MainViewModel : ObservableObject
             // パネルの切り替えとフォルダーの移動。
             case AppCommand.SwitchPane:
                 SwitchPane();
+                break;
+            case AppCommand.ParentLeft:
+                if (ReferenceEquals(ActivePane, LeftPane)) await GoParentAsync();
+                break;
+            case AppCommand.ParentRight:
+                if (ReferenceEquals(ActivePane, RightPane)) await GoParentAsync();
                 break;
             case AppCommand.ActivateLeftPane:
                 ActivateLeftPane();

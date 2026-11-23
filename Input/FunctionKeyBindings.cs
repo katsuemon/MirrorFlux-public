@@ -40,7 +40,8 @@ public static class FunctionKeyBindings
         binding ??= modifiers == ModifierKeys.None ? CreateDefaults().ElementAt(number - 1) : null;
         if (binding == null) return false;
         // FunctionKeyコマンドが割り当てられていても、自分自身を呼び直して無限に繰り返さないよう何もしないコマンドにする。
-        command = new ResolvedCommand(binding.Command == AppCommand.FunctionKey ? AppCommand.None : binding.Command, 0, modifiers, binding.ExternalCommand);
+        command = new ResolvedCommand(binding.Command == AppCommand.FunctionKey ? AppCommand.None : binding.Command, 0, modifiers, binding.ExternalCommand,
+            binding.FollowingCommands?.Select(c => new ResolvedCommand(c.Command == AppCommand.FunctionKey ? AppCommand.None : c.Command)).ToArray());
         return true;
     }
 

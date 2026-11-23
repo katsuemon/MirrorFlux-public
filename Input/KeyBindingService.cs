@@ -21,8 +21,8 @@ public sealed class KeyBindingService
         Add(Key.PageDown, AppCommand.MovePageDown);
         Add(Key.Home, AppCommand.MoveHome);
         Add(Key.End, AppCommand.MoveEnd);
-        Add(Key.Left, AppCommand.ActivateLeftPane);
-        Add(Key.Right, AppCommand.ActivateRightPane);
+        Add(Key.Left, AppCommand.ParentLeft, followingCommands: [new(AppCommand.ActivateLeftPane)]);
+        Add(Key.Right, AppCommand.ParentRight, followingCommands: [new(AppCommand.ActivateRightPane)]);
         Add(Key.Tab, AppCommand.SwitchPane);
         Add(Key.Tab, AppCommand.SwitchPane, ModifierKeys.Shift);
         // 実行、親フォルダーへの移動、マーク。
@@ -86,26 +86,27 @@ public sealed class KeyBindingService
     {
         foreach (var item in customBindings)
         {
-            _bindings[(item.Key, item.Modifiers)] = new ResolvedCommand(item.Command, 0, ExternalCommand: item.ExternalCommand);
+            var following = item.FollowingCommands?.Select(c => new ResolvedCommand(c.Command)).ToArray();
+            _bindings[(item.Key, item.Modifiers)] = new ResolvedCommand(item.Command, 0, ExternalCommand: item.ExternalCommand, FollowingCommands: following);
             if (item.Key == Key.Return)
             {
-                _bindings[(Key.Enter, item.Modifiers)] = new ResolvedCommand(item.Command, 0, ExternalCommand: item.ExternalCommand);
+                _bindings[(Key.Enter, item.Modifiers)] = new ResolvedCommand(item.Command, 0, ExternalCommand: item.ExternalCommand, FollowingCommands: following);
             }
             else if (item.Key == Key.Enter)
             {
-                _bindings[(Key.Return, item.Modifiers)] = new ResolvedCommand(item.Command, 0, ExternalCommand: item.ExternalCommand);
+                _bindings[(Key.Return, item.Modifiers)] = new ResolvedCommand(item.Command, 0, ExternalCommand: item.ExternalCommand, FollowingCommands: following);
             }
             else if (item.Key == Key.OemMinus)
             {
-                _bindings[(Key.Subtract, item.Modifiers)] = new ResolvedCommand(item.Command, 0, ExternalCommand: item.ExternalCommand);
+                _bindings[(Key.Subtract, item.Modifiers)] = new ResolvedCommand(item.Command, 0, ExternalCommand: item.ExternalCommand, FollowingCommands: following);
             }
             else if (item.Key == Key.Subtract)
             {
-                _bindings[(Key.OemMinus, item.Modifiers)] = new ResolvedCommand(item.Command, 0, ExternalCommand: item.ExternalCommand);
+                _bindings[(Key.OemMinus, item.Modifiers)] = new ResolvedCommand(item.Command, 0, ExternalCommand: item.ExternalCommand, FollowingCommands: following);
             }
         }
     }
 
-    private void Add(Key key, AppCommand command, ModifierKeys modifiers = ModifierKeys.None, int argument = 0) =>
-        _bindings[(key, modifiers)] = new ResolvedCommand(command, argument);
+    private void Add(Key key, AppCommand command, ModifierKeys modifiers = ModifierKeys.None, int argument = 0, ResolvedCommand[]? followingCommands = null) =>
+        _bindings[(key, modifiers)] = new ResolvedCommand(command, argument, FollowingCommands: followingCommands);
 }

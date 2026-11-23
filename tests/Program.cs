@@ -406,6 +406,12 @@ if (args.Contains("--hardware-stop"))
     return;
 }
 
+if (args.Contains("--pane-navigation"))
+{
+    await PaneNavigationRegression.Run();
+    return;
+}
+
 if (args.Contains("--window-resume"))
 {
     int checks = 0;

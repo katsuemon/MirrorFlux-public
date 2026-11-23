@@ -565,7 +565,8 @@ public partial class MainWindow : Window
         e.Handled = true;
         await _viewModel.ExecuteAsync(command);
 
-        if (command.Command is AppCommand.SwitchPane or AppCommand.ActivateLeftPane or AppCommand.ActivateRightPane)
+        if (command.Command is AppCommand.SwitchPane or AppCommand.ActivateLeftPane or AppCommand.ActivateRightPane ||
+            command.FollowingCommands?.Any(c => c.Command is AppCommand.SwitchPane or AppCommand.ActivateLeftPane or AppCommand.ActivateRightPane) == true)
         {
             FocusActiveList();
         }
